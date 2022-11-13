@@ -95,5 +95,18 @@ def t_HEXADECIMAL(t):
     pass
 
 
+#Agregar t_COMMENTS, t_ERROR, t_newline, entre otras pertinentes --> Ronald
+
+#Construir el lexer, funcion getTokens y leer el archivo --> David 
+
+#Mostrar en consola el lexer --> Danae
+linea=" "
+while linea!="":
+    linea=input(">>")
+    #lexer.input(linea)
+    #getTokens(lexer)
+# Tokenize
+print("Succesfull")
+
 
 
