@@ -4,14 +4,14 @@ import ply.lex as lex
 reserved = {
   'as':'AS',
   'use':'USE',
-  'extern crate':'EXTERNCRATE',
+  'extern crate':'EXTERN_CRATE',
   'break':'BREAK',
   'const':'CONST',
   'continue':'CONTINUE',
   'crate':'CRATE',
   'else':'ELSE',
   'if':'IF',
-  'if let':'IFLET'
+  'if let':'IF_LET'
   # --> completar Ronald
 
 }
@@ -81,10 +81,6 @@ t_RIGHT_MAYUS = r'>>'
 
 #Expresiones regulares con reglas - tipo de datos --> Completar David y Ronald mitad y mitad
 
-def t_VARIABLE(t):
-    r'[a-zA-Z_][a-zA-Z0-9]*'
-    t.type = reserved.get(t.value,'VARIABLE')
-    return t
 
 def t_HEXADECIMAL(t):
     r'0x[0-9a-f_]*'
@@ -98,10 +94,27 @@ def t_BINARIO(t):
     r'0b[0,1]*'
     return t
 
+def t_FLOAT(t):
+  r'\d+\.\d+'
+  return t
 
 def t_DECIMAL(t):
     r'[0-9_]{1,}'
     return t
+
+def t_BOOL(t):
+  r'(true|false)'
+  return t
+  
+def t_STRING(t):
+  r'(\'.*\')|(\".*\")'
+  return t
+
+def t_VARIABLE(t):
+    r'[a-z][a-z0-9_]*'
+    t.type = reserved.get(t.value,'VARIABLE')
+    return t
+
 
 #Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
 #t_ERROR --> David
@@ -113,15 +126,15 @@ def t_error(t):
 #Construir el lexer, funcion getTokens y leer el archivo --> David 
 lexer = lex.lex()
 
-instructions='0b0111100'
+file = open('./AlgoritmoMarcilloRommel.rs', 'r')
+content = file.read()
 
+lexer.input(content)
 def getTokens(lexer):
-  for tok in lexer:
-    print(tok)
+  for token in lexer:
+    print(f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}')
 
 linea=" "
-
-lexer.input(instructions)
 
 getTokens(lexer)
 
