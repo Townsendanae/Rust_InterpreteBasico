@@ -1,6 +1,6 @@
 import ply.lex as lex
 
-# reserverd words
+# reserverd words --> Danaé 1/3
 reserved = {
     'as': 'AS',
     'use': 'USE',
@@ -12,7 +12,7 @@ reserved = {
     'else': 'ELSE',
     'if': 'IF',
     'if let': 'IFLET',
-    # --> completar Ronald
+    # --> completar Ronald 2/3
     'enum': 'ENUM',
     'extern': 'EXTERN',
     'false': 'FALSE',
@@ -24,7 +24,7 @@ reserved = {
     'loop': 'LOOP',
     'match': 'MATCH',
     'mod': 'MOD',
-    'move': 'MOD',
+    'move': 'MOV',
     'mut': 'MUT',
     'pub': 'PUB',
     'impl': 'IMPL',
@@ -70,9 +70,9 @@ reserved = {
     'if let': 'IF_LET'
 }
 
-# definir listado de tokens
+# definir listado de tokens --> Danaé
 punctuation_tokens = [
-    'LPAREN', 'RPAREN'
+    'LPAREN', 'RPAREN', 'LKEY', 'RKEY', 'QUO_MARKS', 'COMA', "COMMA_DOT", "POINT", "TWO_POINTS"
 ]
 
 math_tokens = [
@@ -99,12 +99,20 @@ data_type_tokens = [
 ]
 
 tokens = punctuation_tokens + math_tokens + compare_tokens + \
-    logic_tokens + bit_tokens + data_type_tokens + list(reserved.values())
+    logic_tokens + bit_tokens + data_type_tokens + list(reserved.values())# --> Danae
 
 
-# Expresiones regulares - punctuation
+#Expresiones Regulares --> Danaé
+# Expresiones regulares - punctuation 
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_LKEY = r'{'
+t_RKEY = r'}'
+t_QUO_MARKS = r'"'
+t_COMA = r','
+t_COMMA_DOT = r';' 
+t_POINT = r'.'
+t_TWO_POINTS = r':'
 
 # Expresiones regulares - math
 t_PLUS = r'\+'
@@ -134,7 +142,7 @@ t_XOR_BIT = r'\^'
 t_LEFT_MAYUS = r'<<'
 t_RIGHT_MAYUS = r'>>'
 
-# Expresiones regulares con reglas - tipo de datos --> Completar David y Ronald mitad y mitad
+# Expresiones regulares con reglas - tipo de datos --> Completar David 1/2 y Ronald 1/2
 
 
 def t_VARIABLE(t):
@@ -155,11 +163,6 @@ def t_OCTAL(t):
 
 def t_BINARIO(t):
     r'0b[0,1]*'
-    return t
-
-
-def t_FLOAT(t):
-    r'\d+\.\d+'
     return t
 
 
@@ -206,6 +209,8 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+t_ignore  = ' \t' 
+
 
 def t_error(t):
     print("Caracter no permitido'%s'" % t.value[0])
@@ -215,7 +220,7 @@ def t_error(t):
 # Construir el lexer, funcion getTokens y leer el archivo --> David
 lexer = lex.lex()
 
-file = open('./AlgoritmoMarcilloRommel.rs', 'r')
+file = open('./AlgoritmoTownsendDanae.rs', 'r')
 content = file.read()
 
 lexer.input(content)
@@ -227,11 +232,11 @@ def getTokens(lexer):
             f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}')
 
 
-linea = " "
+linea = " \t"
 
 getTokens(lexer)
 
-# Mostrar en consola el lexer --> David
+# Mostrar en consola el lexer --> Danaé y David
 while linea != "":
     # lexer.input(linea)
     linea = input(">>")
