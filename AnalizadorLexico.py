@@ -207,26 +207,6 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 
-def t_BOOL(t):
-    r'(true|false)'
-    return t
-
-
-def t_STRING(t):
-    r'(\'.*\')|(\".*\")'
-    return t
-
-
-def t_VARIABLE(t):
-    r'[a-z][a-z0-9_]*'
-    t.type = reserved.get(t.value, 'VARIABLE')
-    return t
-
-
-# Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
-# t_ERROR --> David
-
-
 def t_error(t):
     print("Caracter no permitido'%s'" % t.value[0])
     t.lexer.skip(1)
