@@ -4,14 +4,14 @@ import ply.lex as lex
 reserved = {
   'as':'AS',
   'use':'USE',
-  'extern crate':'EXTERN CRATE',
+  'extern crate':'EXTERNCRATE',
   'break':'BREAK',
   'const':'CONST',
   'continue':'CONTINUE',
   'crate':'CRATE',
   'else':'ELSE',
   'if':'IF',
-  'if let':'IF LET'
+  'if let':'IFLET'
   # --> completar Ronald
 
 }
@@ -40,7 +40,8 @@ bit_tokens = [
 
 
 data_type_tokens = [
-    'VARIABLE','INTEGER','DECIMAL','HEXADECIMAL' ## -->completar David
+    'VARIABLE','INTEGER','DECIMAL','HEXADECIMAL', 'OCTAL', 'BINARIO', 'BYTE',
+     'CHAR', 'STRING', 'BOOL', 'FLOAT'## -->completar David
     ]
 
 tokens = punctuation_tokens + math_tokens + compare_tokens + logic_tokens + bit_tokens + data_type_tokens + list(reserved.values())
@@ -74,7 +75,7 @@ t_NOT = r'!'
 #Expresiones regulares - bit
 t_AND_BIT = r'&'
 t_OR_BIT = r'\|'
-t_XOR_BIT = r'^'
+t_XOR_BIT = r'\^'
 t_LEFT_MAYUS = r'<<'
 t_RIGHT_MAYUS = r'>>'
 
@@ -85,26 +86,53 @@ def t_VARIABLE(t):
     t.type = reserved.get(t.value,'VARIABLE')
     return t
 
-def t_INTEGER(t):
-    pass
+def t_HEXADECIMAL(t):
+    r'0x[0-9a-f_]*'
+    return t
+
+def t_OCTAL(t):
+    r'0o[0-7_]*'
+    return t
+
+def t_BINARIO(t):
+    r'0b[0,1]*'
+    return t
+
 
 def t_DECIMAL(t):
-    pass
+    r'[0-9_]{1,}'
+    return t
 
-def t_HEXADECIMAL(t):
-    pass
+#Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
+#t_ERROR --> David
 
-
-#Agregar t_COMMENTS, t_ERROR, t_newline, entre otras pertinentes --> Ronald
+def t_error(t):
+  print("Caracter no permitido'%s'" % t.value[0])
+  t.lexer.skip(1)
 
 #Construir el lexer, funcion getTokens y leer el archivo --> David 
+lexer = lex.lex()
 
-#Mostrar en consola el lexer --> Danae
+instructions='0b0111100'
+
+def getTokens(lexer):
+  for tok in lexer:
+    print(tok)
+
 linea=" "
+
+lexer.input(instructions)
+
+getTokens(lexer)
+
+#Mostrar en consola el lexer --> David
 while linea!="":
-    linea=input(">>")
     #lexer.input(linea)
-    #getTokens(lexer)
+    linea=input(">>")
+    lexer.input(linea)
+    #getTokens(lexer
+    getTokens(lexer)
+    
 # Tokenize
 print("Succesfull")
 
