@@ -54,7 +54,8 @@ reserved = {
     'typeof': 'TYPEOF',
     'unsized': 'UNSIZED',
     'virtual': 'VIRTUAL',
-    'yield': 'YIELD'
+    'yield': 'YIELD',
+    'println': 'PRINTLN'
 }
 
 # definir listado de tokens --> Danaé
@@ -95,7 +96,6 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LKEY = r'{'
 t_RKEY = r'}'
-t_QUO_MARKS = r'"'
 t_COMA = r','
 t_COMMA_DOT = r';' 
 t_POINT = r'\.'
@@ -133,7 +133,7 @@ t_RIGHT_MAYUS = r'>>'
 
 
 def t_VARIABLE(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    r'[a-z_][a-z0-9_]*'
     t.type = reserved.get(t.value, 'VARIABLE')
     return t
 
