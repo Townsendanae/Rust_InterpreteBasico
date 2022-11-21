@@ -4,18 +4,16 @@ import ply.lex as lex
 reserved = {
     'as': 'AS',
     'use': 'USE',
-    'extern crate': 'EXTERNCRATE',
+    'extern': 'EXTERN',
     'break': 'BREAK',
     'const': 'CONST',
     'continue': 'CONTINUE',
     'crate': 'CRATE',
     'else': 'ELSE',
     'if': 'IF',
-    'if let': 'IFLET',
     # --> completar Ronald 2/3
     'enum': 'ENUM',
     'extern': 'EXTERN',
-    'false': 'FALSE',
     'fn': 'FN',
     'for': 'FOR',
     'impl': 'IMPL',
@@ -35,7 +33,6 @@ reserved = {
     'struct': 'STRUCT',
     'super': 'SUPER',
     'trait': 'TRAIT',
-    'true': 'TRUE',
     'type': 'TYPE',
     'unsafe': 'UNSAFE',
     'use': 'USE',
@@ -57,17 +54,7 @@ reserved = {
     'typeof': 'TYPEOF',
     'unsized': 'UNSIZED',
     'virtual': 'VIRTUAL',
-    'yield': 'YIELD',
-    'as': 'AS',
-    'use': 'USE',
-    'extern crate': 'EXTERN_CRATE',
-    'break': 'BREAK',
-    'const': 'CONST',
-    'continue': 'CONTINUE',
-    'crate': 'CRATE',
-    'else': 'ELSE',
-    'if': 'IF',
-    'if let': 'IF_LET'
+    'yield': 'YIELD'
 }
 
 # definir listado de tokens --> Danaé
@@ -111,7 +98,7 @@ t_RKEY = r'}'
 t_QUO_MARKS = r'"'
 t_COMA = r','
 t_COMMA_DOT = r';' 
-t_POINT = r'.'
+t_POINT = r'\.'
 t_TWO_POINTS = r':'
 
 # Expresiones regulares - math
@@ -146,8 +133,13 @@ t_RIGHT_MAYUS = r'>>'
 
 
 def t_VARIABLE(t):
-    r'[a-zA-Z_][a-zA-Z0-9]*'
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'VARIABLE')
+    return t
+
+
+def t_FLOAT(t):
+    r'\d+\.\d+'
     return t
 
 
@@ -171,11 +163,6 @@ def t_DECIMAL(t):
     return t
 
 
-def t_FLOAT(t):
-    r'\d+\.\d+'
-    return t
-
-
 def t_BYTE(t):
     r"(b|B)'[a-zA-Z0-9]'"
     return t
@@ -187,7 +174,7 @@ def t_CHAR(t):
 
 
 def t_STRING(t):
-    r'"[a-zA-Z0-9]*"'
+    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\''
     return t
 
 
@@ -220,7 +207,7 @@ def t_error(t):
 # Construir el lexer, funcion getTokens y leer el archivo --> David
 lexer = lex.lex()
 
-file = open('./AlgoritmoTownsendDanae.rs', 'r')
+file = open('./AlgoritmoMarcilloRommel.rs', 'r')
 content = file.read()
 
 lexer.input(content)
