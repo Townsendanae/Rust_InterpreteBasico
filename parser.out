@@ -1,0 +1,394 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ABSTRACT
+    ALIGNOF
+    AND
+    AND_BIT
+    AS
+    BECOME
+    BOX
+    BREAK
+    BYTE
+    COMA
+    CONST
+    CONTINUE
+    CRATE
+    DIVIDE
+    DO
+    ELSE
+    ENUM
+    EQUALS
+    EXTERN
+    FINAL
+    FN
+    FOR
+    IF
+    IMPL
+    IN
+    INTEGER
+    LEFT_MAYUS
+    LESSEQUAL_THAN
+    LESS_THAN
+    LKEY
+    LOOP
+    LPAREN
+    MACRO
+    MATCH
+    MATH_REMINDER
+    MINUS
+    MOD
+    MOREEQUAL_THAN
+    MORE_THAN
+    MOV
+    NOT
+    NOT_EQUALS
+    OFFSETOF
+    OR
+    OR_BIT
+    OVERRIDE
+    PLUS
+    POINT
+    PRINTLN
+    PRIV
+    PROC
+    PUB
+    PURE
+    QUO_MARKS
+    REF
+    RETURN
+    RIGHT_MAYUS
+    RKEY
+    RPAREN
+    SELF
+    SIZEOF
+    STATIC
+    STRUCT
+    SUPER
+    TIMES
+    TRAIT
+    TWO_POINTS
+    TYPE
+    TYPEOF
+    UNSAFE
+    UNSIZED
+    USE
+    VIRTUAL
+    WHERE
+    WHILE
+    XOR_BIT
+    YIELD
+
+Grammar
+
+Rule 0     S' -> cuerpo
+Rule 1     cuerpo -> asignacion
+Rule 2     cuerpo -> asignacionMutable
+Rule 3     asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT
+Rule 4     valor -> STRING
+Rule 5     valor -> CHAR
+Rule 6     valor -> DECIMAL
+Rule 7     valor -> HEXADECIMAL
+Rule 8     valor -> OCTAL
+Rule 9     valor -> BINARIO
+Rule 10    valor -> BOOL
+Rule 11    valor -> FLOAT
+Rule 12    asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT
+
+Terminals, with rules where they appear
+
+ABSTRACT             : 
+ALIGNOF              : 
+AND                  : 
+AND_BIT              : 
+AS                   : 
+ASSIGN               : 3 12
+BECOME               : 
+BINARIO              : 9
+BOOL                 : 10
+BOX                  : 
+BREAK                : 
+BYTE                 : 
+CHAR                 : 5
+COMA                 : 
+COMMA_DOT            : 3 12
+CONST                : 
+CONTINUE             : 
+CRATE                : 
+DECIMAL              : 6
+DIVIDE               : 
+DO                   : 
+ELSE                 : 
+ENUM                 : 
+EQUALS               : 
+EXTERN               : 
+FINAL                : 
+FLOAT                : 11
+FN                   : 
+FOR                  : 
+HEXADECIMAL          : 7
+IF                   : 
+IMPL                 : 
+IN                   : 
+INTEGER              : 
+LEFT_MAYUS           : 
+LESSEQUAL_THAN       : 
+LESS_THAN            : 
+LET                  : 3 12
+LKEY                 : 
+LOOP                 : 
+LPAREN               : 
+MACRO                : 
+MATCH                : 
+MATH_REMINDER        : 
+MINUS                : 
+MOD                  : 
+MOREEQUAL_THAN       : 
+MORE_THAN            : 
+MOV                  : 
+MUT                  : 12
+NOT                  : 
+NOT_EQUALS           : 
+OCTAL                : 8
+OFFSETOF             : 
+OR                   : 
+OR_BIT               : 
+OVERRIDE             : 
+PLUS                 : 
+POINT                : 
+PRINTLN              : 
+PRIV                 : 
+PROC                 : 
+PUB                  : 
+PURE                 : 
+QUO_MARKS            : 
+REF                  : 
+RETURN               : 
+RIGHT_MAYUS          : 
+RKEY                 : 
+RPAREN               : 
+SELF                 : 
+SIZEOF               : 
+STATIC               : 
+STRING               : 4
+STRUCT               : 
+SUPER                : 
+TIMES                : 
+TRAIT                : 
+TWO_POINTS           : 
+TYPE                 : 
+TYPEOF               : 
+UNSAFE               : 
+UNSIZED              : 
+USE                  : 
+VARIABLE             : 3 12
+VIRTUAL              : 
+WHERE                : 
+WHILE                : 
+XOR_BIT              : 
+YIELD                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 1
+asignacionMutable    : 2
+cuerpo               : 0
+valor                : 3 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . cuerpo
+    (1) cuerpo -> . asignacion
+    (2) cuerpo -> . asignacionMutable
+    (3) asignacion -> . LET VARIABLE ASSIGN valor COMMA_DOT
+    (12) asignacionMutable -> . LET MUT VARIABLE ASSIGN valor COMMA_DOT
+
+    LET             shift and go to state 4
+
+    cuerpo                         shift and go to state 1
+    asignacion                     shift and go to state 2
+    asignacionMutable              shift and go to state 3
+
+state 1
+
+    (0) S' -> cuerpo .
+
+
+
+state 2
+
+    (1) cuerpo -> asignacion .
+
+    $end            reduce using rule 1 (cuerpo -> asignacion .)
+
+
+state 3
+
+    (2) cuerpo -> asignacionMutable .
+
+    $end            reduce using rule 2 (cuerpo -> asignacionMutable .)
+
+
+state 4
+
+    (3) asignacion -> LET . VARIABLE ASSIGN valor COMMA_DOT
+    (12) asignacionMutable -> LET . MUT VARIABLE ASSIGN valor COMMA_DOT
+
+    VARIABLE        shift and go to state 5
+    MUT             shift and go to state 6
+
+
+state 5
+
+    (3) asignacion -> LET VARIABLE . ASSIGN valor COMMA_DOT
+
+    ASSIGN          shift and go to state 7
+
+
+state 6
+
+    (12) asignacionMutable -> LET MUT . VARIABLE ASSIGN valor COMMA_DOT
+
+    VARIABLE        shift and go to state 8
+
+
+state 7
+
+    (3) asignacion -> LET VARIABLE ASSIGN . valor COMMA_DOT
+    (4) valor -> . STRING
+    (5) valor -> . CHAR
+    (6) valor -> . DECIMAL
+    (7) valor -> . HEXADECIMAL
+    (8) valor -> . OCTAL
+    (9) valor -> . BINARIO
+    (10) valor -> . BOOL
+    (11) valor -> . FLOAT
+
+    STRING          shift and go to state 10
+    CHAR            shift and go to state 11
+    DECIMAL         shift and go to state 12
+    HEXADECIMAL     shift and go to state 13
+    OCTAL           shift and go to state 14
+    BINARIO         shift and go to state 15
+    BOOL            shift and go to state 16
+    FLOAT           shift and go to state 17
+
+    valor                          shift and go to state 9
+
+state 8
+
+    (12) asignacionMutable -> LET MUT VARIABLE . ASSIGN valor COMMA_DOT
+
+    ASSIGN          shift and go to state 18
+
+
+state 9
+
+    (3) asignacion -> LET VARIABLE ASSIGN valor . COMMA_DOT
+
+    COMMA_DOT       shift and go to state 19
+
+
+state 10
+
+    (4) valor -> STRING .
+
+    COMMA_DOT       reduce using rule 4 (valor -> STRING .)
+
+
+state 11
+
+    (5) valor -> CHAR .
+
+    COMMA_DOT       reduce using rule 5 (valor -> CHAR .)
+
+
+state 12
+
+    (6) valor -> DECIMAL .
+
+    COMMA_DOT       reduce using rule 6 (valor -> DECIMAL .)
+
+
+state 13
+
+    (7) valor -> HEXADECIMAL .
+
+    COMMA_DOT       reduce using rule 7 (valor -> HEXADECIMAL .)
+
+
+state 14
+
+    (8) valor -> OCTAL .
+
+    COMMA_DOT       reduce using rule 8 (valor -> OCTAL .)
+
+
+state 15
+
+    (9) valor -> BINARIO .
+
+    COMMA_DOT       reduce using rule 9 (valor -> BINARIO .)
+
+
+state 16
+
+    (10) valor -> BOOL .
+
+    COMMA_DOT       reduce using rule 10 (valor -> BOOL .)
+
+
+state 17
+
+    (11) valor -> FLOAT .
+
+    COMMA_DOT       reduce using rule 11 (valor -> FLOAT .)
+
+
+state 18
+
+    (12) asignacionMutable -> LET MUT VARIABLE ASSIGN . valor COMMA_DOT
+    (4) valor -> . STRING
+    (5) valor -> . CHAR
+    (6) valor -> . DECIMAL
+    (7) valor -> . HEXADECIMAL
+    (8) valor -> . OCTAL
+    (9) valor -> . BINARIO
+    (10) valor -> . BOOL
+    (11) valor -> . FLOAT
+
+    STRING          shift and go to state 10
+    CHAR            shift and go to state 11
+    DECIMAL         shift and go to state 12
+    HEXADECIMAL     shift and go to state 13
+    OCTAL           shift and go to state 14
+    BINARIO         shift and go to state 15
+    BOOL            shift and go to state 16
+    FLOAT           shift and go to state 17
+
+    valor                          shift and go to state 20
+
+state 19
+
+    (3) asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .
+
+    $end            reduce using rule 3 (asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .)
+
+
+state 20
+
+    (12) asignacionMutable -> LET MUT VARIABLE ASSIGN valor . COMMA_DOT
+
+    COMMA_DOT       shift and go to state 21
+
+
+state 21
+
+    (12) asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .
+
+    $end            reduce using rule 12 (asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .)
+

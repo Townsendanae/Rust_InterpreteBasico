@@ -131,6 +131,10 @@ t_RIGHT_MAYUS = r'>>'
 
 # Expresiones regulares con reglas - tipo de datos --> Completar David 1/2 y Ronald 1/2
 
+def t_BOOL(t):
+    r'(true|false)'
+    return t
+
 
 def t_VARIABLE(t):
     r'[a-z_][a-z0-9_]*'
@@ -167,20 +171,14 @@ def t_BYTE(t):
     r"(b|B)'[a-zA-Z0-9]'"
     return t
 
-
 def t_CHAR(t):
     r"'[a-zA-Z0-9]'"
     return t
-
 
 def t_STRING(t):
     r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\''
     return t
 
-
-def t_BOOL(t):
-    r'(true|false)'
-    return t
 
 
 # Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
@@ -206,8 +204,7 @@ def t_error(t):
 
 # Construir el lexer, funcion getTokens y leer el archivo --> David
 lexer = lex.lex()
-
-file = open('./AlgoritmoMarcilloRommel.rs', 'r')
+"""file = open('./AlgoritmoMarcilloRommel.rs', 'r')
 content = file.read()
 
 lexer.input(content)
@@ -232,4 +229,4 @@ while linea != "":
     getTokens(lexer)
 
 # Tokenize
-print("Succesfull")
+print("Succesfull")"""
