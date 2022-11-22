@@ -6,7 +6,9 @@ def p_cuerpo(p):
   '''cuerpo : asignacion
   | asignacionMutable
   | eMatch
-  | instruccion'''
+  | instruccion
+  | funcion
+  | funcionDiv'''
 
 #Rommel
 def p_asignacion(p):
@@ -65,7 +67,19 @@ def p_hashMap(p):
 def p_asignacionMutable(p):
   'asignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT'
 
+def p_funcion(p):
+  'funcion : FN VARIABLE parametros LKEY instruccion RKEY'
 
+def p_parametros(p):
+  '''parametros : LPAREN RPAREN
+  | LPAREN parametro RPAREN'''
+
+def p_parametro(p):
+  '''parametro : VARIABLE
+  | VARIABLE COMA parametro'''
+
+def p_funcionDiv(p):
+  'funcionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY'
 #casting, alias y enlaces a variables: Ronald
 
 
