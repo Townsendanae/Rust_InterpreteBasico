@@ -59,7 +59,6 @@ Unused terminals:
     SUPER
     TIMES
     TRAIT
-    TWO_POINTS
     TYPE
     TYPEOF
     UNSAFE
@@ -77,21 +76,24 @@ Rule 0     S' -> cuerpo
 Rule 1     cuerpo -> asignacion
 Rule 2     cuerpo -> asignacionMutable
 Rule 3     cuerpo -> eMatch
-Rule 4     asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT
-Rule 5     valor -> STRING
-Rule 6     valor -> CHAR
-Rule 7     valor -> DECIMAL
-Rule 8     valor -> HEXADECIMAL
-Rule 9     valor -> OCTAL
-Rule 10    valor -> BINARIO
-Rule 11    valor -> BOOL
-Rule 12    valor -> FLOAT
-Rule 13    eMatch -> MATCH VARIABLE LKEY content RKEY
-Rule 14    content -> valor MOREEQUAL_THAN instruccion
-Rule 15    content -> valor MOREEQUAL_THAN instruccion COMA content
-Rule 16    instruccion -> imprimir
-Rule 17    imprimir -> PRINTLN NOT LPAREN valor RPAREN
-Rule 18    asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT
+Rule 4     cuerpo -> instruccion
+Rule 5     asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT
+Rule 6     valor -> STRING
+Rule 7     valor -> CHAR
+Rule 8     valor -> DECIMAL
+Rule 9     valor -> HEXADECIMAL
+Rule 10    valor -> OCTAL
+Rule 11    valor -> BINARIO
+Rule 12    valor -> BOOL
+Rule 13    valor -> FLOAT
+Rule 14    eMatch -> MATCH VARIABLE LKEY content RKEY
+Rule 15    content -> valor MOREEQUAL_THAN instruccion
+Rule 16    content -> valor MOREEQUAL_THAN instruccion COMA content
+Rule 17    instruccion -> imprimir
+Rule 18    instruccion -> hashMap
+Rule 19    imprimir -> PRINTLN NOT LPAREN valor RPAREN
+Rule 20    hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+Rule 21    asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT
 
 Terminals, with rules where they appear
 
@@ -100,20 +102,20 @@ ALIGNOF              :
 AND                  : 
 AND_BIT              : 
 AS                   : 
-ASSIGN               : 4 18
+ASSIGN               : 5 20 21
 BECOME               : 
-BINARIO              : 10
-BOOL                 : 11
+BINARIO              : 11
+BOOL                 : 12
 BOX                  : 
 BREAK                : 
 BYTE                 : 
-CHAR                 : 6
-COMA                 : 15
-COMMA_DOT            : 4 18
+CHAR                 : 7
+COMA                 : 16
+COMMA_DOT            : 5 20 21
 CONST                : 
 CONTINUE             : 
 CRATE                : 
-DECIMAL              : 7
+DECIMAL              : 8
 DIVIDE               : 
 DO                   : 
 ELSE                 : 
@@ -121,10 +123,11 @@ ENUM                 :
 EQUALS               : 
 EXTERN               : 
 FINAL                : 
-FLOAT                : 12
+FLOAT                : 13
 FN                   : 
 FOR                  : 
-HEXADECIMAL          : 8
+HASHMAP              : 20
+HEXADECIMAL          : 9
 IF                   : 
 IMPL                 : 
 IN                   : 
@@ -132,29 +135,30 @@ INTEGER              :
 LEFT_MAYUS           : 
 LESSEQUAL_THAN       : 
 LESS_THAN            : 
-LET                  : 4 18
-LKEY                 : 13
+LET                  : 5 20 21
+LKEY                 : 14
 LOOP                 : 
-LPAREN               : 17
+LPAREN               : 19 20
 MACRO                : 
-MATCH                : 13
+MATCH                : 14
 MATH_REMINDER        : 
 MINUS                : 
 MOD                  : 
-MOREEQUAL_THAN       : 14 15
+MOREEQUAL_THAN       : 15 16
 MORE_THAN            : 
 MOV                  : 
-MUT                  : 18
-NOT                  : 17
+MUT                  : 20 21
+NEW                  : 20
+NOT                  : 19
 NOT_EQUALS           : 
-OCTAL                : 9
+OCTAL                : 10
 OFFSETOF             : 
 OR                   : 
 OR_BIT               : 
 OVERRIDE             : 
 PLUS                 : 
 POINT                : 
-PRINTLN              : 17
+PRINTLN              : 19
 PRIV                 : 
 PROC                 : 
 PUB                  : 
@@ -163,23 +167,23 @@ QUO_MARKS            :
 REF                  : 
 RETURN               : 
 RIGHT_MAYUS          : 
-RKEY                 : 13
-RPAREN               : 17
+RKEY                 : 14
+RPAREN               : 19 20
 SELF                 : 
 SIZEOF               : 
 STATIC               : 
-STRING               : 5
+STRING               : 6
 STRUCT               : 
 SUPER                : 
 TIMES                : 
 TRAIT                : 
-TWO_POINTS           : 
+TWO_POINTS           : 20 20
 TYPE                 : 
 TYPEOF               : 
 UNSAFE               : 
 UNSIZED              : 
 USE                  : 
-VARIABLE             : 4 13 18
+VARIABLE             : 5 14 20 21
 VIRTUAL              : 
 WHERE                : 
 WHILE                : 
@@ -191,12 +195,13 @@ Nonterminals, with rules where they appear
 
 asignacion           : 1
 asignacionMutable    : 2
-content              : 13 15
+content              : 14 16
 cuerpo               : 0
 eMatch               : 3
-imprimir             : 16
-instruccion          : 14 15
-valor                : 4 14 15 17 18
+hashMap              : 18
+imprimir             : 17
+instruccion          : 4 15 16
+valor                : 5 15 16 19 21
 
 Parsing method: LALR
 
@@ -206,17 +211,26 @@ state 0
     (1) cuerpo -> . asignacion
     (2) cuerpo -> . asignacionMutable
     (3) cuerpo -> . eMatch
-    (4) asignacion -> . LET VARIABLE ASSIGN valor COMMA_DOT
-    (18) asignacionMutable -> . LET MUT VARIABLE ASSIGN valor COMMA_DOT
-    (13) eMatch -> . MATCH VARIABLE LKEY content RKEY
+    (4) cuerpo -> . instruccion
+    (5) asignacion -> . LET VARIABLE ASSIGN valor COMMA_DOT
+    (21) asignacionMutable -> . LET MUT VARIABLE ASSIGN valor COMMA_DOT
+    (14) eMatch -> . MATCH VARIABLE LKEY content RKEY
+    (17) instruccion -> . imprimir
+    (18) instruccion -> . hashMap
+    (19) imprimir -> . PRINTLN NOT LPAREN valor RPAREN
+    (20) hashMap -> . LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    LET             shift and go to state 5
-    MATCH           shift and go to state 6
+    LET             shift and go to state 6
+    MATCH           shift and go to state 7
+    PRINTLN         shift and go to state 10
 
     cuerpo                         shift and go to state 1
     asignacion                     shift and go to state 2
     asignacionMutable              shift and go to state 3
     eMatch                         shift and go to state 4
+    instruccion                    shift and go to state 5
+    imprimir                       shift and go to state 8
+    hashMap                        shift and go to state 9
 
 state 1
 
@@ -247,352 +261,458 @@ state 4
 
 state 5
 
-    (4) asignacion -> LET . VARIABLE ASSIGN valor COMMA_DOT
-    (18) asignacionMutable -> LET . MUT VARIABLE ASSIGN valor COMMA_DOT
+    (4) cuerpo -> instruccion .
 
-    VARIABLE        shift and go to state 7
-    MUT             shift and go to state 8
+    $end            reduce using rule 4 (cuerpo -> instruccion .)
 
 
 state 6
 
-    (13) eMatch -> MATCH . VARIABLE LKEY content RKEY
+    (5) asignacion -> LET . VARIABLE ASSIGN valor COMMA_DOT
+    (21) asignacionMutable -> LET . MUT VARIABLE ASSIGN valor COMMA_DOT
+    (20) hashMap -> LET . MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    VARIABLE        shift and go to state 9
+    VARIABLE        shift and go to state 11
+    MUT             shift and go to state 12
 
 
 state 7
 
-    (4) asignacion -> LET VARIABLE . ASSIGN valor COMMA_DOT
+    (14) eMatch -> MATCH . VARIABLE LKEY content RKEY
 
-    ASSIGN          shift and go to state 10
+    VARIABLE        shift and go to state 13
 
 
 state 8
 
-    (18) asignacionMutable -> LET MUT . VARIABLE ASSIGN valor COMMA_DOT
+    (17) instruccion -> imprimir .
 
-    VARIABLE        shift and go to state 11
+    $end            reduce using rule 17 (instruccion -> imprimir .)
+    COMA            reduce using rule 17 (instruccion -> imprimir .)
+    RKEY            reduce using rule 17 (instruccion -> imprimir .)
 
 
 state 9
 
-    (13) eMatch -> MATCH VARIABLE . LKEY content RKEY
+    (18) instruccion -> hashMap .
 
-    LKEY            shift and go to state 12
+    $end            reduce using rule 18 (instruccion -> hashMap .)
+    COMA            reduce using rule 18 (instruccion -> hashMap .)
+    RKEY            reduce using rule 18 (instruccion -> hashMap .)
 
 
 state 10
 
-    (4) asignacion -> LET VARIABLE ASSIGN . valor COMMA_DOT
-    (5) valor -> . STRING
-    (6) valor -> . CHAR
-    (7) valor -> . DECIMAL
-    (8) valor -> . HEXADECIMAL
-    (9) valor -> . OCTAL
-    (10) valor -> . BINARIO
-    (11) valor -> . BOOL
-    (12) valor -> . FLOAT
+    (19) imprimir -> PRINTLN . NOT LPAREN valor RPAREN
 
-    STRING          shift and go to state 14
-    CHAR            shift and go to state 15
-    DECIMAL         shift and go to state 16
-    HEXADECIMAL     shift and go to state 17
-    OCTAL           shift and go to state 18
-    BINARIO         shift and go to state 19
-    BOOL            shift and go to state 20
-    FLOAT           shift and go to state 21
+    NOT             shift and go to state 14
 
-    valor                          shift and go to state 13
 
 state 11
 
-    (18) asignacionMutable -> LET MUT VARIABLE . ASSIGN valor COMMA_DOT
+    (5) asignacion -> LET VARIABLE . ASSIGN valor COMMA_DOT
 
-    ASSIGN          shift and go to state 22
+    ASSIGN          shift and go to state 15
 
 
 state 12
 
-    (13) eMatch -> MATCH VARIABLE LKEY . content RKEY
-    (14) content -> . valor MOREEQUAL_THAN instruccion
-    (15) content -> . valor MOREEQUAL_THAN instruccion COMA content
-    (5) valor -> . STRING
-    (6) valor -> . CHAR
-    (7) valor -> . DECIMAL
-    (8) valor -> . HEXADECIMAL
-    (9) valor -> . OCTAL
-    (10) valor -> . BINARIO
-    (11) valor -> . BOOL
-    (12) valor -> . FLOAT
+    (21) asignacionMutable -> LET MUT . VARIABLE ASSIGN valor COMMA_DOT
+    (20) hashMap -> LET MUT . VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    STRING          shift and go to state 14
-    CHAR            shift and go to state 15
-    DECIMAL         shift and go to state 16
-    HEXADECIMAL     shift and go to state 17
-    OCTAL           shift and go to state 18
-    BINARIO         shift and go to state 19
-    BOOL            shift and go to state 20
-    FLOAT           shift and go to state 21
+    VARIABLE        shift and go to state 16
 
-    content                        shift and go to state 23
-    valor                          shift and go to state 24
 
 state 13
 
-    (4) asignacion -> LET VARIABLE ASSIGN valor . COMMA_DOT
+    (14) eMatch -> MATCH VARIABLE . LKEY content RKEY
 
-    COMMA_DOT       shift and go to state 25
+    LKEY            shift and go to state 17
 
 
 state 14
 
-    (5) valor -> STRING .
+    (19) imprimir -> PRINTLN NOT . LPAREN valor RPAREN
 
-    COMMA_DOT       reduce using rule 5 (valor -> STRING .)
-    MOREEQUAL_THAN  reduce using rule 5 (valor -> STRING .)
-    RPAREN          reduce using rule 5 (valor -> STRING .)
+    LPAREN          shift and go to state 18
 
 
 state 15
 
-    (6) valor -> CHAR .
+    (5) asignacion -> LET VARIABLE ASSIGN . valor COMMA_DOT
+    (6) valor -> . STRING
+    (7) valor -> . CHAR
+    (8) valor -> . DECIMAL
+    (9) valor -> . HEXADECIMAL
+    (10) valor -> . OCTAL
+    (11) valor -> . BINARIO
+    (12) valor -> . BOOL
+    (13) valor -> . FLOAT
 
-    COMMA_DOT       reduce using rule 6 (valor -> CHAR .)
-    MOREEQUAL_THAN  reduce using rule 6 (valor -> CHAR .)
-    RPAREN          reduce using rule 6 (valor -> CHAR .)
+    STRING          shift and go to state 20
+    CHAR            shift and go to state 21
+    DECIMAL         shift and go to state 22
+    HEXADECIMAL     shift and go to state 23
+    OCTAL           shift and go to state 24
+    BINARIO         shift and go to state 25
+    BOOL            shift and go to state 26
+    FLOAT           shift and go to state 27
 
+    valor                          shift and go to state 19
 
 state 16
 
-    (7) valor -> DECIMAL .
+    (21) asignacionMutable -> LET MUT VARIABLE . ASSIGN valor COMMA_DOT
+    (20) hashMap -> LET MUT VARIABLE . ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    COMMA_DOT       reduce using rule 7 (valor -> DECIMAL .)
-    MOREEQUAL_THAN  reduce using rule 7 (valor -> DECIMAL .)
-    RPAREN          reduce using rule 7 (valor -> DECIMAL .)
+    ASSIGN          shift and go to state 28
 
 
 state 17
 
-    (8) valor -> HEXADECIMAL .
+    (14) eMatch -> MATCH VARIABLE LKEY . content RKEY
+    (15) content -> . valor MOREEQUAL_THAN instruccion
+    (16) content -> . valor MOREEQUAL_THAN instruccion COMA content
+    (6) valor -> . STRING
+    (7) valor -> . CHAR
+    (8) valor -> . DECIMAL
+    (9) valor -> . HEXADECIMAL
+    (10) valor -> . OCTAL
+    (11) valor -> . BINARIO
+    (12) valor -> . BOOL
+    (13) valor -> . FLOAT
 
-    COMMA_DOT       reduce using rule 8 (valor -> HEXADECIMAL .)
-    MOREEQUAL_THAN  reduce using rule 8 (valor -> HEXADECIMAL .)
-    RPAREN          reduce using rule 8 (valor -> HEXADECIMAL .)
+    STRING          shift and go to state 20
+    CHAR            shift and go to state 21
+    DECIMAL         shift and go to state 22
+    HEXADECIMAL     shift and go to state 23
+    OCTAL           shift and go to state 24
+    BINARIO         shift and go to state 25
+    BOOL            shift and go to state 26
+    FLOAT           shift and go to state 27
 
+    content                        shift and go to state 29
+    valor                          shift and go to state 30
 
 state 18
 
-    (9) valor -> OCTAL .
+    (19) imprimir -> PRINTLN NOT LPAREN . valor RPAREN
+    (6) valor -> . STRING
+    (7) valor -> . CHAR
+    (8) valor -> . DECIMAL
+    (9) valor -> . HEXADECIMAL
+    (10) valor -> . OCTAL
+    (11) valor -> . BINARIO
+    (12) valor -> . BOOL
+    (13) valor -> . FLOAT
 
-    COMMA_DOT       reduce using rule 9 (valor -> OCTAL .)
-    MOREEQUAL_THAN  reduce using rule 9 (valor -> OCTAL .)
-    RPAREN          reduce using rule 9 (valor -> OCTAL .)
+    STRING          shift and go to state 20
+    CHAR            shift and go to state 21
+    DECIMAL         shift and go to state 22
+    HEXADECIMAL     shift and go to state 23
+    OCTAL           shift and go to state 24
+    BINARIO         shift and go to state 25
+    BOOL            shift and go to state 26
+    FLOAT           shift and go to state 27
 
+    valor                          shift and go to state 31
 
 state 19
 
-    (10) valor -> BINARIO .
+    (5) asignacion -> LET VARIABLE ASSIGN valor . COMMA_DOT
 
-    COMMA_DOT       reduce using rule 10 (valor -> BINARIO .)
-    MOREEQUAL_THAN  reduce using rule 10 (valor -> BINARIO .)
-    RPAREN          reduce using rule 10 (valor -> BINARIO .)
+    COMMA_DOT       shift and go to state 32
 
 
 state 20
 
-    (11) valor -> BOOL .
+    (6) valor -> STRING .
 
-    COMMA_DOT       reduce using rule 11 (valor -> BOOL .)
-    MOREEQUAL_THAN  reduce using rule 11 (valor -> BOOL .)
-    RPAREN          reduce using rule 11 (valor -> BOOL .)
+    COMMA_DOT       reduce using rule 6 (valor -> STRING .)
+    MOREEQUAL_THAN  reduce using rule 6 (valor -> STRING .)
+    RPAREN          reduce using rule 6 (valor -> STRING .)
 
 
 state 21
 
-    (12) valor -> FLOAT .
+    (7) valor -> CHAR .
 
-    COMMA_DOT       reduce using rule 12 (valor -> FLOAT .)
-    MOREEQUAL_THAN  reduce using rule 12 (valor -> FLOAT .)
-    RPAREN          reduce using rule 12 (valor -> FLOAT .)
+    COMMA_DOT       reduce using rule 7 (valor -> CHAR .)
+    MOREEQUAL_THAN  reduce using rule 7 (valor -> CHAR .)
+    RPAREN          reduce using rule 7 (valor -> CHAR .)
 
 
 state 22
 
-    (18) asignacionMutable -> LET MUT VARIABLE ASSIGN . valor COMMA_DOT
-    (5) valor -> . STRING
-    (6) valor -> . CHAR
-    (7) valor -> . DECIMAL
-    (8) valor -> . HEXADECIMAL
-    (9) valor -> . OCTAL
-    (10) valor -> . BINARIO
-    (11) valor -> . BOOL
-    (12) valor -> . FLOAT
+    (8) valor -> DECIMAL .
 
-    STRING          shift and go to state 14
-    CHAR            shift and go to state 15
-    DECIMAL         shift and go to state 16
-    HEXADECIMAL     shift and go to state 17
-    OCTAL           shift and go to state 18
-    BINARIO         shift and go to state 19
-    BOOL            shift and go to state 20
-    FLOAT           shift and go to state 21
+    COMMA_DOT       reduce using rule 8 (valor -> DECIMAL .)
+    MOREEQUAL_THAN  reduce using rule 8 (valor -> DECIMAL .)
+    RPAREN          reduce using rule 8 (valor -> DECIMAL .)
 
-    valor                          shift and go to state 26
 
 state 23
 
-    (13) eMatch -> MATCH VARIABLE LKEY content . RKEY
+    (9) valor -> HEXADECIMAL .
 
-    RKEY            shift and go to state 27
+    COMMA_DOT       reduce using rule 9 (valor -> HEXADECIMAL .)
+    MOREEQUAL_THAN  reduce using rule 9 (valor -> HEXADECIMAL .)
+    RPAREN          reduce using rule 9 (valor -> HEXADECIMAL .)
 
 
 state 24
 
-    (14) content -> valor . MOREEQUAL_THAN instruccion
-    (15) content -> valor . MOREEQUAL_THAN instruccion COMA content
+    (10) valor -> OCTAL .
 
-    MOREEQUAL_THAN  shift and go to state 28
+    COMMA_DOT       reduce using rule 10 (valor -> OCTAL .)
+    MOREEQUAL_THAN  reduce using rule 10 (valor -> OCTAL .)
+    RPAREN          reduce using rule 10 (valor -> OCTAL .)
 
 
 state 25
 
-    (4) asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .
+    (11) valor -> BINARIO .
 
-    $end            reduce using rule 4 (asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .)
+    COMMA_DOT       reduce using rule 11 (valor -> BINARIO .)
+    MOREEQUAL_THAN  reduce using rule 11 (valor -> BINARIO .)
+    RPAREN          reduce using rule 11 (valor -> BINARIO .)
 
 
 state 26
 
-    (18) asignacionMutable -> LET MUT VARIABLE ASSIGN valor . COMMA_DOT
+    (12) valor -> BOOL .
 
-    COMMA_DOT       shift and go to state 29
+    COMMA_DOT       reduce using rule 12 (valor -> BOOL .)
+    MOREEQUAL_THAN  reduce using rule 12 (valor -> BOOL .)
+    RPAREN          reduce using rule 12 (valor -> BOOL .)
 
 
 state 27
 
-    (13) eMatch -> MATCH VARIABLE LKEY content RKEY .
+    (13) valor -> FLOAT .
 
-    $end            reduce using rule 13 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
+    COMMA_DOT       reduce using rule 13 (valor -> FLOAT .)
+    MOREEQUAL_THAN  reduce using rule 13 (valor -> FLOAT .)
+    RPAREN          reduce using rule 13 (valor -> FLOAT .)
 
 
 state 28
 
-    (14) content -> valor MOREEQUAL_THAN . instruccion
-    (15) content -> valor MOREEQUAL_THAN . instruccion COMA content
-    (16) instruccion -> . imprimir
-    (17) imprimir -> . PRINTLN NOT LPAREN valor RPAREN
+    (21) asignacionMutable -> LET MUT VARIABLE ASSIGN . valor COMMA_DOT
+    (20) hashMap -> LET MUT VARIABLE ASSIGN . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+    (6) valor -> . STRING
+    (7) valor -> . CHAR
+    (8) valor -> . DECIMAL
+    (9) valor -> . HEXADECIMAL
+    (10) valor -> . OCTAL
+    (11) valor -> . BINARIO
+    (12) valor -> . BOOL
+    (13) valor -> . FLOAT
 
-    PRINTLN         shift and go to state 32
+    HASHMAP         shift and go to state 34
+    STRING          shift and go to state 20
+    CHAR            shift and go to state 21
+    DECIMAL         shift and go to state 22
+    HEXADECIMAL     shift and go to state 23
+    OCTAL           shift and go to state 24
+    BINARIO         shift and go to state 25
+    BOOL            shift and go to state 26
+    FLOAT           shift and go to state 27
 
-    instruccion                    shift and go to state 30
-    imprimir                       shift and go to state 31
+    valor                          shift and go to state 33
 
 state 29
 
-    (18) asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .
+    (14) eMatch -> MATCH VARIABLE LKEY content . RKEY
 
-    $end            reduce using rule 18 (asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .)
+    RKEY            shift and go to state 35
 
 
 state 30
 
-    (14) content -> valor MOREEQUAL_THAN instruccion .
-    (15) content -> valor MOREEQUAL_THAN instruccion . COMA content
+    (15) content -> valor . MOREEQUAL_THAN instruccion
+    (16) content -> valor . MOREEQUAL_THAN instruccion COMA content
 
-    RKEY            reduce using rule 14 (content -> valor MOREEQUAL_THAN instruccion .)
-    COMA            shift and go to state 33
+    MOREEQUAL_THAN  shift and go to state 36
 
 
 state 31
 
-    (16) instruccion -> imprimir .
+    (19) imprimir -> PRINTLN NOT LPAREN valor . RPAREN
 
-    COMA            reduce using rule 16 (instruccion -> imprimir .)
-    RKEY            reduce using rule 16 (instruccion -> imprimir .)
+    RPAREN          shift and go to state 37
 
 
 state 32
 
-    (17) imprimir -> PRINTLN . NOT LPAREN valor RPAREN
+    (5) asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .
 
-    NOT             shift and go to state 34
+    $end            reduce using rule 5 (asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT .)
 
 
 state 33
 
-    (15) content -> valor MOREEQUAL_THAN instruccion COMA . content
-    (14) content -> . valor MOREEQUAL_THAN instruccion
-    (15) content -> . valor MOREEQUAL_THAN instruccion COMA content
-    (5) valor -> . STRING
-    (6) valor -> . CHAR
-    (7) valor -> . DECIMAL
-    (8) valor -> . HEXADECIMAL
-    (9) valor -> . OCTAL
-    (10) valor -> . BINARIO
-    (11) valor -> . BOOL
-    (12) valor -> . FLOAT
+    (21) asignacionMutable -> LET MUT VARIABLE ASSIGN valor . COMMA_DOT
 
-    STRING          shift and go to state 14
-    CHAR            shift and go to state 15
-    DECIMAL         shift and go to state 16
-    HEXADECIMAL     shift and go to state 17
-    OCTAL           shift and go to state 18
-    BINARIO         shift and go to state 19
-    BOOL            shift and go to state 20
-    FLOAT           shift and go to state 21
+    COMMA_DOT       shift and go to state 38
 
-    valor                          shift and go to state 24
-    content                        shift and go to state 35
 
 state 34
 
-    (17) imprimir -> PRINTLN NOT . LPAREN valor RPAREN
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP . TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    LPAREN          shift and go to state 36
+    TWO_POINTS      shift and go to state 39
 
 
 state 35
 
-    (15) content -> valor MOREEQUAL_THAN instruccion COMA content .
+    (14) eMatch -> MATCH VARIABLE LKEY content RKEY .
 
-    RKEY            reduce using rule 15 (content -> valor MOREEQUAL_THAN instruccion COMA content .)
+    $end            reduce using rule 14 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
 
 
 state 36
 
-    (17) imprimir -> PRINTLN NOT LPAREN . valor RPAREN
-    (5) valor -> . STRING
-    (6) valor -> . CHAR
-    (7) valor -> . DECIMAL
-    (8) valor -> . HEXADECIMAL
-    (9) valor -> . OCTAL
-    (10) valor -> . BINARIO
-    (11) valor -> . BOOL
-    (12) valor -> . FLOAT
+    (15) content -> valor MOREEQUAL_THAN . instruccion
+    (16) content -> valor MOREEQUAL_THAN . instruccion COMA content
+    (17) instruccion -> . imprimir
+    (18) instruccion -> . hashMap
+    (19) imprimir -> . PRINTLN NOT LPAREN valor RPAREN
+    (20) hashMap -> . LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
 
-    STRING          shift and go to state 14
-    CHAR            shift and go to state 15
-    DECIMAL         shift and go to state 16
-    HEXADECIMAL     shift and go to state 17
-    OCTAL           shift and go to state 18
-    BINARIO         shift and go to state 19
-    BOOL            shift and go to state 20
-    FLOAT           shift and go to state 21
+    PRINTLN         shift and go to state 10
+    LET             shift and go to state 41
 
-    valor                          shift and go to state 37
+    instruccion                    shift and go to state 40
+    imprimir                       shift and go to state 8
+    hashMap                        shift and go to state 9
 
 state 37
 
-    (17) imprimir -> PRINTLN NOT LPAREN valor . RPAREN
+    (19) imprimir -> PRINTLN NOT LPAREN valor RPAREN .
 
-    RPAREN          shift and go to state 38
+    $end            reduce using rule 19 (imprimir -> PRINTLN NOT LPAREN valor RPAREN .)
+    COMA            reduce using rule 19 (imprimir -> PRINTLN NOT LPAREN valor RPAREN .)
+    RKEY            reduce using rule 19 (imprimir -> PRINTLN NOT LPAREN valor RPAREN .)
 
 
 state 38
 
-    (17) imprimir -> PRINTLN NOT LPAREN valor RPAREN .
+    (21) asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .
 
-    COMA            reduce using rule 17 (imprimir -> PRINTLN NOT LPAREN valor RPAREN .)
-    RKEY            reduce using rule 17 (imprimir -> PRINTLN NOT LPAREN valor RPAREN .)
+    $end            reduce using rule 21 (asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT .)
+
+
+state 39
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS . TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+
+    TWO_POINTS      shift and go to state 42
+
+
+state 40
+
+    (15) content -> valor MOREEQUAL_THAN instruccion .
+    (16) content -> valor MOREEQUAL_THAN instruccion . COMA content
+
+    RKEY            reduce using rule 15 (content -> valor MOREEQUAL_THAN instruccion .)
+    COMA            shift and go to state 43
+
+
+state 41
+
+    (20) hashMap -> LET . MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+
+    MUT             shift and go to state 44
+
+
+state 42
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS . NEW LPAREN RPAREN COMMA_DOT
+
+    NEW             shift and go to state 45
+
+
+state 43
+
+    (16) content -> valor MOREEQUAL_THAN instruccion COMA . content
+    (15) content -> . valor MOREEQUAL_THAN instruccion
+    (16) content -> . valor MOREEQUAL_THAN instruccion COMA content
+    (6) valor -> . STRING
+    (7) valor -> . CHAR
+    (8) valor -> . DECIMAL
+    (9) valor -> . HEXADECIMAL
+    (10) valor -> . OCTAL
+    (11) valor -> . BINARIO
+    (12) valor -> . BOOL
+    (13) valor -> . FLOAT
+
+    STRING          shift and go to state 20
+    CHAR            shift and go to state 21
+    DECIMAL         shift and go to state 22
+    HEXADECIMAL     shift and go to state 23
+    OCTAL           shift and go to state 24
+    BINARIO         shift and go to state 25
+    BOOL            shift and go to state 26
+    FLOAT           shift and go to state 27
+
+    valor                          shift and go to state 30
+    content                        shift and go to state 46
+
+state 44
+
+    (20) hashMap -> LET MUT . VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+
+    VARIABLE        shift and go to state 47
+
+
+state 45
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW . LPAREN RPAREN COMMA_DOT
+
+    LPAREN          shift and go to state 48
+
+
+state 46
+
+    (16) content -> valor MOREEQUAL_THAN instruccion COMA content .
+
+    RKEY            reduce using rule 16 (content -> valor MOREEQUAL_THAN instruccion COMA content .)
+
+
+state 47
+
+    (20) hashMap -> LET MUT VARIABLE . ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+
+    ASSIGN          shift and go to state 49
+
+
+state 48
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN . RPAREN COMMA_DOT
+
+    RPAREN          shift and go to state 50
+
+
+state 49
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT
+
+    HASHMAP         shift and go to state 34
+
+
+state 50
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN . COMMA_DOT
+
+    COMMA_DOT       shift and go to state 51
+
+
+state 51
+
+    (20) hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT .
+
+    $end            reduce using rule 20 (hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT .)
+    COMA            reduce using rule 20 (hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT .)
+    RKEY            reduce using rule 20 (hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT .)
 

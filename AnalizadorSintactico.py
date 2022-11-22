@@ -5,7 +5,8 @@ from AnalizadorLexico import tokens
 def p_cuerpo(p):
   '''cuerpo : asignacion
   | asignacionMutable
-  | eMatch'''
+  | eMatch
+  | instruccion'''
 
 #Rommel
 def p_asignacion(p):
@@ -32,10 +33,12 @@ def p_content(p):
   | valor MOREEQUAL_THAN instruccion COMA content'''
 
 def p_instruccion(p):
-  'instruccion : imprimir'
+  '''instruccion : imprimir
+  | hashMap'''
 
 def p_imprimir(p):
   'imprimir : PRINTLN NOT LPAREN valor RPAREN'
+
 #loop: Ronald
 
 
@@ -50,8 +53,8 @@ def p_imprimir(p):
 
 
 #hashmap: Rommel
-
-
+def p_hashMap(p):
+  'hashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT'
 
 #structs: Ronald
 

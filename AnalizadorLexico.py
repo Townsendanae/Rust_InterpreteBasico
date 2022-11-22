@@ -55,7 +55,9 @@ reserved = {
     'unsized': 'UNSIZED',
     'virtual': 'VIRTUAL',
     'yield': 'YIELD',
-    'println': 'PRINTLN'
+    'println': 'PRINTLN',
+    'hashmap': 'HASHMAP',
+    'new': 'NEW',
 }
 
 # definir listado de tokens --> Danaé

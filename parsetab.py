@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ABSTRACT ALIGNOF AND AND_BIT AS ASSIGN BECOME BINARIO BOOL BOX BREAK BYTE CHAR COMA COMMA_DOT CONST CONTINUE CRATE DECIMAL DIVIDE DO ELSE ENUM EQUALS EXTERN FINAL FLOAT FN FOR HEXADECIMAL IF IMPL IN INTEGER LEFT_MAYUS LESSEQUAL_THAN LESS_THAN LET LKEY LOOP LPAREN MACRO MATCH MATH_REMINDER MINUS MOD MOREEQUAL_THAN MORE_THAN MOV MUT NOT NOT_EQUALS OCTAL OFFSETOF OR OR_BIT OVERRIDE PLUS POINT PRINTLN PRIV PROC PUB PURE QUO_MARKS REF RETURN RIGHT_MAYUS RKEY RPAREN SELF SIZEOF STATIC STRING STRUCT SUPER TIMES TRAIT TWO_POINTS TYPE TYPEOF UNSAFE UNSIZED USE VARIABLE VIRTUAL WHERE WHILE XOR_BIT YIELDcuerpo : asignacion\n  | asignacionMutable\n  | eMatchasignacion : LET VARIABLE ASSIGN valor COMMA_DOTvalor : STRING\n  | CHAR\n  | DECIMAL\n  | HEXADECIMAL\n  | OCTAL\n  | BINARIO\n  | BOOL\n  | FLOATeMatch : MATCH VARIABLE LKEY content RKEYcontent : valor MOREEQUAL_THAN instruccion\n  | valor MOREEQUAL_THAN instruccion COMA contentinstruccion : imprimirimprimir : PRINTLN NOT LPAREN valor RPARENasignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT'
+_lr_signature = 'ABSTRACT ALIGNOF AND AND_BIT AS ASSIGN BECOME BINARIO BOOL BOX BREAK BYTE CHAR COMA COMMA_DOT CONST CONTINUE CRATE DECIMAL DIVIDE DO ELSE ENUM EQUALS EXTERN FINAL FLOAT FN FOR HASHMAP HEXADECIMAL IF IMPL IN INTEGER LEFT_MAYUS LESSEQUAL_THAN LESS_THAN LET LKEY LOOP LPAREN MACRO MATCH MATH_REMINDER MINUS MOD MOREEQUAL_THAN MORE_THAN MOV MUT NEW NOT NOT_EQUALS OCTAL OFFSETOF OR OR_BIT OVERRIDE PLUS POINT PRINTLN PRIV PROC PUB PURE QUO_MARKS REF RETURN RIGHT_MAYUS RKEY RPAREN SELF SIZEOF STATIC STRING STRUCT SUPER TIMES TRAIT TWO_POINTS TYPE TYPEOF UNSAFE UNSIZED USE VARIABLE VIRTUAL WHERE WHILE XOR_BIT YIELDcuerpo : asignacion\n  | asignacionMutable\n  | eMatch\n  | instruccionasignacion : LET VARIABLE ASSIGN valor COMMA_DOTvalor : STRING\n  | CHAR\n  | DECIMAL\n  | HEXADECIMAL\n  | OCTAL\n  | BINARIO\n  | BOOL\n  | FLOATeMatch : MATCH VARIABLE LKEY content RKEYcontent : valor MOREEQUAL_THAN instruccion\n  | valor MOREEQUAL_THAN instruccion COMA contentinstruccion : imprimir\n  | hashMapimprimir : PRINTLN NOT LPAREN valor RPARENhashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOTasignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT'
     
-_lr_action_items = {'LET':([0,],[5,]),'MATCH':([0,],[6,]),'$end':([1,2,3,4,25,27,29,],[0,-1,-2,-3,-4,-13,-18,]),'VARIABLE':([5,6,8,],[7,9,11,]),'MUT':([5,],[8,]),'ASSIGN':([7,11,],[10,22,]),'LKEY':([9,],[12,]),'STRING':([10,12,22,33,36,],[14,14,14,14,14,]),'CHAR':([10,12,22,33,36,],[15,15,15,15,15,]),'DECIMAL':([10,12,22,33,36,],[16,16,16,16,16,]),'HEXADECIMAL':([10,12,22,33,36,],[17,17,17,17,17,]),'OCTAL':([10,12,22,33,36,],[18,18,18,18,18,]),'BINARIO':([10,12,22,33,36,],[19,19,19,19,19,]),'BOOL':([10,12,22,33,36,],[20,20,20,20,20,]),'FLOAT':([10,12,22,33,36,],[21,21,21,21,21,]),'COMMA_DOT':([13,14,15,16,17,18,19,20,21,26,],[25,-5,-6,-7,-8,-9,-10,-11,-12,29,]),'MOREEQUAL_THAN':([14,15,16,17,18,19,20,21,24,],[-5,-6,-7,-8,-9,-10,-11,-12,28,]),'RPAREN':([14,15,16,17,18,19,20,21,37,],[-5,-6,-7,-8,-9,-10,-11,-12,38,]),'RKEY':([23,30,31,35,38,],[27,-14,-16,-15,-17,]),'PRINTLN':([28,],[32,]),'COMA':([30,31,38,],[33,-16,-17,]),'NOT':([32,],[34,]),'LPAREN':([34,],[36,]),}
+_lr_action_items = {'LET':([0,36,],[6,41,]),'MATCH':([0,],[7,]),'PRINTLN':([0,36,],[10,10,]),'$end':([1,2,3,4,5,8,9,32,35,37,38,51,],[0,-1,-2,-3,-4,-17,-18,-5,-14,-19,-21,-20,]),'VARIABLE':([6,7,12,44,],[11,13,16,47,]),'MUT':([6,41,],[12,44,]),'COMA':([8,9,37,40,51,],[-17,-18,-19,43,-20,]),'RKEY':([8,9,29,37,40,46,51,],[-17,-18,35,-19,-15,-16,-20,]),'NOT':([10,],[14,]),'ASSIGN':([11,16,47,],[15,28,49,]),'LKEY':([13,],[17,]),'LPAREN':([14,45,],[18,48,]),'STRING':([15,17,18,28,43,],[20,20,20,20,20,]),'CHAR':([15,17,18,28,43,],[21,21,21,21,21,]),'DECIMAL':([15,17,18,28,43,],[22,22,22,22,22,]),'HEXADECIMAL':([15,17,18,28,43,],[23,23,23,23,23,]),'OCTAL':([15,17,18,28,43,],[24,24,24,24,24,]),'BINARIO':([15,17,18,28,43,],[25,25,25,25,25,]),'BOOL':([15,17,18,28,43,],[26,26,26,26,26,]),'FLOAT':([15,17,18,28,43,],[27,27,27,27,27,]),'COMMA_DOT':([19,20,21,22,23,24,25,26,27,33,50,],[32,-6,-7,-8,-9,-10,-11,-12,-13,38,51,]),'MOREEQUAL_THAN':([20,21,22,23,24,25,26,27,30,],[-6,-7,-8,-9,-10,-11,-12,-13,36,]),'RPAREN':([20,21,22,23,24,25,26,27,31,48,],[-6,-7,-8,-9,-10,-11,-12,-13,37,50,]),'HASHMAP':([28,49,],[34,34,]),'TWO_POINTS':([34,39,],[39,42,]),'NEW':([42,],[45,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'cuerpo':([0,],[1,]),'asignacion':([0,],[2,]),'asignacionMutable':([0,],[3,]),'eMatch':([0,],[4,]),'valor':([10,12,22,33,36,],[13,24,26,24,37,]),'content':([12,33,],[23,35,]),'instruccion':([28,],[30,]),'imprimir':([28,],[31,]),}
+_lr_goto_items = {'cuerpo':([0,],[1,]),'asignacion':([0,],[2,]),'asignacionMutable':([0,],[3,]),'eMatch':([0,],[4,]),'instruccion':([0,36,],[5,40,]),'imprimir':([0,36,],[8,8,]),'hashMap':([0,36,],[9,9,]),'valor':([15,17,18,28,43,],[19,30,31,33,30,]),'content':([17,43,],[29,46,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -30,19 +30,22 @@ _lr_productions = [
   ('cuerpo -> asignacion','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',6),
   ('cuerpo -> asignacionMutable','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',7),
   ('cuerpo -> eMatch','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',8),
-  ('asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT','asignacion',5,'p_asignacion','AnalizadorSintactico.py',12),
-  ('valor -> STRING','valor',1,'p_valor','AnalizadorSintactico.py',16),
-  ('valor -> CHAR','valor',1,'p_valor','AnalizadorSintactico.py',17),
-  ('valor -> DECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',18),
-  ('valor -> HEXADECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',19),
-  ('valor -> OCTAL','valor',1,'p_valor','AnalizadorSintactico.py',20),
-  ('valor -> BINARIO','valor',1,'p_valor','AnalizadorSintactico.py',21),
-  ('valor -> BOOL','valor',1,'p_valor','AnalizadorSintactico.py',22),
-  ('valor -> FLOAT','valor',1,'p_valor','AnalizadorSintactico.py',23),
-  ('eMatch -> MATCH VARIABLE LKEY content RKEY','eMatch',5,'p_eMatch','AnalizadorSintactico.py',28),
-  ('content -> valor MOREEQUAL_THAN instruccion','content',3,'p_content','AnalizadorSintactico.py',31),
-  ('content -> valor MOREEQUAL_THAN instruccion COMA content','content',5,'p_content','AnalizadorSintactico.py',32),
-  ('instruccion -> imprimir','instruccion',1,'p_instruccion','AnalizadorSintactico.py',35),
-  ('imprimir -> PRINTLN NOT LPAREN valor RPAREN','imprimir',5,'p_imprimir','AnalizadorSintactico.py',38),
-  ('asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT','asignacionMutable',6,'p_asignacionMutable','AnalizadorSintactico.py',63),
+  ('cuerpo -> instruccion','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',9),
+  ('asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT','asignacion',5,'p_asignacion','AnalizadorSintactico.py',13),
+  ('valor -> STRING','valor',1,'p_valor','AnalizadorSintactico.py',17),
+  ('valor -> CHAR','valor',1,'p_valor','AnalizadorSintactico.py',18),
+  ('valor -> DECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',19),
+  ('valor -> HEXADECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',20),
+  ('valor -> OCTAL','valor',1,'p_valor','AnalizadorSintactico.py',21),
+  ('valor -> BINARIO','valor',1,'p_valor','AnalizadorSintactico.py',22),
+  ('valor -> BOOL','valor',1,'p_valor','AnalizadorSintactico.py',23),
+  ('valor -> FLOAT','valor',1,'p_valor','AnalizadorSintactico.py',24),
+  ('eMatch -> MATCH VARIABLE LKEY content RKEY','eMatch',5,'p_eMatch','AnalizadorSintactico.py',29),
+  ('content -> valor MOREEQUAL_THAN instruccion','content',3,'p_content','AnalizadorSintactico.py',32),
+  ('content -> valor MOREEQUAL_THAN instruccion COMA content','content',5,'p_content','AnalizadorSintactico.py',33),
+  ('instruccion -> imprimir','instruccion',1,'p_instruccion','AnalizadorSintactico.py',36),
+  ('instruccion -> hashMap','instruccion',1,'p_instruccion','AnalizadorSintactico.py',37),
+  ('imprimir -> PRINTLN NOT LPAREN valor RPAREN','imprimir',5,'p_imprimir','AnalizadorSintactico.py',40),
+  ('hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT','hashMap',11,'p_hashMap','AnalizadorSintactico.py',57),
+  ('asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT','asignacionMutable',6,'p_asignacionMutable','AnalizadorSintactico.py',66),
 ]
