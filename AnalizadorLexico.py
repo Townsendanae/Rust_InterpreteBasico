@@ -85,7 +85,7 @@ bit_tokens = [
 
 data_type_tokens = [
     'VARIABLE', 'INTEGER', 'DECIMAL', 'HEXADECIMAL', 'OCTAL', 'BINARIO', 'BYTE',
-    'CHAR', 'STRING', 'BOOL', 'FLOAT'  # -->completar David
+    'CHAR', 'STRING', 'BOOL', 'FLOAT', 'GENERIC'  # -->completar David
 ]
 
 tokens = punctuation_tokens + math_tokens + compare_tokens + \
@@ -132,20 +132,18 @@ t_LEFT_MAYUS = r'<<'
 t_RIGHT_MAYUS = r'>>'
 
 # Expresiones regulares con reglas - tipo de datos --> Completar David 1/2 y Ronald 1/2
+def t_GENERIC(t):
+    r'T|\?|E|K|V'
+    return t
 
 def t_BOOL(t):
-    r'(true|false)'
+    r'(true|false)|bool'
     return t
 
-
-def t_VARIABLE(t):
-    r'[a-z_][a-z0-9_]*'
-    t.type = reserved.get(t.value, 'VARIABLE')
-    return t
 
 
 def t_FLOAT(t):
-    r'\d+\.\d+'
+    r'\d+\.\d+|f32|f64'
     return t
 
 
@@ -165,7 +163,7 @@ def t_BINARIO(t):
 
 
 def t_DECIMAL(t):
-    r'[0-9_]{1,}'
+    r'([0-9_]{1,})|i8|i16|i32|i64|i128|u8|u16|u32|u64|u128'
     return t
 
 
@@ -174,14 +172,18 @@ def t_BYTE(t):
     return t
 
 def t_CHAR(t):
-    r"'[a-zA-Z0-9]'"
+    r"'[a-zA-Z0-9]'|char"
     return t
 
 def t_STRING(t):
-    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\''
+    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\'|str'
     return t
 
 
+def t_VARIABLE(t):
+    r'[a-z_][a-z0-9_]*'
+    t.type = reserved.get(t.value, 'VARIABLE')
+    return t
 
 # Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
 # t_ERROR --> David
@@ -207,9 +209,9 @@ def t_error(t):
 # Construir el lexer, funcion getTokens y leer el archivo --> David
 lexer = lex.lex()
 """file = open('./AlgoritmoMarcilloRommel.rs', 'r')
-content = file.read()
+content = file.read
 
-lexer.input(content)
+lexer.input("i32")
 
 
 def getTokens(lexer):

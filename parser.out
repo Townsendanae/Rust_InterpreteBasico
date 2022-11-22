@@ -22,6 +22,7 @@ Unused terminals:
     EXTERN
     FINAL
     FOR
+    GENERIC
     IF
     IMPL
     IN
@@ -131,6 +132,7 @@ FINAL                :
 FLOAT                : 15
 FN                   : 24 29
 FOR                  : 
+GENERIC              : 
 HASHMAP              : 22
 HEXADECIMAL          : 11
 IF                   : 
