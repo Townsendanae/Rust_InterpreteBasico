@@ -11,6 +11,7 @@ reserved = {
     'crate': 'CRATE',
     'else': 'ELSE',
     'if': 'IF',
+    'vec' : 'VEC',
     # --> completar Ronald 2/3
     'enum': 'ENUM',
     'extern': 'EXTERN',
@@ -62,7 +63,7 @@ reserved = {
 
 # definir listado de tokens --> Danaé
 punctuation_tokens = [
-    'LPAREN', 'RPAREN', 'LKEY', 'RKEY', 'QUO_MARKS', 'COMA', "COMMA_DOT", "POINT", "TWO_POINTS"
+    'LPAREN', 'RPAREN', 'LKEY', 'RKEY', 'QUO_MARKS', 'COMA', "COMMA_DOT", "POINT", "TWO_POINTS","LBRACKET","RBRACKET"
 ]
 
 math_tokens = [
@@ -102,6 +103,8 @@ t_COMA = r','
 t_COMMA_DOT = r';' 
 t_POINT = r'\.'
 t_TWO_POINTS = r':'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
 
 # Expresiones regulares - math
 t_PLUS = r'\+'

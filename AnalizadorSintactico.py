@@ -8,7 +8,11 @@ def p_cuerpo(p):
   | eMatch
   | instruccion
   | funcion
-  | funcionDiv'''
+  | funcionDiv
+  | vector
+  | for
+  | apuntador
+  | trait '''
 
 #Rommel
 def p_asignacion(p):
@@ -46,12 +50,21 @@ def p_imprimir(p):
 
 
 #for: Danae
+def p_for(p):
+  'for : FOR VARIABLE IN rango LKEY instruccion RKEY'
 
-
+def p_rango(p):
+  ''' rango : DECIMAL POINT POINT DECIMAL
+  | DECIMAL POINT POINT ASSIGN DECIMAL '''
 
 #Estructuras de datos
 #vectores: Danae
+def p_vector(p):
+  'vector : LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET '
 
+def p_valores(p):
+  '''valores : valor
+  | valor COMA valores'''
 
 
 #hashmap: Rommel
@@ -74,9 +87,9 @@ def p_parametros(p):
   '''parametros : LPAREN RPAREN
   | LPAREN parametro RPAREN'''
 
-def p_parametro(p):
-  '''parametro : VARIABLE
-  | VARIABLE COMA parametro'''
+def p_parametro(p): #Corrección por Danae
+  '''parametro : VARIABLE TWO_POINTS valor 
+  | VARIABLE TWO_POINTS valor COMA parametro'''
 
 def p_funcionDiv(p):
   'funcionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY'
@@ -86,6 +99,10 @@ def p_funcionDiv(p):
 
 #apuntadores, traits y parametros:Danae
 
+def p_trait(p):
+  'trait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN '
+def p_apuntador(p):
+  'apuntador : LET VARIABLE TWO_POINTS FN parametros MINUS MORE_THAN valor ASSIGN VARIABLE COMMA_DOT'
 
 #Por hacer: entrada y salida de datos
 

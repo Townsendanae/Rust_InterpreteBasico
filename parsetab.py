@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ABSTRACT ALIGNOF AND AND_BIT AS ASSIGN BECOME BINARIO BOOL BOX BREAK BYTE CHAR COMA COMMA_DOT CONST CONTINUE CRATE DECIMAL DIVIDE DO ELSE ENUM EQUALS EXTERN FINAL FLOAT FN FOR GENERIC HASHMAP HEXADECIMAL IF IMPL IN INTEGER LEFT_MAYUS LESSEQUAL_THAN LESS_THAN LET LKEY LOOP LPAREN MACRO MATCH MATH_REMINDER MINUS MOD MOREEQUAL_THAN MORE_THAN MOV MUT NEW NOT NOT_EQUALS OCTAL OFFSETOF OR OR_BIT OVERRIDE PLUS POINT PRINTLN PRIV PROC PUB PURE QUO_MARKS REF RETURN RIGHT_MAYUS RKEY RPAREN SELF SIZEOF STATIC STRING STRUCT SUPER TIMES TRAIT TWO_POINTS TYPE TYPEOF UNSAFE UNSIZED USE VARIABLE VIRTUAL WHERE WHILE XOR_BIT YIELDcuerpo : asignacion\n  | asignacionMutable\n  | eMatch\n  | instruccion\n  | funcion\n  | funcionDivasignacion : LET VARIABLE ASSIGN valor COMMA_DOTvalor : STRING\n  | CHAR\n  | DECIMAL\n  | HEXADECIMAL\n  | OCTAL\n  | BINARIO\n  | BOOL\n  | FLOATeMatch : MATCH VARIABLE LKEY content RKEYcontent : valor MOREEQUAL_THAN instruccion\n  | valor MOREEQUAL_THAN instruccion COMA contentinstruccion : imprimir\n  | hashMapimprimir : PRINTLN NOT LPAREN valor RPARENhashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOTasignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOTfuncion : FN VARIABLE parametros LKEY instruccion RKEYparametros : LPAREN RPAREN\n  | LPAREN parametro RPARENparametro : VARIABLE\n  | VARIABLE COMA parametrofuncionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY'
+_lr_signature = 'ABSTRACT ALIGNOF AND AND_BIT AS ASSIGN BECOME BINARIO BOOL BOX BREAK BYTE CHAR COMA COMMA_DOT CONST CONTINUE CRATE DECIMAL DIVIDE DO ELSE ENUM EQUALS EXTERN FINAL FLOAT FN FOR GENERIC HASHMAP HEXADECIMAL IF IMPL IN INTEGER LBRACKET LEFT_MAYUS LESSEQUAL_THAN LESS_THAN LET LKEY LOOP LPAREN MACRO MATCH MATH_REMINDER MINUS MOD MOREEQUAL_THAN MORE_THAN MOV MUT NEW NOT NOT_EQUALS OCTAL OFFSETOF OR OR_BIT OVERRIDE PLUS POINT PRINTLN PRIV PROC PUB PURE QUO_MARKS RBRACKET REF RETURN RIGHT_MAYUS RKEY RPAREN SELF SIZEOF STATIC STRING STRUCT SUPER TIMES TRAIT TWO_POINTS TYPE TYPEOF UNSAFE UNSIZED USE VARIABLE VEC VIRTUAL WHERE WHILE XOR_BIT YIELDcuerpo : asignacion\n  | asignacionMutable\n  | eMatch\n  | instruccion\n  | funcion\n  | funcionDiv\n  | vector\n  | for\n  | apuntador\n  | trait asignacion : LET VARIABLE ASSIGN valor COMMA_DOTvalor : STRING\n  | CHAR\n  | DECIMAL\n  | HEXADECIMAL\n  | OCTAL\n  | BINARIO\n  | BOOL\n  | FLOATeMatch : MATCH VARIABLE LKEY content RKEYcontent : valor MOREEQUAL_THAN instruccion\n  | valor MOREEQUAL_THAN instruccion COMA contentinstruccion : imprimir\n  | hashMapimprimir : PRINTLN NOT LPAREN valor RPARENfor : FOR VARIABLE IN rango LKEY instruccion RKEY rango : DECIMAL POINT POINT DECIMAL\n  | DECIMAL POINT POINT ASSIGN DECIMAL vector : LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET valores : valor\n  | valor COMA valoreshashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOTasignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOTfuncion : FN VARIABLE parametros LKEY instruccion RKEYparametros : LPAREN RPAREN\n  | LPAREN parametro RPARENparametro : VARIABLE TWO_POINTS valor \n  | VARIABLE TWO_POINTS valor COMA parametrofuncionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEYtrait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN apuntador : LET VARIABLE TWO_POINTS FN parametros MINUS MORE_THAN valor ASSIGN VARIABLE COMMA_DOT'
     
-_lr_action_items = {'LET':([0,37,47,64,],[8,49,49,49,]),'MATCH':([0,],[9,]),'FN':([0,],[12,]),'PRINTLN':([0,37,47,64,],[13,13,13,13,]),'$end':([1,2,3,4,5,6,7,10,11,43,46,53,54,57,70,72,],[0,-1,-2,-3,-4,-5,-6,-19,-20,-7,-16,-21,-23,-24,-29,-22,]),'VARIABLE':([8,9,12,15,23,52,58,],[14,16,17,20,41,41,63,]),'MUT':([8,49,],[15,58,]),'RKEY':([10,11,35,48,53,56,66,68,72,],[-19,-20,46,57,-21,-17,-18,70,-22,]),'COMA':([10,11,41,53,56,72,],[-19,-20,52,-21,62,-22,]),'NOT':([13,50,],[18,59,]),'ASSIGN':([14,20,63,],[19,34,67,]),'LKEY':([16,22,39,51,59,],[21,37,-25,-26,64,]),'LPAREN':([17,18,65,],[23,24,69,]),'STRING':([19,21,24,34,62,],[26,26,26,26,26,]),'CHAR':([19,21,24,34,62,],[27,27,27,27,27,]),'DECIMAL':([19,21,24,34,62,],[28,28,28,28,28,]),'HEXADECIMAL':([19,21,24,34,62,],[29,29,29,29,29,]),'OCTAL':([19,21,24,34,62,],[30,30,30,30,30,]),'BINARIO':([19,21,24,34,62,],[31,31,31,31,31,]),'BOOL':([19,21,24,34,62,],[32,32,32,32,32,]),'FLOAT':([19,21,24,34,62,],[33,33,33,33,33,]),'MINUS':([22,39,51,],[38,-25,-26,]),'RPAREN':([23,26,27,28,29,30,31,32,33,40,41,42,60,69,],[39,-8,-9,-10,-11,-12,-13,-14,-15,51,-27,53,-28,71,]),'COMMA_DOT':([25,26,27,28,29,30,31,32,33,44,71,],[43,-8,-9,-10,-11,-12,-13,-14,-15,54,72,]),'MOREEQUAL_THAN':([26,27,28,29,30,31,32,33,36,],[-8,-9,-10,-11,-12,-13,-14,-15,47,]),'HASHMAP':([34,67,],[45,45,]),'MORE_THAN':([38,],[50,]),'TWO_POINTS':([45,55,],[55,61,]),'NEW':([61,],[65,]),}
+_lr_action_items = {'LET':([0,50,65,71,92,],[12,67,67,67,67,]),'MATCH':([0,],[13,]),'FN':([0,28,],[16,46,]),'FOR':([0,],[17,]),'LESS_THAN':([0,],[18,]),'PRINTLN':([0,50,65,71,92,],[19,19,19,19,19,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,14,15,59,64,73,74,77,80,94,97,109,112,113,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-23,-24,-11,-20,-40,-25,-33,-34,-26,-29,-39,-41,-32,]),'VARIABLE':([12,13,16,17,21,32,34,81,93,107,],[20,22,23,24,29,54,57,91,54,110,]),'MUT':([12,67,],[21,81,]),'RKEY':([14,15,48,66,74,79,84,101,103,113,],[-23,-24,64,80,-25,-21,94,-22,109,-32,]),'COMA':([14,15,38,39,40,41,42,43,44,45,74,79,83,87,113,],[-23,-24,-12,-13,-14,-15,-16,-17,-18,-19,-25,90,93,98,-32,]),'GENERIC':([18,],[25,]),'NOT':([19,37,68,],[26,60,82,]),'ASSIGN':([20,29,38,39,40,41,42,43,44,45,85,91,99,],[27,47,-12,-13,-14,-15,-16,-17,-18,-19,96,102,107,]),'TWO_POINTS':([20,25,54,63,78,],[28,34,70,78,89,]),'LKEY':([22,31,52,55,69,82,95,105,],[30,50,-35,71,-36,92,-27,-28,]),'LPAREN':([23,26,46,100,],[32,35,32,108,]),'IN':([24,],[33,]),'VEC':([27,],[37,]),'STRING':([27,30,35,47,70,75,88,90,98,],[38,38,38,38,38,38,38,38,38,]),'CHAR':([27,30,35,47,70,75,88,90,98,],[39,39,39,39,39,39,39,39,39,]),'DECIMAL':([27,30,33,35,47,70,75,85,88,90,96,98,],[40,40,56,40,40,40,40,95,40,40,105,40,]),'HEXADECIMAL':([27,30,35,47,70,75,88,90,98,],[41,41,41,41,41,41,41,41,41,]),'OCTAL':([27,30,35,47,70,75,88,90,98,],[42,42,42,42,42,42,42,42,42,]),'BINARIO':([27,30,35,47,70,75,88,90,98,],[43,43,43,43,43,43,43,43,43,]),'BOOL':([27,30,35,47,70,75,88,90,98,],[44,44,44,44,44,44,44,44,44,]),'FLOAT':([27,30,35,47,70,75,88,90,98,],[45,45,45,45,45,45,45,45,45,]),'MINUS':([31,52,61,69,],[51,-35,76,-36,]),'RPAREN':([32,38,39,40,41,42,43,44,45,53,58,83,104,108,],[52,-12,-13,-14,-15,-16,-17,-18,-19,69,74,-37,-38,111,]),'COMMA_DOT':([36,38,39,40,41,42,43,44,45,62,110,111,],[59,-12,-13,-14,-15,-16,-17,-18,-19,77,112,113,]),'MOREEQUAL_THAN':([38,39,40,41,42,43,44,45,49,],[-12,-13,-14,-15,-16,-17,-18,-19,65,]),'RBRACKET':([38,39,40,41,42,43,44,45,86,87,106,],[-12,-13,-14,-15,-16,-17,-18,-19,97,-30,-31,]),'HASHMAP':([47,102,],[63,63,]),'MORE_THAN':([51,57,76,],[68,73,88,]),'POINT':([56,72,],[72,85,]),'LBRACKET':([60,],[75,]),'NEW':([89,],[100,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'cuerpo':([0,],[1,]),'asignacion':([0,],[2,]),'asignacionMutable':([0,],[3,]),'eMatch':([0,],[4,]),'instruccion':([0,37,47,64,],[5,48,56,68,]),'funcion':([0,],[6,]),'funcionDiv':([0,],[7,]),'imprimir':([0,37,47,64,],[10,10,10,10,]),'hashMap':([0,37,47,64,],[11,11,11,11,]),'parametros':([17,],[22,]),'valor':([19,21,24,34,62,],[25,36,42,44,36,]),'content':([21,62,],[35,66,]),'parametro':([23,52,],[40,60,]),}
+_lr_goto_items = {'cuerpo':([0,],[1,]),'asignacion':([0,],[2,]),'asignacionMutable':([0,],[3,]),'eMatch':([0,],[4,]),'instruccion':([0,50,65,71,92,],[5,66,79,84,103,]),'funcion':([0,],[6,]),'funcionDiv':([0,],[7,]),'vector':([0,],[8,]),'for':([0,],[9,]),'apuntador':([0,],[10,]),'trait':([0,],[11,]),'imprimir':([0,50,65,71,92,],[14,14,14,14,14,]),'hashMap':([0,50,65,71,92,],[15,15,15,15,15,]),'parametros':([23,46,],[31,61,]),'valor':([27,30,35,47,70,75,88,90,98,],[36,49,58,62,83,87,99,49,87,]),'content':([30,90,],[48,101,]),'parametro':([32,93,],[53,104,]),'rango':([33,],[55,]),'valores':([75,98,],[86,106,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -33,27 +33,39 @@ _lr_productions = [
   ('cuerpo -> instruccion','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',9),
   ('cuerpo -> funcion','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',10),
   ('cuerpo -> funcionDiv','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',11),
-  ('asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT','asignacion',5,'p_asignacion','AnalizadorSintactico.py',15),
-  ('valor -> STRING','valor',1,'p_valor','AnalizadorSintactico.py',19),
-  ('valor -> CHAR','valor',1,'p_valor','AnalizadorSintactico.py',20),
-  ('valor -> DECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',21),
-  ('valor -> HEXADECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',22),
-  ('valor -> OCTAL','valor',1,'p_valor','AnalizadorSintactico.py',23),
-  ('valor -> BINARIO','valor',1,'p_valor','AnalizadorSintactico.py',24),
-  ('valor -> BOOL','valor',1,'p_valor','AnalizadorSintactico.py',25),
-  ('valor -> FLOAT','valor',1,'p_valor','AnalizadorSintactico.py',26),
-  ('eMatch -> MATCH VARIABLE LKEY content RKEY','eMatch',5,'p_eMatch','AnalizadorSintactico.py',31),
-  ('content -> valor MOREEQUAL_THAN instruccion','content',3,'p_content','AnalizadorSintactico.py',34),
-  ('content -> valor MOREEQUAL_THAN instruccion COMA content','content',5,'p_content','AnalizadorSintactico.py',35),
-  ('instruccion -> imprimir','instruccion',1,'p_instruccion','AnalizadorSintactico.py',38),
-  ('instruccion -> hashMap','instruccion',1,'p_instruccion','AnalizadorSintactico.py',39),
-  ('imprimir -> PRINTLN NOT LPAREN valor RPAREN','imprimir',5,'p_imprimir','AnalizadorSintactico.py',42),
-  ('hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT','hashMap',11,'p_hashMap','AnalizadorSintactico.py',59),
-  ('asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT','asignacionMutable',6,'p_asignacionMutable','AnalizadorSintactico.py',68),
-  ('funcion -> FN VARIABLE parametros LKEY instruccion RKEY','funcion',6,'p_funcion','AnalizadorSintactico.py',71),
-  ('parametros -> LPAREN RPAREN','parametros',2,'p_parametros','AnalizadorSintactico.py',74),
-  ('parametros -> LPAREN parametro RPAREN','parametros',3,'p_parametros','AnalizadorSintactico.py',75),
-  ('parametro -> VARIABLE','parametro',1,'p_parametro','AnalizadorSintactico.py',78),
-  ('parametro -> VARIABLE COMA parametro','parametro',3,'p_parametro','AnalizadorSintactico.py',79),
-  ('funcionDiv -> FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY','funcionDiv',9,'p_funcionDiv','AnalizadorSintactico.py',82),
+  ('cuerpo -> vector','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',12),
+  ('cuerpo -> for','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',13),
+  ('cuerpo -> apuntador','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',14),
+  ('cuerpo -> trait','cuerpo',1,'p_cuerpo','AnalizadorSintactico.py',15),
+  ('asignacion -> LET VARIABLE ASSIGN valor COMMA_DOT','asignacion',5,'p_asignacion','AnalizadorSintactico.py',19),
+  ('valor -> STRING','valor',1,'p_valor','AnalizadorSintactico.py',23),
+  ('valor -> CHAR','valor',1,'p_valor','AnalizadorSintactico.py',24),
+  ('valor -> DECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',25),
+  ('valor -> HEXADECIMAL','valor',1,'p_valor','AnalizadorSintactico.py',26),
+  ('valor -> OCTAL','valor',1,'p_valor','AnalizadorSintactico.py',27),
+  ('valor -> BINARIO','valor',1,'p_valor','AnalizadorSintactico.py',28),
+  ('valor -> BOOL','valor',1,'p_valor','AnalizadorSintactico.py',29),
+  ('valor -> FLOAT','valor',1,'p_valor','AnalizadorSintactico.py',30),
+  ('eMatch -> MATCH VARIABLE LKEY content RKEY','eMatch',5,'p_eMatch','AnalizadorSintactico.py',35),
+  ('content -> valor MOREEQUAL_THAN instruccion','content',3,'p_content','AnalizadorSintactico.py',38),
+  ('content -> valor MOREEQUAL_THAN instruccion COMA content','content',5,'p_content','AnalizadorSintactico.py',39),
+  ('instruccion -> imprimir','instruccion',1,'p_instruccion','AnalizadorSintactico.py',42),
+  ('instruccion -> hashMap','instruccion',1,'p_instruccion','AnalizadorSintactico.py',43),
+  ('imprimir -> PRINTLN NOT LPAREN valor RPAREN','imprimir',5,'p_imprimir','AnalizadorSintactico.py',46),
+  ('for -> FOR VARIABLE IN rango LKEY instruccion RKEY','for',7,'p_for','AnalizadorSintactico.py',54),
+  ('rango -> DECIMAL POINT POINT DECIMAL','rango',4,'p_rango','AnalizadorSintactico.py',57),
+  ('rango -> DECIMAL POINT POINT ASSIGN DECIMAL','rango',5,'p_rango','AnalizadorSintactico.py',58),
+  ('vector -> LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET','vector',8,'p_vector','AnalizadorSintactico.py',63),
+  ('valores -> valor','valores',1,'p_valores','AnalizadorSintactico.py',66),
+  ('valores -> valor COMA valores','valores',3,'p_valores','AnalizadorSintactico.py',67),
+  ('hashMap -> LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT','hashMap',11,'p_hashMap','AnalizadorSintactico.py',72),
+  ('asignacionMutable -> LET MUT VARIABLE ASSIGN valor COMMA_DOT','asignacionMutable',6,'p_asignacionMutable','AnalizadorSintactico.py',81),
+  ('funcion -> FN VARIABLE parametros LKEY instruccion RKEY','funcion',6,'p_funcion','AnalizadorSintactico.py',84),
+  ('parametros -> LPAREN RPAREN','parametros',2,'p_parametros','AnalizadorSintactico.py',87),
+  ('parametros -> LPAREN parametro RPAREN','parametros',3,'p_parametros','AnalizadorSintactico.py',88),
+  ('parametro -> VARIABLE TWO_POINTS valor','parametro',3,'p_parametro','AnalizadorSintactico.py',91),
+  ('parametro -> VARIABLE TWO_POINTS valor COMA parametro','parametro',5,'p_parametro','AnalizadorSintactico.py',92),
+  ('funcionDiv -> FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY','funcionDiv',9,'p_funcionDiv','AnalizadorSintactico.py',95),
+  ('trait -> LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN','trait',5,'p_trait','AnalizadorSintactico.py',103),
+  ('apuntador -> LET VARIABLE TWO_POINTS FN parametros MINUS MORE_THAN valor ASSIGN VARIABLE COMMA_DOT','apuntador',11,'p_apuntador','AnalizadorSintactico.py',105),
 ]
