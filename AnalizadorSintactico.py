@@ -4,7 +4,8 @@ from AnalizadorLexico import tokens
 #Rommel
 def p_cuerpo(p):
   '''cuerpo : asignacion
-  | asignacionMutable'''
+  | asignacionMutable
+  | eMatch'''
 
 #Rommel
 def p_asignacion(p):
@@ -23,9 +24,18 @@ def p_valor(p):
 
 #Estructuras de control
 #match: Rommel
+def p_eMatch(p):
+ 'eMatch : MATCH VARIABLE LKEY content RKEY'
 
+def p_content(p):
+  '''content : valor MOREEQUAL_THAN instruccion
+  | valor MOREEQUAL_THAN instruccion COMA content'''
 
+def p_instruccion(p):
+  'instruccion : imprimir'
 
+def p_imprimir(p):
+  'imprimir : PRINTLN NOT LPAREN valor RPAREN'
 #loop: Ronald
 
 
