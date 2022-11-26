@@ -1,0 +1,25 @@
+fn print_pais(pais_nombre: str){println!(1)} 2022-11-21 23:46:40.345315
+let asd = vec![12] 2022-11-21 23:52:30.733548
+fn print_pais(pais_nombre: str){println!(1)} 2022-11-21 23:52:44.316549
+loop {println!(1)} 2022-11-21 23:53:03.114549
+let var = 12; 2022-11-21 23:53:36.658349
+let var = "asd"; 2022-11-21 23:53:39.893350
+let var = 12.2; 2022-11-21 23:53:43.245916
+let var = true; 2022-11-21 23:53:48.567593
+let mut var = 'a'; 2022-11-21 23:54:03.944543
+struct 2022-11-21 23:58:09.874633
+struct 2022-11-21 23:58:33.628636
+struct asd {xsd:12} 2022-11-21 23:58:45.447592
+struct{x:1} 2022-11-25 21:12:10.888022
+struct{x:1} 2022-11-25 21:12:38.407028
+struct asd {x:1} 2022-11-25 21:13:30.302130
+asd : string 2022-11-25 21:14:08.293031
+asd:string 2022-11-25 21:15:43.805033
+asd:T 2022-11-25 21:18:36.249032
+type asd = i32 2022-11-25 21:18:52.515558
+type asd = string 2022-11-25 21:18:58.485034
+type asd = string; 2022-11-25 21:19:16.670033
+let mut s = s.to_ascii_lowercase().chars().collect::<Vec<_>>(); 2022-11-25 21:21:43.621030
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>(); 2022-11-25 21:21:45.690047
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>(); 2022-11-25 21:21:50.480032
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>(); 2022-11-25 21:21:51.553032

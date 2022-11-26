@@ -1,4 +1,5 @@
 import ply.yacc as yacc
+from datetime import datetime
 from AnalizadorLexico import tokens
 
 # Rommel
@@ -19,7 +20,8 @@ def p_cuerpo(p):
     | struct
     | casting
     | alias
-    | link'''
+    | link
+    | parametro'''
 
 # Rommel
 
@@ -124,7 +126,9 @@ def p_parametros(p):
 
 def p_parametro(p):  # Corrección por Danae
     '''parametro : VARIABLE TWO_POINTS valor 
-    | VARIABLE TWO_POINTS valor COMA parametro'''
+    | VARIABLE TWO_POINTS valor COMA parametro
+    | VARIABLE TWO_POINTS GENERIC
+    | VARIABLE TWO_POINTS GENERIC COMA parametro'''
 
 
 def p_funcionDiv(p):
@@ -178,9 +182,10 @@ parser = yacc.yacc()
 
 
 def validaRegla(s):
-    result = parser.parse(s)
-    print(result)
-
+  result = parser.parse(s)
+  logs = open('logs.txt','a')
+  logs.write(s+' '+str(datetime.now())+'\n')
+  print(result)
 
 while True:
     try:

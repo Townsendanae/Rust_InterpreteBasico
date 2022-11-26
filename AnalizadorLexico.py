@@ -31,7 +31,6 @@ reserved = {
     'return': 'RETURN',
     'self': 'SELF',
     'static': 'STATIC',
-    'struct': 'STRUCT',
     'super': 'SUPER',
     'trait': 'TRAIT',
     'type': 'TYPE',
@@ -59,6 +58,7 @@ reserved = {
     'println': 'PRINTLN',
     'hashmap': 'HASHMAP',
     'new': 'NEW',
+    'struct': 'STRUCT'
 }
 
 # definir listado de tokens --> Danaé
@@ -179,7 +179,7 @@ def t_CHAR(t):
     return t
 
 def t_STRING(t):
-    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\'|str'
+    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\'|string'
     return t
 
 
@@ -214,7 +214,7 @@ lexer = lex.lex()
 """file = open('./AlgoritmoMarcilloRommel.rs', 'r')
 content = file.read
 
-lexer.input("i32")
+lexer.input("struct")
 
 
 def getTokens(lexer):
