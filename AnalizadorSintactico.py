@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 from datetime import datetime
 from AnalizadorLexico import tokens
-
+"""
 # Rommel
 
 
@@ -168,6 +168,84 @@ def p_apuntador(p):
 
 # Por hacer: entrada y salida de datos
 
+"""
+
+def p_cuerpo(p):
+    '''cuerpo : asignacion
+    | definicion
+    | struct
+    | varEnVar
+    '''    
+
+def p_asignacion(p):
+    '''asignacion : definicion ASSIGN valorAsignado COMMA_DOT
+    | VARIABLE ASSIGN valorAsignado COMMA_DOT
+    | VARIABLE ASSIGN varEnVar COMMA_DOT'''
+
+def p_varEnVar(p):
+    'varEnVar : VARIABLE POINT VARIABLE'
+
+def p_definicion(p):
+    '''definicion : creacion
+    | creacion COMMA_DOT
+    | creacion tipoDato'''
+
+def p_creacion(p):
+    '''creacion : LET MUT VARIABLE
+    | LET VARIABLE
+    | CONST VARIABLE'''
+
+def p_tipoDato(p):
+    '''tipoDato : TWO_POINTS dato
+    | TWO_POINTS dato tipoDato
+    | LESS_THAN dato MORE_THAN
+    '''
+
+def p_dato(p):
+    '''dato : STRING
+    | CHAR
+    | DECIMAL
+    | HEXADECIMAL
+    | OCTAL
+    | BINARIO
+    | BOOL
+    | FLOAT
+    | VEC
+    | GENERIC'''
+
+def p_valorAsignado(p):
+    '''valorAsignado : dato
+    | llamadaAfuncion
+    | llamadaAfuncionPorAlias'''
+
+def p_llamadaAfuncionPorAlias(p):
+    '''llamadaAfuncionPorAlias : VARIABLE POINT llamadaAfuncion'''
+
+def p_llamadaAfuncion(p):
+    '''llamadaAfuncion : VARIABLE argumentos
+    | VARIABLE argumentos POINT llamadaAfuncion
+    | VARIABLE TWO_POINTS TWO_POINTS argumentos'''
+
+def p_argumentos(p):
+    '''argumentos : LPAREN argumento RPAREN
+    | LPAREN RPAREN'''
+
+def p_argumento(p):
+    '''argumento : VARIABLE
+    | dato
+    | VARIABLE COMA argumento
+    | dato COMA argumento
+    | llamadaAfuncion
+    | llamadaAfuncionPorAlias
+    | llamadaAfuncion COMA argumento
+    | llamadaAfuncionPorAlias COMA argumento'''
+
+def p_struct(p):
+    'struct : STRUCT VARIABLE LKEY atributos RKEY'
+
+def p_atributos(p):
+    '''atributos : VARIABLE TWO_POINTS dato
+    | VARIABLE TWO_POINTS dato COMA atributos'''
 
 def p_error(p):
     if p:
@@ -195,3 +273,10 @@ while True:
     if not s:
         continue
     validaRegla(s)
+
+
+
+
+
+
+

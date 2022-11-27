@@ -11,7 +11,6 @@ reserved = {
     'crate': 'CRATE',
     'else': 'ELSE',
     'if': 'IF',
-    'vec' : 'VEC',
     # --> completar Ronald 2/3
     'enum': 'ENUM',
     'extern': 'EXTERN',
@@ -86,7 +85,7 @@ bit_tokens = [
 
 data_type_tokens = [
     'VARIABLE', 'INTEGER', 'DECIMAL', 'HEXADECIMAL', 'OCTAL', 'BINARIO', 'BYTE',
-    'CHAR', 'STRING', 'BOOL', 'FLOAT', 'GENERIC'  # -->completar David
+    'CHAR', 'STRING', 'BOOL', 'FLOAT', 'GENERIC', 'VEC'  # -->completar David
 ]
 
 tokens = punctuation_tokens + math_tokens + compare_tokens + \
@@ -135,15 +134,18 @@ t_LEFT_MAYUS = r'<<'
 t_RIGHT_MAYUS = r'>>'
 
 # Expresiones regulares con reglas - tipo de datos --> Completar David 1/2 y Ronald 1/2
+def t_VEC(t):
+    r'Vec'
+    t.type = reserved.get(t.value, 'VEC')
+    return t
+
 def t_GENERIC(t):
-    r'T|\?|E|K|V'
+    r'T|\?|E|K|V|_'
     return t
 
 def t_BOOL(t):
     r'(true|false)|bool'
     return t
-
-
 
 def t_FLOAT(t):
     r'\d+\.\d+|f32|f64'
@@ -179,14 +181,14 @@ def t_CHAR(t):
     return t
 
 def t_STRING(t):
-    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\'|string'
+    r'"[a-zA-Z0-9]*"|\'[a-zA-Z0-9]*\'|string|&str'
     return t
-
 
 def t_VARIABLE(t):
     r'[a-z_][a-z0-9_]*'
     t.type = reserved.get(t.value, 'VARIABLE')
     return t
+
 
 # Agregar t_COMMENTS, t_newline, entre otras pertinentes --> Ronald
 # t_ERROR --> David
@@ -214,7 +216,7 @@ lexer = lex.lex()
 """file = open('./AlgoritmoMarcilloRommel.rs', 'r')
 content = file.read
 
-lexer.input("struct")
+lexer.input("Vec")
 
 
 def getTokens(lexer):
@@ -236,4 +238,5 @@ while linea != "":
     getTokens(lexer)
 
 # Tokenize
-print("Succesfull")"""
+print("Succesfull")
+"""
