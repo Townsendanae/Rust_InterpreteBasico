@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter.ttk import *
 from AnalizadorLexico import *
+from AnalizadorSintactico import *
 
 #funciones Complementarias
 def getTokens(lexer):
@@ -21,9 +22,12 @@ def show_analisis_lexico():
 
 
 #Funciones analisis sintáctico
-def show_analysis_sintactico():
-    content=entrada.get()
-    print(content)
+def show_analysis_sintactico(): #comentar el while True del analizador sintactico
+    content = entrada.get()
+    result = parser.parse(content)
+    print(result)
+    string_output.set(result)  #en el analizador sintactico, acumular en una lista los errores para presentar
+    
     
 #funciones analisis semantico
 def show_analysis_semantico():
@@ -41,7 +45,7 @@ titulo = tk.Label(text="ANALIZADOR BÁSICO DE RUST",font=("Arial",18), fg="black
 lb1 = tk.Label( text="Ingrese código en Rust",fg="black", bg="ivory").place(x=10,y=50)
 entrada = tk.StringVar()
 tk.Entry(textvariable=entrada, font=("Arial",8), width=80).place(height=60,x=10,y=80)
-botonLexico = tk.Button(text="Analizador léxico",  command=show_analisis_lexico).place(width=130,x=10,y=150)
+botonLexico = tk.Button(text="Analizador Léxico",  command=show_analisis_lexico).place(width=130,x=10,y=150)
 botonSintactico = tk.Button(text="Analizador Sintáctico",  command=show_analysis_sintactico).place(width=130,x=160,y=150)
 botonSemantico = tk.Button(text="Analizador Semántico",  command=show_analysis_semantico).place(width=130,x=310,y=150)
 lb2_Title = tk.Label( text="Salida: ",fg="black", bg="ivory").place(x=10,y=200)
