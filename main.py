@@ -4,31 +4,39 @@ from tkinter.ttk import *
 from AnalizadorLexico import *
 from AnalizadorSintactico import *
 
-#funciones Complementarias
+############### En el analizador lexico, colocar y modificar el:
+def t_error(t):
+    lstTokens.append("Caracter no permitido'%s'" % t.value[0])
+    t.lexer.skip(1) 
+
+# Construir el lexer
+lexer = lex.lex()
+lstTokens = []
+
 def getTokens(lexer):
-    lstTokens = []
+    lstTokens.clear()
     for token in lexer:
         output = f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}'
         lstTokens.append(output)
         print(f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}')
-    string_output.set("\n".join(lstTokens))  
-    
 
+
+
+#
 #Funciones analisis lexico
 def show_analisis_lexico():
     content=entrada.get()
     lexer.input(content)
     getTokens(lexer)
+    string_output.set("\n".join(lstTokens))  
 
 
 #Funciones analisis sintáctico
-def show_analysis_sintactico(): #comentar el while True del analizador sintactico
-    content = entrada.get()
-    result = parser.parse(content)
-    print(result)
-    string_output.set(result)  #en el analizador sintactico, acumular en una lista los errores para presentar
-    
-    
+def show_analysis_sintactico(): #comentar el while True del analizador sintactico y colocar el clear a la lista en validarRegla
+    s = entrada.get()
+    validaRegla(s)
+    string_output.set("\n".join(lstErrores))  
+
 #funciones analisis semantico
 def show_analysis_semantico():
     content=entrada.get()
