@@ -4,60 +4,13 @@ from AnalizadorLexico import tokens
 """
 # Rommel
 
-
-def p_cuerpo(p):
-    '''cuerpo : asignacion
-    | asignacionMutable
-    | eMatch
-    | instruccion
-    | funcion
-    | funcionDiv
-    | vector
-    | for
-    | apuntador
-    | trait 
-    | loop
-    | struct
-    | casting
-    | alias
-    | link
-    | parametro''' agregado
-
 # Rommel
 
 
-def p_asignacion(p):
-    'asignacion : LET VARIABLE ASSIGN valor COMMA_DOT' agregado
-
-# Rommel
-
-
-def p_valor(p):
-    '''valor : STRING
-    | CHAR
-    | DECIMAL
-    | HEXADECIMAL
-    | OCTAL
-    | BINARIO
-    | BOOL
-    | FLOAT''' agregado
 
 # Estructuras de control
 #match: Rommel
 
-
-def p_eMatch(p):
-    'eMatch : MATCH VARIABLE LKEY content RKEY'
-
-
-def p_content(p):
-    '''content : valor MOREEQUAL_THAN instruccion
-    | valor MOREEQUAL_THAN instruccion COMA content'''
-
-
-def p_instruccion(p):
-    '''instruccion : imprimir
-    | hashMap'''
 
 
 def p_imprimir(p):
@@ -66,73 +19,20 @@ def p_imprimir(p):
 #loop: Ronald
 
 
-def p_loop(p):
-    'loop : LOOP LKEY instruccion RKEY'
-
-
 # for: Danae
-def p_for(p):
-    'for : FOR VARIABLE IN rango LKEY instruccion RKEY'
 
-
-def p_rango(p):
-    ''' rango : DECIMAL POINT POINT DECIMAL
-    | DECIMAL POINT POINT ASSIGN DECIMAL '''
 
 # Estructuras de datos
 #vectores: Danae
 
 
-def p_vector(p):
-    'vector : LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET ' agregado
-
-
-def p_valores(p):
-    '''valores : valor
-    | valor COMA valores''' agregado
-
-
-#hashmap: Rommel
-def p_hashMap(p):
-    'hashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT' agregado
 
 #structs: Ronald
 
 
-def p_struct(p):
-    'struct : STRUCT VARIABLE LKEY atributos RKEY' agregado
-
-
-def p_atributos(p):
-    '''atributos : VARIABLE TWO_POINTS valor
-    | VARIABLE TWO_POINTS valor COMA atributos''' agregado
 
 # Reglas
 # definicion de funciones y mutabilidad: Rommel 
-
-
-def p_asignacionMutable(p):
-    'asignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT' agregado
-
-
-def p_funcion(p):
-    'funcion : FN VARIABLE parametros LKEY instruccion RKEY' agregado
-
-
-def p_parametros(p):
-    '''parametros : LPAREN RPAREN
-    | LPAREN parametro RPAREN''' agregado
-
-
-def p_parametro(p):  # Corrección por Danae
-    '''parametro : VARIABLE TWO_POINTS valor 
-    | VARIABLE TWO_POINTS valor COMA parametro
-    | VARIABLE TWO_POINTS GENERIC
-    | VARIABLE TWO_POINTS GENERIC COMA parametro''' agregado
-
-
-def p_funcionDiv(p):
-    'funcionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY' agregado
 
 
 # casting, alias y enlaces a variables: Ronald
@@ -159,31 +59,27 @@ def p_variables(p):
 # apuntadores, traits y parametros:Danae
 
 
-def p_trait(p):
-    'trait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN ' agregado
-
-
-def p_apuntador(p):
-    'apuntador : LET VARIABLE TWO_POINTS FN parametros MINUS MORE_THAN valor ASSIGN VARIABLE COMMA_DOT'
-
 # Por hacer: entrada y salida de datos
 
 """
 
 def p_cuerpo(p):
     '''cuerpo : asignacion
-    | definicion
     | struct
     | varEnVar
     | definirFuncion
     | hashMap
     | vector
+    | for
+    | loop
+    | eMatch
     '''    
 
 def p_asignacion(p):
     '''asignacion : definicion ASSIGN valorAsignado COMMA_DOT
     | VARIABLE ASSIGN valorAsignado COMMA_DOT
-    | VARIABLE ASSIGN varEnVar COMMA_DOT'''
+    | VARIABLE ASSIGN varEnVar COMMA_DOT
+    | definicion'''
 
 def p_varEnVar(p):
     'varEnVar : VARIABLE POINT VARIABLE'
@@ -202,6 +98,7 @@ def p_tipoDato(p):
     '''tipoDato : TWO_POINTS dato
     | TWO_POINTS dato tipoDato
     | LESS_THAN dato MORE_THAN
+    | TWO_POINTS apuntador
     '''
 
 def p_dato(p):
@@ -222,7 +119,8 @@ def p_valorAsignado(p):
     | llamadaAfuncion
     | llamadaAfuncionPorAlias
     | vector
-    | hashMap'''
+    | hashMap
+    | VARIABLE'''
 
 def p_llamadaAfuncionPorAlias(p):
     '''llamadaAfuncionPorAlias : VARIABLE POINT llamadaAfuncion'''
@@ -230,7 +128,9 @@ def p_llamadaAfuncionPorAlias(p):
 def p_llamadaAfuncion(p):
     '''llamadaAfuncion : VARIABLE argumentos
     | VARIABLE argumentos POINT llamadaAfuncion
-    | VARIABLE TWO_POINTS TWO_POINTS argumentos'''
+    | VARIABLE TWO_POINTS TWO_POINTS argumentos
+    | VARIABLE TWO_POINTS TWO_POINTS
+    | VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion'''
 
 def p_argumentos(p):
     '''argumentos : LPAREN argumento RPAREN
@@ -269,6 +169,8 @@ def p_parametros(p):
 def p_parametro(p):  # Corrección por Danae
     '''parametro : VARIABLE TWO_POINTS dato 
     | VARIABLE TWO_POINTS dato COMA parametro
+    | dato COMA parametro
+    | dato
     '''
 
 def p_cuerpoFuncion(p):
@@ -294,8 +196,31 @@ def p_datos(p):
 #hashmap: Rommel
 def p_hashMap(p):
     'hashMap : HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN'
-    
 
+# for: Danae
+def p_for(p):
+    'for : FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY'
+
+
+def p_rango(p):
+    ''' rango : DECIMAL POINT POINT DECIMAL
+    | DECIMAL POINT POINT ASSIGN DECIMAL '''
+    
+#match: Rommel
+def p_eMatch(p):
+    'eMatch : MATCH VARIABLE LKEY content RKEY'
+
+
+def p_content(p):
+    '''content : dato MOREEQUAL_THAN cuerpoFuncion
+    | dato MOREEQUAL_THAN cuerpoFuncion COMA content'''
+
+#loop: Ronald
+def p_loop(p):
+    'loop : LOOP LKEY cuerpoFuncion RKEY'
+
+def p_apuntador(p):
+    'apuntador : FN parametros'
 
 def p_error(p):
     if p:
