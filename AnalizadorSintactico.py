@@ -21,13 +21,13 @@ def p_cuerpo(p):
     | casting
     | alias
     | link
-    | parametro'''
+    | parametro''' agregado
 
 # Rommel
 
 
 def p_asignacion(p):
-    'asignacion : LET VARIABLE ASSIGN valor COMMA_DOT'
+    'asignacion : LET VARIABLE ASSIGN valor COMMA_DOT' agregado
 
 # Rommel
 
@@ -40,7 +40,7 @@ def p_valor(p):
     | OCTAL
     | BINARIO
     | BOOL
-    | FLOAT'''
+    | FLOAT''' agregado
 
 # Estructuras de control
 #match: Rommel
@@ -84,55 +84,55 @@ def p_rango(p):
 
 
 def p_vector(p):
-    'vector : LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET '
+    'vector : LET VARIABLE ASSIGN VEC NOT LBRACKET valores RBRACKET ' agregado
 
 
 def p_valores(p):
     '''valores : valor
-    | valor COMA valores'''
+    | valor COMA valores''' agregado
 
 
 #hashmap: Rommel
 def p_hashMap(p):
-    'hashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT'
+    'hashMap : LET MUT VARIABLE ASSIGN HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN COMMA_DOT' agregado
 
 #structs: Ronald
 
 
 def p_struct(p):
-    'struct : STRUCT VARIABLE LKEY atributos RKEY'
+    'struct : STRUCT VARIABLE LKEY atributos RKEY' agregado
 
 
 def p_atributos(p):
     '''atributos : VARIABLE TWO_POINTS valor
-    | VARIABLE TWO_POINTS valor COMA atributos'''
+    | VARIABLE TWO_POINTS valor COMA atributos''' agregado
 
 # Reglas
-# definicion de funciones y mutabilidad: Rommel
+# definicion de funciones y mutabilidad: Rommel 
 
 
 def p_asignacionMutable(p):
-    'asignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT'
+    'asignacionMutable : LET MUT VARIABLE ASSIGN valor COMMA_DOT' agregado
 
 
 def p_funcion(p):
-    'funcion : FN VARIABLE parametros LKEY instruccion RKEY'
+    'funcion : FN VARIABLE parametros LKEY instruccion RKEY' agregado
 
 
 def p_parametros(p):
     '''parametros : LPAREN RPAREN
-    | LPAREN parametro RPAREN'''
+    | LPAREN parametro RPAREN''' agregado
 
 
 def p_parametro(p):  # Corrección por Danae
     '''parametro : VARIABLE TWO_POINTS valor 
     | VARIABLE TWO_POINTS valor COMA parametro
     | VARIABLE TWO_POINTS GENERIC
-    | VARIABLE TWO_POINTS GENERIC COMA parametro'''
+    | VARIABLE TWO_POINTS GENERIC COMA parametro''' agregado
 
 
 def p_funcionDiv(p):
-    'funcionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY'
+    'funcionDiv : FN VARIABLE parametros MINUS MORE_THAN NOT LKEY instruccion RKEY' agregado
 
 
 # casting, alias y enlaces a variables: Ronald
@@ -160,7 +160,7 @@ def p_variables(p):
 
 
 def p_trait(p):
-    'trait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN '
+    'trait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN ' agregado
 
 
 def p_apuntador(p):
@@ -175,6 +175,9 @@ def p_cuerpo(p):
     | definicion
     | struct
     | varEnVar
+    | definirFuncion
+    | hashMap
+    | vector
     '''    
 
 def p_asignacion(p):
@@ -211,12 +214,15 @@ def p_dato(p):
     | BOOL
     | FLOAT
     | VEC
-    | GENERIC'''
+    | GENERIC
+    '''
 
 def p_valorAsignado(p):
     '''valorAsignado : dato
     | llamadaAfuncion
-    | llamadaAfuncionPorAlias'''
+    | llamadaAfuncionPorAlias
+    | vector
+    | hashMap'''
 
 def p_llamadaAfuncionPorAlias(p):
     '''llamadaAfuncionPorAlias : VARIABLE POINT llamadaAfuncion'''
@@ -240,6 +246,36 @@ def p_argumento(p):
     | llamadaAfuncion COMA argumento
     | llamadaAfuncionPorAlias COMA argumento'''
 
+def p_definirFuncion(p):
+    ''' definirFuncion : FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
+    | FN VARIABLE parametros LKEY cuerpoFuncion RKEY
+    '''
+
+def p_trait(p):
+    'trait : LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN '
+
+def p_datoAretornar(p):
+    ''' datoARetornar : MINUS MORE_THAN dato
+    | MINUS MORE_THAN NOT
+    '''
+
+def p_parametros(p):
+    '''parametros : LPAREN RPAREN datoARetornar
+    | LPAREN parametro RPAREN datoARetornar
+    | LPAREN RPAREN
+    | LPAREN parametro RPAREN'''
+
+
+def p_parametro(p):  # Corrección por Danae
+    '''parametro : VARIABLE TWO_POINTS dato 
+    | VARIABLE TWO_POINTS dato COMA parametro
+    '''
+
+def p_cuerpoFuncion(p):
+    ''' cuerpoFuncion : cuerpo
+    '''
+
+#structs: Ronald
 def p_struct(p):
     'struct : STRUCT VARIABLE LKEY atributos RKEY'
 
@@ -247,36 +283,51 @@ def p_atributos(p):
     '''atributos : VARIABLE TWO_POINTS dato
     | VARIABLE TWO_POINTS dato COMA atributos'''
 
+#vectores: Danae, agregar la otra forma de definir vectores
+def p_vector(p):
+    '''vector : VEC NOT LBRACKET datos RBRACKET '''
+
+def p_datos(p):
+    '''datos : dato
+    | dato COMA datos'''
+
+#hashmap: Rommel
+def p_hashMap(p):
+    'hashMap : HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN'
+    
+
+
 def p_error(p):
     if p:
-        print(
-            f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}")
+        msg = f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}" 
+        # print(f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}")
+        lstErrores.append(msg)
         parser.errok()
     else:
-        print("Error de sintaxis Fin de Linea")
+        msg = "Error de sintaxis Fin de Linea"
+        lstErrores.append(msg)
+        # print("Error de sintaxis Fin de Linea")
 
 
 parser = yacc.yacc()
-
+lstErrores = list()
 
 def validaRegla(s):
   result = parser.parse(s)
   logs = open('logs.txt','a')
   logs.write(s+' '+str(datetime.now())+'\n')
-  print(result)
+  return result
+  
+  
 
 while True:
     try:
         s = input('calc > ')
+        lstErrores = []
     except EOFError:
         break
     if not s:
         continue
     validaRegla(s)
-
-
-
-
-
-
+    print(lstErrores)
 

@@ -55,7 +55,6 @@ reserved = {
     'virtual': 'VIRTUAL',
     'yield': 'YIELD',
     'println': 'PRINTLN',
-    'hashmap': 'HASHMAP',
     'new': 'NEW',
     'struct': 'STRUCT'
 }
@@ -85,7 +84,7 @@ bit_tokens = [
 
 data_type_tokens = [
     'VARIABLE', 'INTEGER', 'DECIMAL', 'HEXADECIMAL', 'OCTAL', 'BINARIO', 'BYTE',
-    'CHAR', 'STRING', 'BOOL', 'FLOAT', 'GENERIC', 'VEC'  # -->completar David
+    'CHAR', 'STRING', 'BOOL', 'FLOAT', 'GENERIC', 'VEC', 'HASHMAP'  # -->completar David
 ]
 
 tokens = punctuation_tokens + math_tokens + compare_tokens + \
@@ -134,8 +133,13 @@ t_LEFT_MAYUS = r'<<'
 t_RIGHT_MAYUS = r'>>'
 
 # Expresiones regulares con reglas - tipo de datos --> Completar David 1/2 y Ronald 1/2
+def t_HASHMAP(t):
+    r'HashMap'
+    t.type = reserved.get(t.value,'HASHMAP')
+    return t
+
 def t_VEC(t):
-    r'Vec'
+    r'Vec|vec'
     t.type = reserved.get(t.value, 'VEC')
     return t
 
