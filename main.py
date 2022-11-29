@@ -4,25 +4,7 @@ from tkinter.ttk import *
 from AnalizadorLexico import *
 from AnalizadorSintactico import *
 
-############### En el analizador lexico, colocar y modificar el:
-def t_error(t):
-    lstTokens.append("Caracter no permitido'%s'" % t.value[0])
-    t.lexer.skip(1) 
 
-# Construir el lexer
-lexer = lex.lex()
-lstTokens = []
-
-def getTokens(lexer):
-    lstTokens.clear()
-    for token in lexer:
-        output = f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}'
-        lstTokens.append(output)
-        print(f'Line: {token.lineno} | Type: {token.type} | Value: {token.value}')
-
-
-
-#
 #Funciones analisis lexico
 def show_analisis_lexico():
     content=entrada.get()

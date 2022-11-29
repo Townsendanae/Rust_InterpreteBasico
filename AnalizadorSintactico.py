@@ -238,6 +238,8 @@ parser = yacc.yacc()
 lstErrores = list()
 
 def validaRegla(s):
+  lstErrores.clear()
+  print(lstErrores) 
   result = parser.parse(s)
   logs = open('logs.txt','a')
   logs.write(s+' '+str(datetime.now())+'\n')
@@ -245,14 +247,16 @@ def validaRegla(s):
   
   
 
-while True:
-    try:
-        s = input('calc > ')
-        lstErrores = []
-    except EOFError:
-        break
-    if not s:
-        continue
-    validaRegla(s)
-    print(lstErrores)
+# while True:
+#     try:
+#         s = input('calc > ')
+#         lstErrores = []
+#     except EOFError:
+#         break
+#     if not s:
+#         continue
+#     validaRegla(s)
+#     print(lstErrores)
+
+    
 
