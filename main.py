@@ -19,6 +19,7 @@ def open_file():
     entrada.set(content)
 
 def popup(lst):
+    lexer.lineno = 1
     panel2 = Tk()
     ventana2 = Frame(panel2,width=500,height=500)
     ventana2.pack()
@@ -34,6 +35,9 @@ def popup(lst):
     for line in lst:
         mylist.insert(END, line + '\n')
 
+def clear():
+    entrada.set("")
+
 #Funciones analisis lexico
 def show_analisis_lexico():
     content=entrada.get()
@@ -43,32 +47,27 @@ def show_analisis_lexico():
 
 
 #Funciones analisis sintáctico
-def show_analysis_sintactico(): #comentar el while True del analizador sintactico y colocar el clear a la lista en validarRegla
+def show_analysis_sintacticoYSemantico(): #comentar el while True del analizador sintactico y colocar el clear a la lista en validarRegla
     s = entrada.get()
     validaRegla(s)  
     popup(lstErrores)
 
 #funciones analisis semantico
-def show_analysis_semantico():
-    content=entrada.get()
-    print(content)
+
 
 
 #main
 panel = Tk()
-ventana = Frame(panel,width=500,height=300)
+ventana = Frame(panel,width=580,height=300)
 ventana.pack()
 
 
 titulo = tk.Label(ventana,text="ANALIZADOR BÁSICO DE RUST",font=("Arial",18), fg="black", bg="aliceblue").place(x=5,y=8)
 lb1 = tk.Label( ventana,text="Ingrese código en Rust",fg="black", bg="ivory").place(x=10,y=50)
 entrada = tk.StringVar()
-tk.Entry(ventana,textvariable=entrada, font=("Arial",8), width=80).place(height=60,x=10,y=80)
+tk.Entry(ventana,textvariable=entrada, font=("Arial",8), width=90).place(height=60,x=10,y=80)
 botonLexico = tk.Button(ventana,text="Analizador Léxico",  command=show_analisis_lexico).place(width=130,x=10,y=150)
-botonSintactico = tk.Button(ventana,text="Analizador Sintáctico",  command=show_analysis_sintactico).place(width=130,x=160,y=150)
-botonSemantico = tk.Button(ventana,text="Analizador Semántico",  command=show_analysis_semantico).place(width=130,x=310,y=150)
-botonOpenFile = tk.Button(ventana,text="Abrir archivo",  command=open_file).place(width=130,x=160,y=200)
-lb2_Title = tk.Label(ventana, text="Salida: ",fg="black", bg="ivory").place(x=10,y=250)
-
-
+botonSintacticoYSemantico = tk.Button(ventana,text="Analizador Sintáctico y Semántico",  command=show_analysis_sintacticoYSemantico).place(width=200,x=160,y=150)
+botonClear = tk.Button(ventana,text="Clear",  command=clear).place(width=130,x=380,y=150)
+botonOpenFile = tk.Button(ventana,text="Abrir archivo",  command=open_file).place(width=130,x=190,y=200)
 ventana.mainloop()

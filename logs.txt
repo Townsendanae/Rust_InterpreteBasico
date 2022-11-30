@@ -1232,3 +1232,155 @@ pub fn prime_factors(n: u64) -> Vec<u64> {
 dwedwede 2022-11-29 19:22:58.369865
 dwedwede = sdasdasd 2022-11-29 19:23:09.987850
 dwedwede = sdasdasd; 2022-11-29 19:23:13.538432
+ 2022-11-29 21:39:54.298846
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 21:40:18.136468
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 21:40:50.475841
+ 2022-11-29 21:42:28.358343
+ 2022-11-29 21:44:35.023140
+hola = 12; 2022-11-29 21:47:49.806722
+pub fn check_anagram(s: &str, t: &str) -> bool {
+    let mut s = s.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    s.sort_unstable();
+    t.sort_unstable();
+    s == t
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_check_anagram() {
+        assert!(check_anagram("anagram", "nagaram"));
+        assert!(!check_anagram("rat", "car"));
+        assert!(check_anagram("abcde", "edcba"));
+        assert!(check_anagram("sIlEnT", "LiStEn"));
+    }
+} 2022-11-29 21:47:55.378011
+pub fn check_anagram(s: &str, t: &str) -> bool {
+    let mut s = s.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    s.sort_unstable();
+    t.sort_unstable();
+    s == t
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_check_anagram() {
+        assert!(check_anagram("anagram", "nagaram"));
+        assert!(!check_anagram("rat", "car"));
+        assert!(check_anagram("abcde", "edcba"));
+        assert!(check_anagram("sIlEnT", "LiStEn"));
+    }
+} 2022-11-29 21:48:04.902429
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 21:48:26.607617
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 21:48:32.198194
