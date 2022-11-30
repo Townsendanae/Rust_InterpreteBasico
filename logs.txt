@@ -462,3 +462,773 @@ vdfvdvdfvdfvdfvdfvd dvdfv vsdsdvsd º sfsd 2022-11-29 01:08:42.568140
 vdfvdvdfvdfvdfvdfvd dvdfv vsdsdvsd º sfsd 2022-11-29 01:08:46.367223
 ferfwfer º  2022-11-29 01:11:37.994441
 ferfwfer º fw ; 2022-11-29 01:11:40.946182
+vfvdvdfv 2022-11-29 01:13:02.211526
+vfvdvdfv 2022-11-29 01:13:03.341181
+vfvdvdfv 2022-11-29 01:13:04.260017
+vfvdvdfv 2022-11-29 01:13:05.357854
+vfvdvdfv 2022-11-29 01:13:06.036258
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:28:44.766227
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:28:55.379804
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:01.984964
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:03.094759
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:04.479033
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:06.828867
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:13.886675
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:15.436311
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:19.931033
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:20.659633
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:21.300360
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:21.859023
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:22.447559
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:23.018333
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:31:23.615948
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:34:03.432985
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:34:05.174008
+ 2022-11-29 18:40:59.064772
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:47:24.201372
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:51:02.773034
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:55:37.576319
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:56:29.052511
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:56:29.916596
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:57:03.963298
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 18:58:39.833391
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 19:06:46.149246
+pub fn check_anagram(s: &str, t: &str) -> bool {
+    let mut s = s.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    s.sort_unstable();
+    t.sort_unstable();
+    s == t
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_check_anagram() {
+        assert!(check_anagram("anagram", "nagaram"));
+        assert!(!check_anagram("rat", "car"));
+        assert!(check_anagram("abcde", "edcba"));
+        assert!(check_anagram("sIlEnT", "LiStEn"));
+    }
+} 2022-11-29 19:07:51.178631
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 19:10:42.449419
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 19:12:44.353885
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 19:13:46.533981
+fn main() {
+    let number = 5;
+
+    if number < 0 {
+        print!("{} - numero es negativo", number;
+    } else if number > 0 {
+        print!("{} - numero es positivo", number);
+    } else {
+        print!("{} - numero es cero", number);
+    }
+
+    while n < 10 && n > -10 {
+        if number % 2 == 0 {
+            println!(":)");
+        }else {
+            println!(":D", number);
+        }
+        number += 1;
+    }
+
+    for number2 in 1..3 {    
+            println!("{} - ", number2); 
+    }
+} 2022-11-29 19:14:43.287791
+ 2022-11-29 19:15:08.126793
+ 2022-11-29 19:16:46.678384
+ 2022-11-29 19:17:03.448012
+ 2022-11-29 19:17:30.151623
+rferferfer 2022-11-29 19:17:34.917649
+ 2022-11-29 19:17:43.051806
+ 2022-11-29 19:18:00.594755
+ 2022-11-29 19:18:34.630055
+ 2022-11-29 19:19:22.328579
+ 2022-11-29 19:19:36.204122
+ 2022-11-29 19:19:58.523372
+ 2022-11-29 19:21:03.984847
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 19:22:02.845152
+dwedwede 2022-11-29 19:22:58.369865
+dwedwede = sdasdasd 2022-11-29 19:23:09.987850
+dwedwede = sdasdasd; 2022-11-29 19:23:13.538432
