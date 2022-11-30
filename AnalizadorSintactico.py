@@ -70,10 +70,10 @@ def p_cuerpo(p):
     | definirFuncion
     | hashMap
     | vector
-    | for
+    | for 
+    | for cuerpo
     | loop
     | eMatch
-    | condicional
     '''    
 
 def p_asignacion(p):
@@ -97,8 +97,8 @@ def p_creacion(p):
 
 def p_tipoDato(p):
     '''tipoDato : TWO_POINTS dato
-    | TWO_POINTS dato tipoDato
-    | LESS_THAN dato MORE_THAN
+    | TWO_POINTS tipoDato
+    | dato LESS_THAN dato MORE_THAN
     | TWO_POINTS apuntador
     '''
 
@@ -158,6 +158,7 @@ def p_trait(p):
 def p_datoAretornar(p):
     ''' datoARetornar : MINUS MORE_THAN dato
     | MINUS MORE_THAN NOT
+    | MINUS MORE_THAN tipoDato
     '''
 
 def p_parametros(p):
@@ -188,22 +189,13 @@ def p_atributos(p):
 
 #vectores: Danae, agregar la otra forma de definir vectores
 def p_vector(p):
-    '''vector : VEC NOT LBRACKET datos RBRACKET '''
+    '''vector : VEC NOT LBRACKET datos RBRACKET 
+    | VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    | VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN'''
 
 def p_datos(p):
     '''datos : dato
-    | dato COMA datos'''
-
-def p_condicional(p):
-    '''condicional : IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY'''
-
-def p_comparacion(p):
-    '''comparacion : EQUALS 
-    | NOT_EQUALS
-    | LESS_THAN
-    | LESSEQUAL_THAN
-    | MORE_THAN
-    | MOREEQUAL_THAN''' 
+    | dato COMA datos''' 
 
 #hashmap: Rommel
 def p_hashMap(p):
@@ -259,16 +251,16 @@ def validaRegla(s):
   
   
 
-while True:
-    try:
-        s = input('calc > ')
-        lstErrores = []
-    except EOFError:
-        break
-    if not s:
-        continue
-    validaRegla(s)
-    print(lstErrores)
+# while True:
+#     try:
+#         s = input('calc > ')
+#         lstErrores = []
+#     except EOFError:
+#         break
+#     if not s:
+#         continue
+#     validaRegla(s)
+#     print(lstErrores)
 
     
 

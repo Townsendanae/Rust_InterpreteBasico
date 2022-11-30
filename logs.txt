@@ -1394,3 +1394,181 @@ if a < b {} 2022-11-29 21:58:44.826415
 if a < b {} 2022-11-29 21:59:09.488560
 if a < b {print!("a");} 2022-11-29 21:59:35.706764
 if a < b {print!("a");} 2022-11-29 22:00:22.239126
+let sdasd = Vec :: new(); 2022-11-29 22:18:08.535048
+let sdasd = Vec :: new(1); 2022-11-29 22:18:14.832380
+let sdasd = Vec :: new(1,1); 2022-11-29 22:18:19.211768
+let sdasd = Vec :: new(1,1,1,1,1,1,1,1); 2022-11-29 22:18:24.012815
+& C:/Users/Danaé/AppData/Local/Microsoft/WindowsApps/python3.9.exe "c:/Users/Danaé/OneDrive - Escuela Superior Politécnica del Litoral/6to Semestre/2. Lenguajes de Programación/Proyecto/Coding/main.py" 2022-11-29 22:19:34.995129
+let hola = 123; 2022-11-29 22:19:55.666060
+let hola = 123; 2022-11-29 22:20:24.902237
+let hola = 123 2022-11-29 22:20:35.620037
+let hola = 123 2022-11-29 22:21:02.789782
+1 + "abc"; 2022-11-29 22:21:18.667111
+1 + 2; 2022-11-29 22:21:32.620462
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,dsf12dsa:ads} 2022-11-29 22:22:22.133808
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,dsfdsa:ads} 2022-11-29 22:23:00.046634
+struct sjdsk{fsdkfhs:123,sdfsdf:123123} 2022-11-29 22:23:07.183317
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,sdfsdf:123123} 2022-11-29 22:23:25.510679
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,sdf1sdf:123123} 2022-11-29 22:23:36.583041
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,sdf1sdf:123123} 2022-11-29 22:23:40.239589
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,sdf1sdf:asdadas} 2022-11-29 22:23:52.887433
+struct sjdsk{fsdkfhs:123,sdfsdf:123123,sdf1sdf:"asda"} 2022-11-29 22:24:13.075061
+for number2 in 1..3 {let hola = 223;} 2022-11-29 22:25:19.889589
+for number2 in 1..= 3 {let hola = 223;} 2022-11-29 22:25:41.005453
+for number2 in 1..= 3 {let hola = 223;} 2022-11-29 22:25:52.040521
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 22:26:06.720700
+pub fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new();
+    if n == 0 {
+        return factors;
+    }
+    if n == 1 {
+        factors.push(1);
+        return factors;
+    }
+    while i * i <= n {
+        if n % i != 0 {
+            if i != 2 {
+                i += 1;
+            }
+            i += 1;
+        } else {
+            n /= i;
+            factors.push(i);
+        }
+    }
+    if n > 1 {
+        factors.push(n);
+    }
+    factors
+} 2022-11-29 22:26:15.005170
+pub fn check_anagram(s: &str, t: &str) -> bool {
+    let mut s = s.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    let mut t = t.to_ascii_lowercase().chars().collect::<Vec<_>>();
+    s.sort_unstable();
+    t.sort_unstable();
+    s == t
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_check_anagram() {
+        assert!(check_anagram("anagram", "nagaram"));
+        assert!(!check_anagram("rat", "car"));
+        assert!(check_anagram("abcde", "edcba"));
+        assert!(check_anagram("sIlEnT", "LiStEn"));
+    }
+} 2022-11-29 22:26:23.494649
+for number2 in 1..3 { let hola = 123; }
+for number2 in 1.. = 3 { let hola = 123; }
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:28:23.841088
+for number2 in 1..3 { let hola = 123; } 2022-11-29 22:28:44.346460
+for number2 in 1..3 { let hola = 123; } 
+for number2 in 1.. = 3 { let hola = 123; }
+ fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:29:36.503475
+for number2 in 1..3 { let hola = 123; }  2022-11-29 22:30:09.075512
+for number2 in 1..3 { let hola = 123; } for number2 in 1.. = 3 { let hola = 123; } 2022-11-29 22:30:26.436576
+for number2 in 1.. = 3 { let hola = 123; } 2022-11-29 22:30:31.170514
+for number2 in 1..3 { let hola = 123; }
+// for number2 in 1.. = 3 { let hola = 123; }
+// fn prime_factors(n: u64) -> Vec<u64> {
+//     let mut i = 2;
+//     let mut n = n;
+//     let mut factors = Vec::new(); } 2022-11-29 22:31:09.666437
+for number2 in 1..3 { let hola = 123; }
+// for number2 in 1.. = 3 { let hola = 123; }
+// fn prime_factors(n: u64) -> Vec<u64> {
+//     let mut i = 2;
+//     let mut n = n;
+//     let mut factors = Vec::new(); } 2022-11-29 22:31:28.436536
+for number2 in 1..3 { let hola = 123; } for number2 in 1.. = 3 { let hola = 123; }
+// fn prime_factors(n: u64) -> Vec<u64> {
+//     let mut i = 2;
+//     let mut n = n;
+//     let mut factors = Vec::new(); } 2022-11-29 22:31:42.188738
+for number2 in 1..3 { let hola = 123; } for number2 in 1.. = 3 { let hola = 123; }
+// fn prime_factors(n: u64) -> Vec<u64> {
+//     let mut i = 2;
+//     let mut n = n;
+//     let mut factors = Vec::new(); } 2022-11-29 22:32:15.921202
+ 2022-11-29 22:33:10.013767
+for number2 in 1..3 { let hola = 123; }
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:33:18.651367
+for number2 in 1..3 { let hola = 123; } 
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:34:49.083182
+ 2022-11-29 22:35:00.203223
+for number2 in 1..3 { let hola = 123; }
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:35:09.677226
+
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:36:57.543235
+fn prime_factors(n: u64) -> Vec<u64> {let hola = 123;} 2022-11-29 22:37:49.964472
+& C:/Users/Danaé/AppData/Local/Microsoft/WindowsApps/python3.9.exe "c:/Users/Danaé/OneDrive - Escuela Superior Politécnica del Litoral/6to Semestre/2. Lenguajes de Programación/Proyecto/Coding/AnalizadorSintactico.py" 2022-11-29 22:39:14.418036
+fn prime_factors(n: u64) -> Vec<u64> {let hola = 123;} 2022-11-29 22:39:20.685266
+fn prime_factors(n: u64) -> u64 {let hola = 123;} 2022-11-29 22:40:18.954368
+let hola : Vec<u64> 2022-11-29 22:41:03.563291
+let hola : Vec<u64>; 2022-11-29 22:41:16.703460
+let hola : Vec<u64> = 2345; 2022-11-29 22:41:42.294236
+let hola : Vec<u64> = 2345 2022-11-29 22:41:45.982901
+let hola : Vec<u64> = 2345; 2022-11-29 22:41:48.234443
+fn prime_factors(n: u64) -> Vec<u64> {let hola = 123;} 2022-11-29 22:44:08.755909
+let hola : Vec<u64> = 2345; 2022-11-29 22:44:32.457836
+let hola : Vec<u64> = 2345 2022-11-29 22:44:35.880443
+for number2 in 1..3 { let hola = 123; }
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:45:00.236567
+
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:45:11.257856

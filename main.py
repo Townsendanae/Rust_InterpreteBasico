@@ -34,6 +34,8 @@ def popup(lst):
     scrollbar.config( command = mylist.yview )
     for line in lst:
         mylist.insert(END, line + '\n')
+    if len(lst) == 0:
+        mylist.insert(END,'¡No se encontraron errores! Póngale 100!  \n')
 
 def clear():
     entrada.set("")

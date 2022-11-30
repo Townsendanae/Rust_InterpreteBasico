@@ -17,15 +17,19 @@ Unused terminals:
     DO
     ELSE
     ENUM
+    EQUALS
     EXTERN
     FINAL
+    IF
     IMPL
     INTEGER
     LEFT_MAYUS
+    LESSEQUAL_THAN
     MACRO
     MATH_REMINDER
     MOD
     MOV
+    NOT_EQUALS
     OFFSETOF
     OR
     OR_BIT
@@ -67,9 +71,9 @@ Rule 4     cuerpo -> definirFuncion
 Rule 5     cuerpo -> hashMap
 Rule 6     cuerpo -> vector
 Rule 7     cuerpo -> for
-Rule 8     cuerpo -> loop
-Rule 9     cuerpo -> eMatch
-Rule 10    cuerpo -> condicional
+Rule 8     cuerpo -> for cuerpo
+Rule 9     cuerpo -> loop
+Rule 10    cuerpo -> eMatch
 Rule 11    asignacion -> definicion ASSIGN valorAsignado COMMA_DOT
 Rule 12    asignacion -> VARIABLE ASSIGN valorAsignado COMMA_DOT
 Rule 13    asignacion -> VARIABLE ASSIGN varEnVar COMMA_DOT
@@ -82,8 +86,8 @@ Rule 19    creacion -> LET MUT VARIABLE
 Rule 20    creacion -> LET VARIABLE
 Rule 21    creacion -> CONST VARIABLE
 Rule 22    tipoDato -> TWO_POINTS dato
-Rule 23    tipoDato -> TWO_POINTS dato tipoDato
-Rule 24    tipoDato -> LESS_THAN dato MORE_THAN
+Rule 23    tipoDato -> TWO_POINTS tipoDato
+Rule 24    tipoDato -> dato LESS_THAN dato MORE_THAN
 Rule 25    tipoDato -> TWO_POINTS apuntador
 Rule 26    dato -> STRING
 Rule 27    dato -> CHAR
@@ -122,37 +126,33 @@ Rule 59    definirFuncion -> FN VARIABLE parametros LKEY cuerpoFuncion RKEY
 Rule 60    trait -> LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN
 Rule 61    datoARetornar -> MINUS MORE_THAN dato
 Rule 62    datoARetornar -> MINUS MORE_THAN NOT
-Rule 63    parametros -> LPAREN RPAREN datoARetornar
-Rule 64    parametros -> LPAREN parametro RPAREN datoARetornar
-Rule 65    parametros -> LPAREN RPAREN
-Rule 66    parametros -> LPAREN parametro RPAREN
-Rule 67    parametro -> VARIABLE TWO_POINTS dato
-Rule 68    parametro -> VARIABLE TWO_POINTS dato COMA parametro
-Rule 69    parametro -> dato COMA parametro
-Rule 70    parametro -> dato
-Rule 71    cuerpoFuncion -> cuerpo
-Rule 72    struct -> STRUCT VARIABLE LKEY atributos RKEY
-Rule 73    atributos -> VARIABLE TWO_POINTS dato
-Rule 74    atributos -> VARIABLE TWO_POINTS dato COMA atributos
-Rule 75    vector -> VEC NOT LBRACKET datos RBRACKET
-Rule 76    datos -> dato
-Rule 77    datos -> dato COMA datos
-Rule 78    condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
-Rule 79    comparacion -> EQUALS
-Rule 80    comparacion -> NOT_EQUALS
-Rule 81    comparacion -> LESS_THAN
-Rule 82    comparacion -> LESSEQUAL_THAN
-Rule 83    comparacion -> MORE_THAN
-Rule 84    comparacion -> MOREEQUAL_THAN
-Rule 85    hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-Rule 86    for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-Rule 87    rango -> DECIMAL POINT POINT DECIMAL
-Rule 88    rango -> DECIMAL POINT POINT ASSIGN DECIMAL
-Rule 89    eMatch -> MATCH VARIABLE LKEY content RKEY
-Rule 90    content -> dato MOREEQUAL_THAN cuerpoFuncion
-Rule 91    content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content
-Rule 92    loop -> LOOP LKEY cuerpoFuncion RKEY
-Rule 93    apuntador -> FN parametros
+Rule 63    datoARetornar -> MINUS MORE_THAN tipoDato
+Rule 64    parametros -> LPAREN RPAREN datoARetornar
+Rule 65    parametros -> LPAREN parametro RPAREN datoARetornar
+Rule 66    parametros -> LPAREN RPAREN
+Rule 67    parametros -> LPAREN parametro RPAREN
+Rule 68    parametro -> VARIABLE TWO_POINTS dato
+Rule 69    parametro -> VARIABLE TWO_POINTS dato COMA parametro
+Rule 70    parametro -> dato COMA parametro
+Rule 71    parametro -> dato
+Rule 72    cuerpoFuncion -> cuerpo
+Rule 73    struct -> STRUCT VARIABLE LKEY atributos RKEY
+Rule 74    atributos -> VARIABLE TWO_POINTS dato
+Rule 75    atributos -> VARIABLE TWO_POINTS dato COMA atributos
+Rule 76    vector -> VEC NOT LBRACKET datos RBRACKET
+Rule 77    vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+Rule 78    vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+Rule 79    datos -> dato
+Rule 80    datos -> dato COMA datos
+Rule 81    hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+Rule 82    for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+Rule 83    rango -> DECIMAL POINT POINT DECIMAL
+Rule 84    rango -> DECIMAL POINT POINT ASSIGN DECIMAL
+Rule 85    eMatch -> MATCH VARIABLE LKEY content RKEY
+Rule 86    content -> dato MOREEQUAL_THAN cuerpoFuncion
+Rule 87    content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content
+Rule 88    loop -> LOOP LKEY cuerpoFuncion RKEY
+Rule 89    apuntador -> FN parametros
 
 Terminals, with rules where they appear
 
@@ -161,7 +161,7 @@ ALIGNOF              :
 AND                  : 
 AND_BIT              : 
 AS                   : 
-ASSIGN               : 11 12 13 88
+ASSIGN               : 11 12 13 84
 BECOME               : 
 BINARIO              : 31
 BOOL                 : 32
@@ -169,84 +169,84 @@ BOX                  :
 BREAK                : 
 BYTE                 : 
 CHAR                 : 27
-COMA                 : 52 53 56 57 68 69 74 77 91
+COMA                 : 52 53 56 57 69 70 75 80 87
 COMMA_DOT            : 11 12 13 17
 CONST                : 21
 CONTINUE             : 
 CRATE                : 
-DECIMAL              : 28 87 87 88 88
+DECIMAL              : 28 83 83 84 84
 DIVIDE               : 
 DO                   : 
 ELSE                 : 
 ENUM                 : 
-EQUALS               : 79
+EQUALS               : 
 EXTERN               : 
 FINAL                : 
 FLOAT                : 33
-FN                   : 58 59 93
-FOR                  : 86
+FN                   : 58 59 89
+FOR                  : 82
 GENERIC              : 35 60
-HASHMAP              : 85
+HASHMAP              : 81
 HEXADECIMAL          : 29
-IF                   : 78
+IF                   : 
 IMPL                 : 
-IN                   : 86
+IN                   : 82
 INTEGER              : 
-LBRACKET             : 75
+LBRACKET             : 76
 LEFT_MAYUS           : 
-LESSEQUAL_THAN       : 82
-LESS_THAN            : 24 60 81
+LESSEQUAL_THAN       : 
+LESS_THAN            : 24 60
 LET                  : 19 20
-LKEY                 : 58 59 72 78 86 89 92
-LOOP                 : 92
-LPAREN               : 48 49 63 64 65 66 85
+LKEY                 : 58 59 73 82 85 88
+LOOP                 : 88
+LPAREN               : 48 49 64 65 66 67 77 78 81
 MACRO                : 
-MATCH                : 89
+MATCH                : 85
 MATH_REMINDER        : 
-MINUS                : 61 62
+MINUS                : 61 62 63
 MOD                  : 
-MOREEQUAL_THAN       : 84 90 91
-MORE_THAN            : 24 60 61 62 83
+MOREEQUAL_THAN       : 86 87
+MORE_THAN            : 24 60 61 62 63
 MOV                  : 
 MUT                  : 19
-NEW                  : 85
-NOT                  : 62 75
-NOT_EQUALS           : 80
+NEW                  : 77 78 81
+NOT                  : 62 76
+NOT_EQUALS           : 
 OCTAL                : 30
 OFFSETOF             : 
 OR                   : 
 OR_BIT               : 
 OVERRIDE             : 
 PLUS                 : 
-POINT                : 15 42 44 87 87 88 88
+POINT                : 15 42 44 83 83 84 84
 PRINTLN              : 
 PRIV                 : 
 PROC                 : 
 PUB                  : 
 PURE                 : 
 QUO_MARKS            : 
-RBRACKET             : 75
+RBRACKET             : 76
 REF                  : 
 RETURN               : 
 RIGHT_MAYUS          : 
-RKEY                 : 58 59 72 78 86 89 92
-RPAREN               : 48 49 63 64 65 66 85
+RKEY                 : 58 59 73 82 85 88
+RPAREN               : 48 49 64 65 66 67 77 78 81
 SELF                 : 
 SIZEOF               : 
 STATIC               : 
 STRING               : 26
-STRUCT               : 72
+STRUCT               : 73
 SUPER                : 
 TIMES                : 
 TRAIT                : 
-TWO_POINTS           : 22 23 25 45 45 46 46 47 47 60 67 68 73 74 85 85
+TWO_POINTS           : 22 23 25 45 45 46 46 47 47 60 68 69 74 75 77 77 78 78 81 81
 TYPE                 : 
 TYPEOF               : 
 UNSAFE               : 
 UNSIZED              : 
 USE                  : 
-VARIABLE             : 12 13 15 15 19 20 21 41 42 43 44 45 46 47 50 52 58 59 60 67 68 72 73 74 78 78 86 89
-VEC                  : 34 75
+VARIABLE             : 12 13 15 15 19 20 21 41 42 43 44 45 46 47 50 52 58 59 60 68 69 73 74 75 82 85
+VEC                  : 34 76 77 78
 VIRTUAL              : 
 WHERE                : 
 WHILE                : 
@@ -260,29 +260,27 @@ apuntador            : 25
 argumento            : 48 52 53 56 57
 argumentos           : 43 44 45
 asignacion           : 1
-atributos            : 72 74
-comparacion          : 78
-condicional          : 10
-content              : 89 91
+atributos            : 73 75
+content              : 85 87
 creacion             : 16 17 18
-cuerpo               : 71 78 0
-cuerpoFuncion        : 58 59 86 90 91 92
-dato                 : 22 23 24 36 51 53 61 67 68 69 70 73 74 76 77 90 91
-datoARetornar        : 63 64
-datos                : 75 77
+cuerpo               : 8 72 0
+cuerpoFuncion        : 58 59 82 86 87 88
+dato                 : 22 24 24 36 51 53 61 68 69 70 71 74 75 79 80 86 87
+datoARetornar        : 64 65
+datos                : 76 78 80
 definicion           : 11 14
 definirFuncion       : 4
-eMatch               : 9
-for                  : 7
+eMatch               : 10
+for                  : 7 8
 hashMap              : 5 40
 llamadaAfuncion      : 37 42 44 47 54 56
 llamadaAfuncionPorAlias : 38 55 57
-loop                 : 8
-parametro            : 64 66 68 69
-parametros           : 58 59 93
-rango                : 86
+loop                 : 9
+parametro            : 65 67 69 70
+parametros           : 58 59 89
+rango                : 82
 struct               : 2
-tipoDato             : 18 23
+tipoDato             : 18 23 63
 trait                : 58
 valorAsignado        : 11 12
 varEnVar             : 3 13
@@ -300,23 +298,24 @@ state 0
     (5) cuerpo -> . hashMap
     (6) cuerpo -> . vector
     (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
     (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
     (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
     (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
     (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
     (15) varEnVar -> . VARIABLE POINT VARIABLE
     (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
     (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
     (16) definicion -> . creacion
     (17) definicion -> . creacion COMMA_DOT
     (18) definicion -> . creacion tipoDato
@@ -324,17 +323,16 @@ state 0
     (20) creacion -> . LET VARIABLE
     (21) creacion -> . CONST VARIABLE
 
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
     cuerpo                         shift and go to state 1
     asignacion                     shift and go to state 2
@@ -346,9 +344,8 @@ state 0
     for                            shift and go to state 8
     loop                           shift and go to state 9
     eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
 state 1
 
@@ -413,154 +410,224 @@ state 7
 state 8
 
     (7) cuerpo -> for .
+    (8) cuerpo -> for . cuerpo
+    (1) cuerpo -> . asignacion
+    (2) cuerpo -> . struct
+    (3) cuerpo -> . varEnVar
+    (4) cuerpo -> . definirFuncion
+    (5) cuerpo -> . hashMap
+    (6) cuerpo -> . vector
+    (7) cuerpo -> . for
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
+    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
+    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
+    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
+    (14) asignacion -> . definicion
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (15) varEnVar -> . VARIABLE POINT VARIABLE
+    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
+    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
+    (16) definicion -> . creacion
+    (17) definicion -> . creacion COMMA_DOT
+    (18) definicion -> . creacion tipoDato
+    (19) creacion -> . LET MUT VARIABLE
+    (20) creacion -> . LET VARIABLE
+    (21) creacion -> . CONST VARIABLE
 
     $end            reduce using rule 7 (cuerpo -> for .)
     RKEY            reduce using rule 7 (cuerpo -> for .)
     COMA            reduce using rule 7 (cuerpo -> for .)
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
+    for                            shift and go to state 8
+    cuerpo                         shift and go to state 23
+    asignacion                     shift and go to state 2
+    struct                         shift and go to state 3
+    varEnVar                       shift and go to state 4
+    definirFuncion                 shift and go to state 5
+    hashMap                        shift and go to state 6
+    vector                         shift and go to state 7
+    loop                           shift and go to state 9
+    eMatch                         shift and go to state 10
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
 state 9
 
-    (8) cuerpo -> loop .
+    (9) cuerpo -> loop .
 
-    $end            reduce using rule 8 (cuerpo -> loop .)
-    RKEY            reduce using rule 8 (cuerpo -> loop .)
-    COMA            reduce using rule 8 (cuerpo -> loop .)
+    $end            reduce using rule 9 (cuerpo -> loop .)
+    RKEY            reduce using rule 9 (cuerpo -> loop .)
+    COMA            reduce using rule 9 (cuerpo -> loop .)
 
 
 state 10
 
-    (9) cuerpo -> eMatch .
+    (10) cuerpo -> eMatch .
 
-    $end            reduce using rule 9 (cuerpo -> eMatch .)
-    RKEY            reduce using rule 9 (cuerpo -> eMatch .)
-    COMA            reduce using rule 9 (cuerpo -> eMatch .)
+    $end            reduce using rule 10 (cuerpo -> eMatch .)
+    RKEY            reduce using rule 10 (cuerpo -> eMatch .)
+    COMA            reduce using rule 10 (cuerpo -> eMatch .)
 
 
 state 11
 
-    (10) cuerpo -> condicional .
-
-    $end            reduce using rule 10 (cuerpo -> condicional .)
-    RKEY            reduce using rule 10 (cuerpo -> condicional .)
-    COMA            reduce using rule 10 (cuerpo -> condicional .)
-
-
-state 12
-
     (11) asignacion -> definicion . ASSIGN valorAsignado COMMA_DOT
     (14) asignacion -> definicion .
 
-    ASSIGN          shift and go to state 25
+    ASSIGN          shift and go to state 24
     $end            reduce using rule 14 (asignacion -> definicion .)
     RKEY            reduce using rule 14 (asignacion -> definicion .)
     COMA            reduce using rule 14 (asignacion -> definicion .)
 
 
-state 13
+state 12
 
     (12) asignacion -> VARIABLE . ASSIGN valorAsignado COMMA_DOT
     (13) asignacion -> VARIABLE . ASSIGN varEnVar COMMA_DOT
     (15) varEnVar -> VARIABLE . POINT VARIABLE
 
-    ASSIGN          shift and go to state 26
-    POINT           shift and go to state 27
+    ASSIGN          shift and go to state 25
+    POINT           shift and go to state 26
+
+
+state 13
+
+    (73) struct -> STRUCT . VARIABLE LKEY atributos RKEY
+
+    VARIABLE        shift and go to state 27
 
 
 state 14
 
-    (72) struct -> STRUCT . VARIABLE LKEY atributos RKEY
+    (58) definirFuncion -> FN . VARIABLE trait parametros LKEY cuerpoFuncion RKEY
+    (59) definirFuncion -> FN . VARIABLE parametros LKEY cuerpoFuncion RKEY
 
     VARIABLE        shift and go to state 28
 
 
 state 15
 
-    (58) definirFuncion -> FN . VARIABLE trait parametros LKEY cuerpoFuncion RKEY
-    (59) definirFuncion -> FN . VARIABLE parametros LKEY cuerpoFuncion RKEY
+    (81) hashMap -> HASHMAP . TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
 
-    VARIABLE        shift and go to state 29
+    TWO_POINTS      shift and go to state 29
 
 
 state 16
 
-    (85) hashMap -> HASHMAP . TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> VEC . NOT LBRACKET datos RBRACKET
+    (77) vector -> VEC . TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> VEC . TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
 
-    TWO_POINTS      shift and go to state 30
+    NOT             shift and go to state 30
+    TWO_POINTS      shift and go to state 31
 
 
 state 17
 
-    (75) vector -> VEC . NOT LBRACKET datos RBRACKET
-
-    NOT             shift and go to state 31
-
-
-state 18
-
-    (86) for -> FOR . VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (82) for -> FOR . VARIABLE IN rango LKEY cuerpoFuncion RKEY
 
     VARIABLE        shift and go to state 32
 
 
-state 19
+state 18
 
-    (92) loop -> LOOP . LKEY cuerpoFuncion RKEY
+    (88) loop -> LOOP . LKEY cuerpoFuncion RKEY
 
     LKEY            shift and go to state 33
 
 
-state 20
+state 19
 
-    (89) eMatch -> MATCH . VARIABLE LKEY content RKEY
+    (85) eMatch -> MATCH . VARIABLE LKEY content RKEY
 
     VARIABLE        shift and go to state 34
 
 
-state 21
-
-    (78) condicional -> IF . VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
-
-    VARIABLE        shift and go to state 35
-
-
-state 22
+state 20
 
     (16) definicion -> creacion .
     (17) definicion -> creacion . COMMA_DOT
     (18) definicion -> creacion . tipoDato
     (22) tipoDato -> . TWO_POINTS dato
-    (23) tipoDato -> . TWO_POINTS dato tipoDato
-    (24) tipoDato -> . LESS_THAN dato MORE_THAN
+    (23) tipoDato -> . TWO_POINTS tipoDato
+    (24) tipoDato -> . dato LESS_THAN dato MORE_THAN
     (25) tipoDato -> . TWO_POINTS apuntador
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
 
     ASSIGN          reduce using rule 16 (definicion -> creacion .)
     $end            reduce using rule 16 (definicion -> creacion .)
     RKEY            reduce using rule 16 (definicion -> creacion .)
     COMA            reduce using rule 16 (definicion -> creacion .)
-    COMMA_DOT       shift and go to state 36
-    TWO_POINTS      shift and go to state 38
-    LESS_THAN       shift and go to state 39
+    COMMA_DOT       shift and go to state 35
+    TWO_POINTS      shift and go to state 37
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    tipoDato                       shift and go to state 37
+    tipoDato                       shift and go to state 36
+    dato                           shift and go to state 38
 
-state 23
+state 21
 
     (19) creacion -> LET . MUT VARIABLE
     (20) creacion -> LET . VARIABLE
 
-    MUT             shift and go to state 40
-    VARIABLE        shift and go to state 41
+    MUT             shift and go to state 49
+    VARIABLE        shift and go to state 50
 
 
-state 24
+state 22
 
     (21) creacion -> CONST . VARIABLE
 
-    VARIABLE        shift and go to state 42
+    VARIABLE        shift and go to state 51
 
 
-state 25
+state 23
+
+    (8) cuerpo -> for cuerpo .
+
+    $end            reduce using rule 8 (cuerpo -> for cuerpo .)
+    RKEY            reduce using rule 8 (cuerpo -> for cuerpo .)
+    COMA            reduce using rule 8 (cuerpo -> for cuerpo .)
+
+
+state 24
 
     (11) asignacion -> definicion ASSIGN . valorAsignado COMMA_DOT
     (36) valorAsignado -> . dato
@@ -585,30 +652,32 @@ state 25
     (46) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
 
-    VARIABLE        shift and go to state 49
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 58
-    GENERIC         shift and go to state 59
-    HASHMAP         shift and go to state 16
+    VARIABLE        shift and go to state 58
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 59
+    GENERIC         shift and go to state 48
+    HASHMAP         shift and go to state 15
 
-    valorAsignado                  shift and go to state 43
-    dato                           shift and go to state 44
-    llamadaAfuncion                shift and go to state 45
-    llamadaAfuncionPorAlias        shift and go to state 46
-    vector                         shift and go to state 47
-    hashMap                        shift and go to state 48
+    valorAsignado                  shift and go to state 52
+    dato                           shift and go to state 53
+    llamadaAfuncion                shift and go to state 54
+    llamadaAfuncionPorAlias        shift and go to state 55
+    vector                         shift and go to state 56
+    hashMap                        shift and go to state 57
 
-state 26
+state 25
 
     (12) asignacion -> VARIABLE ASSIGN . valorAsignado COMMA_DOT
     (13) asignacion -> VARIABLE ASSIGN . varEnVar COMMA_DOT
@@ -635,53 +704,55 @@ state 26
     (46) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
 
     VARIABLE        shift and go to state 60
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 58
-    GENERIC         shift and go to state 59
-    HASHMAP         shift and go to state 16
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 59
+    GENERIC         shift and go to state 48
+    HASHMAP         shift and go to state 15
 
     valorAsignado                  shift and go to state 61
     varEnVar                       shift and go to state 62
-    dato                           shift and go to state 44
-    llamadaAfuncion                shift and go to state 45
-    llamadaAfuncionPorAlias        shift and go to state 46
-    vector                         shift and go to state 47
-    hashMap                        shift and go to state 48
+    dato                           shift and go to state 53
+    llamadaAfuncion                shift and go to state 54
+    llamadaAfuncionPorAlias        shift and go to state 55
+    vector                         shift and go to state 56
+    hashMap                        shift and go to state 57
 
-state 27
+state 26
 
     (15) varEnVar -> VARIABLE POINT . VARIABLE
 
     VARIABLE        shift and go to state 63
 
 
-state 28
+state 27
 
-    (72) struct -> STRUCT VARIABLE . LKEY atributos RKEY
+    (73) struct -> STRUCT VARIABLE . LKEY atributos RKEY
 
     LKEY            shift and go to state 64
 
 
-state 29
+state 28
 
     (58) definirFuncion -> FN VARIABLE . trait parametros LKEY cuerpoFuncion RKEY
     (59) definirFuncion -> FN VARIABLE . parametros LKEY cuerpoFuncion RKEY
     (60) trait -> . LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN
-    (63) parametros -> . LPAREN RPAREN datoARetornar
-    (64) parametros -> . LPAREN parametro RPAREN datoARetornar
-    (65) parametros -> . LPAREN RPAREN
-    (66) parametros -> . LPAREN parametro RPAREN
+    (64) parametros -> . LPAREN RPAREN datoARetornar
+    (65) parametros -> . LPAREN parametro RPAREN datoARetornar
+    (66) parametros -> . LPAREN RPAREN
+    (67) parametros -> . LPAREN parametro RPAREN
 
     LESS_THAN       shift and go to state 67
     LPAREN          shift and go to state 68
@@ -689,31 +760,39 @@ state 29
     trait                          shift and go to state 65
     parametros                     shift and go to state 66
 
-state 30
+state 29
 
-    (85) hashMap -> HASHMAP TWO_POINTS . TWO_POINTS NEW LPAREN RPAREN
+    (81) hashMap -> HASHMAP TWO_POINTS . TWO_POINTS NEW LPAREN RPAREN
 
     TWO_POINTS      shift and go to state 69
 
 
-state 31
+state 30
 
-    (75) vector -> VEC NOT . LBRACKET datos RBRACKET
+    (76) vector -> VEC NOT . LBRACKET datos RBRACKET
 
     LBRACKET        shift and go to state 70
 
 
+state 31
+
+    (77) vector -> VEC TWO_POINTS . TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> VEC TWO_POINTS . TWO_POINTS NEW LPAREN datos RPAREN
+
+    TWO_POINTS      shift and go to state 71
+
+
 state 32
 
-    (86) for -> FOR VARIABLE . IN rango LKEY cuerpoFuncion RKEY
+    (82) for -> FOR VARIABLE . IN rango LKEY cuerpoFuncion RKEY
 
-    IN              shift and go to state 71
+    IN              shift and go to state 72
 
 
 state 33
 
-    (92) loop -> LOOP LKEY . cuerpoFuncion RKEY
-    (71) cuerpoFuncion -> . cuerpo
+    (88) loop -> LOOP LKEY . cuerpoFuncion RKEY
+    (72) cuerpoFuncion -> . cuerpo
     (1) cuerpo -> . asignacion
     (2) cuerpo -> . struct
     (3) cuerpo -> . varEnVar
@@ -721,23 +800,24 @@ state 33
     (5) cuerpo -> . hashMap
     (6) cuerpo -> . vector
     (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
     (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
     (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
     (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
     (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
     (15) varEnVar -> . VARIABLE POINT VARIABLE
     (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
     (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
     (16) definicion -> . creacion
     (17) definicion -> . creacion COMMA_DOT
     (18) definicion -> . creacion tipoDato
@@ -745,20 +825,19 @@ state 33
     (20) creacion -> . LET VARIABLE
     (21) creacion -> . CONST VARIABLE
 
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
-    cuerpoFuncion                  shift and go to state 72
-    cuerpo                         shift and go to state 73
+    cuerpoFuncion                  shift and go to state 73
+    cuerpo                         shift and go to state 74
     asignacion                     shift and go to state 2
     struct                         shift and go to state 3
     varEnVar                       shift and go to state 4
@@ -768,37 +847,17 @@ state 33
     for                            shift and go to state 8
     loop                           shift and go to state 9
     eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
 state 34
 
-    (89) eMatch -> MATCH VARIABLE . LKEY content RKEY
+    (85) eMatch -> MATCH VARIABLE . LKEY content RKEY
 
-    LKEY            shift and go to state 74
+    LKEY            shift and go to state 75
 
 
 state 35
-
-    (78) condicional -> IF VARIABLE . comparacion VARIABLE LKEY cuerpo RKEY
-    (79) comparacion -> . EQUALS
-    (80) comparacion -> . NOT_EQUALS
-    (81) comparacion -> . LESS_THAN
-    (82) comparacion -> . LESSEQUAL_THAN
-    (83) comparacion -> . MORE_THAN
-    (84) comparacion -> . MOREEQUAL_THAN
-
-    EQUALS          shift and go to state 76
-    NOT_EQUALS      shift and go to state 77
-    LESS_THAN       shift and go to state 78
-    LESSEQUAL_THAN  shift and go to state 79
-    MORE_THAN       shift and go to state 80
-    MOREEQUAL_THAN  shift and go to state 81
-
-    comparacion                    shift and go to state 75
-
-state 36
 
     (17) definicion -> creacion COMMA_DOT .
 
@@ -808,7 +867,7 @@ state 36
     COMA            reduce using rule 17 (definicion -> creacion COMMA_DOT .)
 
 
-state 37
+state 36
 
     (18) definicion -> creacion tipoDato .
 
@@ -818,10 +877,10 @@ state 37
     COMA            reduce using rule 18 (definicion -> creacion tipoDato .)
 
 
-state 38
+state 37
 
     (22) tipoDato -> TWO_POINTS . dato
-    (23) tipoDato -> TWO_POINTS . dato tipoDato
+    (23) tipoDato -> TWO_POINTS . tipoDato
     (25) tipoDato -> TWO_POINTS . apuntador
     (26) dato -> . STRING
     (27) dato -> . CHAR
@@ -833,126 +892,299 @@ state 38
     (33) dato -> . FLOAT
     (34) dato -> . VEC
     (35) dato -> . GENERIC
-    (93) apuntador -> . FN parametros
+    (22) tipoDato -> . TWO_POINTS dato
+    (23) tipoDato -> . TWO_POINTS tipoDato
+    (24) tipoDato -> . dato LESS_THAN dato MORE_THAN
+    (25) tipoDato -> . TWO_POINTS apuntador
+    (89) apuntador -> . FN parametros
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
-    FN              shift and go to state 85
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
+    TWO_POINTS      shift and go to state 37
+    FN              shift and go to state 79
 
-    dato                           shift and go to state 82
-    apuntador                      shift and go to state 83
+    dato                           shift and go to state 76
+    tipoDato                       shift and go to state 77
+    apuntador                      shift and go to state 78
+
+state 38
+
+    (24) tipoDato -> dato . LESS_THAN dato MORE_THAN
+
+    LESS_THAN       shift and go to state 80
+
 
 state 39
 
-    (24) tipoDato -> LESS_THAN . dato MORE_THAN
-    (26) dato -> . STRING
-    (27) dato -> . CHAR
-    (28) dato -> . DECIMAL
-    (29) dato -> . HEXADECIMAL
-    (30) dato -> . OCTAL
-    (31) dato -> . BINARIO
-    (32) dato -> . BOOL
-    (33) dato -> . FLOAT
-    (34) dato -> . VEC
-    (35) dato -> . GENERIC
+    (26) dato -> STRING .
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    LESS_THAN       reduce using rule 26 (dato -> STRING .)
+    COMMA_DOT       reduce using rule 26 (dato -> STRING .)
+    ASSIGN          reduce using rule 26 (dato -> STRING .)
+    $end            reduce using rule 26 (dato -> STRING .)
+    RKEY            reduce using rule 26 (dato -> STRING .)
+    COMA            reduce using rule 26 (dato -> STRING .)
+    LKEY            reduce using rule 26 (dato -> STRING .)
+    RPAREN          reduce using rule 26 (dato -> STRING .)
+    RBRACKET        reduce using rule 26 (dato -> STRING .)
+    MOREEQUAL_THAN  reduce using rule 26 (dato -> STRING .)
+    MORE_THAN       reduce using rule 26 (dato -> STRING .)
 
-    dato                           shift and go to state 86
 
 state 40
 
-    (19) creacion -> LET MUT . VARIABLE
+    (27) dato -> CHAR .
 
-    VARIABLE        shift and go to state 87
+    LESS_THAN       reduce using rule 27 (dato -> CHAR .)
+    COMMA_DOT       reduce using rule 27 (dato -> CHAR .)
+    ASSIGN          reduce using rule 27 (dato -> CHAR .)
+    $end            reduce using rule 27 (dato -> CHAR .)
+    RKEY            reduce using rule 27 (dato -> CHAR .)
+    COMA            reduce using rule 27 (dato -> CHAR .)
+    LKEY            reduce using rule 27 (dato -> CHAR .)
+    RPAREN          reduce using rule 27 (dato -> CHAR .)
+    RBRACKET        reduce using rule 27 (dato -> CHAR .)
+    MOREEQUAL_THAN  reduce using rule 27 (dato -> CHAR .)
+    MORE_THAN       reduce using rule 27 (dato -> CHAR .)
 
 
 state 41
+
+    (28) dato -> DECIMAL .
+
+    LESS_THAN       reduce using rule 28 (dato -> DECIMAL .)
+    COMMA_DOT       reduce using rule 28 (dato -> DECIMAL .)
+    ASSIGN          reduce using rule 28 (dato -> DECIMAL .)
+    $end            reduce using rule 28 (dato -> DECIMAL .)
+    RKEY            reduce using rule 28 (dato -> DECIMAL .)
+    COMA            reduce using rule 28 (dato -> DECIMAL .)
+    LKEY            reduce using rule 28 (dato -> DECIMAL .)
+    RPAREN          reduce using rule 28 (dato -> DECIMAL .)
+    RBRACKET        reduce using rule 28 (dato -> DECIMAL .)
+    MOREEQUAL_THAN  reduce using rule 28 (dato -> DECIMAL .)
+    MORE_THAN       reduce using rule 28 (dato -> DECIMAL .)
+
+
+state 42
+
+    (29) dato -> HEXADECIMAL .
+
+    LESS_THAN       reduce using rule 29 (dato -> HEXADECIMAL .)
+    COMMA_DOT       reduce using rule 29 (dato -> HEXADECIMAL .)
+    ASSIGN          reduce using rule 29 (dato -> HEXADECIMAL .)
+    $end            reduce using rule 29 (dato -> HEXADECIMAL .)
+    RKEY            reduce using rule 29 (dato -> HEXADECIMAL .)
+    COMA            reduce using rule 29 (dato -> HEXADECIMAL .)
+    LKEY            reduce using rule 29 (dato -> HEXADECIMAL .)
+    RPAREN          reduce using rule 29 (dato -> HEXADECIMAL .)
+    RBRACKET        reduce using rule 29 (dato -> HEXADECIMAL .)
+    MOREEQUAL_THAN  reduce using rule 29 (dato -> HEXADECIMAL .)
+    MORE_THAN       reduce using rule 29 (dato -> HEXADECIMAL .)
+
+
+state 43
+
+    (30) dato -> OCTAL .
+
+    LESS_THAN       reduce using rule 30 (dato -> OCTAL .)
+    COMMA_DOT       reduce using rule 30 (dato -> OCTAL .)
+    ASSIGN          reduce using rule 30 (dato -> OCTAL .)
+    $end            reduce using rule 30 (dato -> OCTAL .)
+    RKEY            reduce using rule 30 (dato -> OCTAL .)
+    COMA            reduce using rule 30 (dato -> OCTAL .)
+    LKEY            reduce using rule 30 (dato -> OCTAL .)
+    RPAREN          reduce using rule 30 (dato -> OCTAL .)
+    RBRACKET        reduce using rule 30 (dato -> OCTAL .)
+    MOREEQUAL_THAN  reduce using rule 30 (dato -> OCTAL .)
+    MORE_THAN       reduce using rule 30 (dato -> OCTAL .)
+
+
+state 44
+
+    (31) dato -> BINARIO .
+
+    LESS_THAN       reduce using rule 31 (dato -> BINARIO .)
+    COMMA_DOT       reduce using rule 31 (dato -> BINARIO .)
+    ASSIGN          reduce using rule 31 (dato -> BINARIO .)
+    $end            reduce using rule 31 (dato -> BINARIO .)
+    RKEY            reduce using rule 31 (dato -> BINARIO .)
+    COMA            reduce using rule 31 (dato -> BINARIO .)
+    LKEY            reduce using rule 31 (dato -> BINARIO .)
+    RPAREN          reduce using rule 31 (dato -> BINARIO .)
+    RBRACKET        reduce using rule 31 (dato -> BINARIO .)
+    MOREEQUAL_THAN  reduce using rule 31 (dato -> BINARIO .)
+    MORE_THAN       reduce using rule 31 (dato -> BINARIO .)
+
+
+state 45
+
+    (32) dato -> BOOL .
+
+    LESS_THAN       reduce using rule 32 (dato -> BOOL .)
+    COMMA_DOT       reduce using rule 32 (dato -> BOOL .)
+    ASSIGN          reduce using rule 32 (dato -> BOOL .)
+    $end            reduce using rule 32 (dato -> BOOL .)
+    RKEY            reduce using rule 32 (dato -> BOOL .)
+    COMA            reduce using rule 32 (dato -> BOOL .)
+    LKEY            reduce using rule 32 (dato -> BOOL .)
+    RPAREN          reduce using rule 32 (dato -> BOOL .)
+    RBRACKET        reduce using rule 32 (dato -> BOOL .)
+    MOREEQUAL_THAN  reduce using rule 32 (dato -> BOOL .)
+    MORE_THAN       reduce using rule 32 (dato -> BOOL .)
+
+
+state 46
+
+    (33) dato -> FLOAT .
+
+    LESS_THAN       reduce using rule 33 (dato -> FLOAT .)
+    COMMA_DOT       reduce using rule 33 (dato -> FLOAT .)
+    ASSIGN          reduce using rule 33 (dato -> FLOAT .)
+    $end            reduce using rule 33 (dato -> FLOAT .)
+    RKEY            reduce using rule 33 (dato -> FLOAT .)
+    COMA            reduce using rule 33 (dato -> FLOAT .)
+    LKEY            reduce using rule 33 (dato -> FLOAT .)
+    RPAREN          reduce using rule 33 (dato -> FLOAT .)
+    RBRACKET        reduce using rule 33 (dato -> FLOAT .)
+    MOREEQUAL_THAN  reduce using rule 33 (dato -> FLOAT .)
+    MORE_THAN       reduce using rule 33 (dato -> FLOAT .)
+
+
+state 47
+
+    (34) dato -> VEC .
+
+    LESS_THAN       reduce using rule 34 (dato -> VEC .)
+    ASSIGN          reduce using rule 34 (dato -> VEC .)
+    $end            reduce using rule 34 (dato -> VEC .)
+    RKEY            reduce using rule 34 (dato -> VEC .)
+    COMA            reduce using rule 34 (dato -> VEC .)
+    LKEY            reduce using rule 34 (dato -> VEC .)
+    RPAREN          reduce using rule 34 (dato -> VEC .)
+    RBRACKET        reduce using rule 34 (dato -> VEC .)
+    MOREEQUAL_THAN  reduce using rule 34 (dato -> VEC .)
+    MORE_THAN       reduce using rule 34 (dato -> VEC .)
+
+
+state 48
+
+    (35) dato -> GENERIC .
+
+    LESS_THAN       reduce using rule 35 (dato -> GENERIC .)
+    COMMA_DOT       reduce using rule 35 (dato -> GENERIC .)
+    ASSIGN          reduce using rule 35 (dato -> GENERIC .)
+    $end            reduce using rule 35 (dato -> GENERIC .)
+    RKEY            reduce using rule 35 (dato -> GENERIC .)
+    COMA            reduce using rule 35 (dato -> GENERIC .)
+    LKEY            reduce using rule 35 (dato -> GENERIC .)
+    RPAREN          reduce using rule 35 (dato -> GENERIC .)
+    RBRACKET        reduce using rule 35 (dato -> GENERIC .)
+    MOREEQUAL_THAN  reduce using rule 35 (dato -> GENERIC .)
+    MORE_THAN       reduce using rule 35 (dato -> GENERIC .)
+
+
+state 49
+
+    (19) creacion -> LET MUT . VARIABLE
+
+    VARIABLE        shift and go to state 81
+
+
+state 50
 
     (20) creacion -> LET VARIABLE .
 
     COMMA_DOT       reduce using rule 20 (creacion -> LET VARIABLE .)
     TWO_POINTS      reduce using rule 20 (creacion -> LET VARIABLE .)
-    LESS_THAN       reduce using rule 20 (creacion -> LET VARIABLE .)
+    STRING          reduce using rule 20 (creacion -> LET VARIABLE .)
+    CHAR            reduce using rule 20 (creacion -> LET VARIABLE .)
+    DECIMAL         reduce using rule 20 (creacion -> LET VARIABLE .)
+    HEXADECIMAL     reduce using rule 20 (creacion -> LET VARIABLE .)
+    OCTAL           reduce using rule 20 (creacion -> LET VARIABLE .)
+    BINARIO         reduce using rule 20 (creacion -> LET VARIABLE .)
+    BOOL            reduce using rule 20 (creacion -> LET VARIABLE .)
+    FLOAT           reduce using rule 20 (creacion -> LET VARIABLE .)
+    VEC             reduce using rule 20 (creacion -> LET VARIABLE .)
+    GENERIC         reduce using rule 20 (creacion -> LET VARIABLE .)
     ASSIGN          reduce using rule 20 (creacion -> LET VARIABLE .)
     $end            reduce using rule 20 (creacion -> LET VARIABLE .)
     RKEY            reduce using rule 20 (creacion -> LET VARIABLE .)
     COMA            reduce using rule 20 (creacion -> LET VARIABLE .)
 
 
-state 42
+state 51
 
     (21) creacion -> CONST VARIABLE .
 
     COMMA_DOT       reduce using rule 21 (creacion -> CONST VARIABLE .)
     TWO_POINTS      reduce using rule 21 (creacion -> CONST VARIABLE .)
-    LESS_THAN       reduce using rule 21 (creacion -> CONST VARIABLE .)
+    STRING          reduce using rule 21 (creacion -> CONST VARIABLE .)
+    CHAR            reduce using rule 21 (creacion -> CONST VARIABLE .)
+    DECIMAL         reduce using rule 21 (creacion -> CONST VARIABLE .)
+    HEXADECIMAL     reduce using rule 21 (creacion -> CONST VARIABLE .)
+    OCTAL           reduce using rule 21 (creacion -> CONST VARIABLE .)
+    BINARIO         reduce using rule 21 (creacion -> CONST VARIABLE .)
+    BOOL            reduce using rule 21 (creacion -> CONST VARIABLE .)
+    FLOAT           reduce using rule 21 (creacion -> CONST VARIABLE .)
+    VEC             reduce using rule 21 (creacion -> CONST VARIABLE .)
+    GENERIC         reduce using rule 21 (creacion -> CONST VARIABLE .)
     ASSIGN          reduce using rule 21 (creacion -> CONST VARIABLE .)
     $end            reduce using rule 21 (creacion -> CONST VARIABLE .)
     RKEY            reduce using rule 21 (creacion -> CONST VARIABLE .)
     COMA            reduce using rule 21 (creacion -> CONST VARIABLE .)
 
 
-state 43
+state 52
 
     (11) asignacion -> definicion ASSIGN valorAsignado . COMMA_DOT
 
-    COMMA_DOT       shift and go to state 88
+    COMMA_DOT       shift and go to state 82
 
 
-state 44
+state 53
 
     (36) valorAsignado -> dato .
 
     COMMA_DOT       reduce using rule 36 (valorAsignado -> dato .)
 
 
-state 45
+state 54
 
     (37) valorAsignado -> llamadaAfuncion .
 
     COMMA_DOT       reduce using rule 37 (valorAsignado -> llamadaAfuncion .)
 
 
-state 46
+state 55
 
     (38) valorAsignado -> llamadaAfuncionPorAlias .
 
     COMMA_DOT       reduce using rule 38 (valorAsignado -> llamadaAfuncionPorAlias .)
 
 
-state 47
+state 56
 
     (39) valorAsignado -> vector .
 
     COMMA_DOT       reduce using rule 39 (valorAsignado -> vector .)
 
 
-state 48
+state 57
 
     (40) valorAsignado -> hashMap .
 
     COMMA_DOT       reduce using rule 40 (valorAsignado -> hashMap .)
 
 
-state 49
+state 58
 
     (41) valorAsignado -> VARIABLE .
     (43) llamadaAfuncion -> VARIABLE . argumentos
@@ -965,181 +1197,22 @@ state 49
     (49) argumentos -> . LPAREN RPAREN
 
     COMMA_DOT       reduce using rule 41 (valorAsignado -> VARIABLE .)
-    TWO_POINTS      shift and go to state 91
-    POINT           shift and go to state 90
-    LPAREN          shift and go to state 92
+    TWO_POINTS      shift and go to state 85
+    POINT           shift and go to state 84
+    LPAREN          shift and go to state 86
 
-    argumentos                     shift and go to state 89
-
-state 50
-
-    (26) dato -> STRING .
-
-    COMMA_DOT       reduce using rule 26 (dato -> STRING .)
-    TWO_POINTS      reduce using rule 26 (dato -> STRING .)
-    LESS_THAN       reduce using rule 26 (dato -> STRING .)
-    ASSIGN          reduce using rule 26 (dato -> STRING .)
-    $end            reduce using rule 26 (dato -> STRING .)
-    RKEY            reduce using rule 26 (dato -> STRING .)
-    COMA            reduce using rule 26 (dato -> STRING .)
-    MORE_THAN       reduce using rule 26 (dato -> STRING .)
-    RPAREN          reduce using rule 26 (dato -> STRING .)
-    RBRACKET        reduce using rule 26 (dato -> STRING .)
-    MOREEQUAL_THAN  reduce using rule 26 (dato -> STRING .)
-    LKEY            reduce using rule 26 (dato -> STRING .)
-
-
-state 51
-
-    (27) dato -> CHAR .
-
-    COMMA_DOT       reduce using rule 27 (dato -> CHAR .)
-    TWO_POINTS      reduce using rule 27 (dato -> CHAR .)
-    LESS_THAN       reduce using rule 27 (dato -> CHAR .)
-    ASSIGN          reduce using rule 27 (dato -> CHAR .)
-    $end            reduce using rule 27 (dato -> CHAR .)
-    RKEY            reduce using rule 27 (dato -> CHAR .)
-    COMA            reduce using rule 27 (dato -> CHAR .)
-    MORE_THAN       reduce using rule 27 (dato -> CHAR .)
-    RPAREN          reduce using rule 27 (dato -> CHAR .)
-    RBRACKET        reduce using rule 27 (dato -> CHAR .)
-    MOREEQUAL_THAN  reduce using rule 27 (dato -> CHAR .)
-    LKEY            reduce using rule 27 (dato -> CHAR .)
-
-
-state 52
-
-    (28) dato -> DECIMAL .
-
-    COMMA_DOT       reduce using rule 28 (dato -> DECIMAL .)
-    TWO_POINTS      reduce using rule 28 (dato -> DECIMAL .)
-    LESS_THAN       reduce using rule 28 (dato -> DECIMAL .)
-    ASSIGN          reduce using rule 28 (dato -> DECIMAL .)
-    $end            reduce using rule 28 (dato -> DECIMAL .)
-    RKEY            reduce using rule 28 (dato -> DECIMAL .)
-    COMA            reduce using rule 28 (dato -> DECIMAL .)
-    MORE_THAN       reduce using rule 28 (dato -> DECIMAL .)
-    RPAREN          reduce using rule 28 (dato -> DECIMAL .)
-    RBRACKET        reduce using rule 28 (dato -> DECIMAL .)
-    MOREEQUAL_THAN  reduce using rule 28 (dato -> DECIMAL .)
-    LKEY            reduce using rule 28 (dato -> DECIMAL .)
-
-
-state 53
-
-    (29) dato -> HEXADECIMAL .
-
-    COMMA_DOT       reduce using rule 29 (dato -> HEXADECIMAL .)
-    TWO_POINTS      reduce using rule 29 (dato -> HEXADECIMAL .)
-    LESS_THAN       reduce using rule 29 (dato -> HEXADECIMAL .)
-    ASSIGN          reduce using rule 29 (dato -> HEXADECIMAL .)
-    $end            reduce using rule 29 (dato -> HEXADECIMAL .)
-    RKEY            reduce using rule 29 (dato -> HEXADECIMAL .)
-    COMA            reduce using rule 29 (dato -> HEXADECIMAL .)
-    MORE_THAN       reduce using rule 29 (dato -> HEXADECIMAL .)
-    RPAREN          reduce using rule 29 (dato -> HEXADECIMAL .)
-    RBRACKET        reduce using rule 29 (dato -> HEXADECIMAL .)
-    MOREEQUAL_THAN  reduce using rule 29 (dato -> HEXADECIMAL .)
-    LKEY            reduce using rule 29 (dato -> HEXADECIMAL .)
-
-
-state 54
-
-    (30) dato -> OCTAL .
-
-    COMMA_DOT       reduce using rule 30 (dato -> OCTAL .)
-    TWO_POINTS      reduce using rule 30 (dato -> OCTAL .)
-    LESS_THAN       reduce using rule 30 (dato -> OCTAL .)
-    ASSIGN          reduce using rule 30 (dato -> OCTAL .)
-    $end            reduce using rule 30 (dato -> OCTAL .)
-    RKEY            reduce using rule 30 (dato -> OCTAL .)
-    COMA            reduce using rule 30 (dato -> OCTAL .)
-    MORE_THAN       reduce using rule 30 (dato -> OCTAL .)
-    RPAREN          reduce using rule 30 (dato -> OCTAL .)
-    RBRACKET        reduce using rule 30 (dato -> OCTAL .)
-    MOREEQUAL_THAN  reduce using rule 30 (dato -> OCTAL .)
-    LKEY            reduce using rule 30 (dato -> OCTAL .)
-
-
-state 55
-
-    (31) dato -> BINARIO .
-
-    COMMA_DOT       reduce using rule 31 (dato -> BINARIO .)
-    TWO_POINTS      reduce using rule 31 (dato -> BINARIO .)
-    LESS_THAN       reduce using rule 31 (dato -> BINARIO .)
-    ASSIGN          reduce using rule 31 (dato -> BINARIO .)
-    $end            reduce using rule 31 (dato -> BINARIO .)
-    RKEY            reduce using rule 31 (dato -> BINARIO .)
-    COMA            reduce using rule 31 (dato -> BINARIO .)
-    MORE_THAN       reduce using rule 31 (dato -> BINARIO .)
-    RPAREN          reduce using rule 31 (dato -> BINARIO .)
-    RBRACKET        reduce using rule 31 (dato -> BINARIO .)
-    MOREEQUAL_THAN  reduce using rule 31 (dato -> BINARIO .)
-    LKEY            reduce using rule 31 (dato -> BINARIO .)
-
-
-state 56
-
-    (32) dato -> BOOL .
-
-    COMMA_DOT       reduce using rule 32 (dato -> BOOL .)
-    TWO_POINTS      reduce using rule 32 (dato -> BOOL .)
-    LESS_THAN       reduce using rule 32 (dato -> BOOL .)
-    ASSIGN          reduce using rule 32 (dato -> BOOL .)
-    $end            reduce using rule 32 (dato -> BOOL .)
-    RKEY            reduce using rule 32 (dato -> BOOL .)
-    COMA            reduce using rule 32 (dato -> BOOL .)
-    MORE_THAN       reduce using rule 32 (dato -> BOOL .)
-    RPAREN          reduce using rule 32 (dato -> BOOL .)
-    RBRACKET        reduce using rule 32 (dato -> BOOL .)
-    MOREEQUAL_THAN  reduce using rule 32 (dato -> BOOL .)
-    LKEY            reduce using rule 32 (dato -> BOOL .)
-
-
-state 57
-
-    (33) dato -> FLOAT .
-
-    COMMA_DOT       reduce using rule 33 (dato -> FLOAT .)
-    TWO_POINTS      reduce using rule 33 (dato -> FLOAT .)
-    LESS_THAN       reduce using rule 33 (dato -> FLOAT .)
-    ASSIGN          reduce using rule 33 (dato -> FLOAT .)
-    $end            reduce using rule 33 (dato -> FLOAT .)
-    RKEY            reduce using rule 33 (dato -> FLOAT .)
-    COMA            reduce using rule 33 (dato -> FLOAT .)
-    MORE_THAN       reduce using rule 33 (dato -> FLOAT .)
-    RPAREN          reduce using rule 33 (dato -> FLOAT .)
-    RBRACKET        reduce using rule 33 (dato -> FLOAT .)
-    MOREEQUAL_THAN  reduce using rule 33 (dato -> FLOAT .)
-    LKEY            reduce using rule 33 (dato -> FLOAT .)
-
-
-state 58
-
-    (34) dato -> VEC .
-    (75) vector -> VEC . NOT LBRACKET datos RBRACKET
-
-    COMMA_DOT       reduce using rule 34 (dato -> VEC .)
-    NOT             shift and go to state 31
-
+    argumentos                     shift and go to state 83
 
 state 59
 
-    (35) dato -> GENERIC .
+    (34) dato -> VEC .
+    (76) vector -> VEC . NOT LBRACKET datos RBRACKET
+    (77) vector -> VEC . TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> VEC . TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
 
-    COMMA_DOT       reduce using rule 35 (dato -> GENERIC .)
-    TWO_POINTS      reduce using rule 35 (dato -> GENERIC .)
-    LESS_THAN       reduce using rule 35 (dato -> GENERIC .)
-    ASSIGN          reduce using rule 35 (dato -> GENERIC .)
-    $end            reduce using rule 35 (dato -> GENERIC .)
-    RKEY            reduce using rule 35 (dato -> GENERIC .)
-    COMA            reduce using rule 35 (dato -> GENERIC .)
-    MORE_THAN       reduce using rule 35 (dato -> GENERIC .)
-    RPAREN          reduce using rule 35 (dato -> GENERIC .)
-    RBRACKET        reduce using rule 35 (dato -> GENERIC .)
-    MOREEQUAL_THAN  reduce using rule 35 (dato -> GENERIC .)
-    LKEY            reduce using rule 35 (dato -> GENERIC .)
+    COMMA_DOT       reduce using rule 34 (dato -> VEC .)
+    NOT             shift and go to state 30
+    TWO_POINTS      shift and go to state 31
 
 
 state 60
@@ -1156,24 +1229,24 @@ state 60
     (49) argumentos -> . LPAREN RPAREN
 
     COMMA_DOT       reduce using rule 41 (valorAsignado -> VARIABLE .)
-    POINT           shift and go to state 93
-    TWO_POINTS      shift and go to state 91
-    LPAREN          shift and go to state 92
+    POINT           shift and go to state 87
+    TWO_POINTS      shift and go to state 85
+    LPAREN          shift and go to state 86
 
-    argumentos                     shift and go to state 89
+    argumentos                     shift and go to state 83
 
 state 61
 
     (12) asignacion -> VARIABLE ASSIGN valorAsignado . COMMA_DOT
 
-    COMMA_DOT       shift and go to state 94
+    COMMA_DOT       shift and go to state 88
 
 
 state 62
 
     (13) asignacion -> VARIABLE ASSIGN varEnVar . COMMA_DOT
 
-    COMMA_DOT       shift and go to state 95
+    COMMA_DOT       shift and go to state 89
 
 
 state 63
@@ -1187,50 +1260,50 @@ state 63
 
 state 64
 
-    (72) struct -> STRUCT VARIABLE LKEY . atributos RKEY
-    (73) atributos -> . VARIABLE TWO_POINTS dato
-    (74) atributos -> . VARIABLE TWO_POINTS dato COMA atributos
+    (73) struct -> STRUCT VARIABLE LKEY . atributos RKEY
+    (74) atributos -> . VARIABLE TWO_POINTS dato
+    (75) atributos -> . VARIABLE TWO_POINTS dato COMA atributos
 
-    VARIABLE        shift and go to state 96
+    VARIABLE        shift and go to state 90
 
-    atributos                      shift and go to state 97
+    atributos                      shift and go to state 91
 
 state 65
 
     (58) definirFuncion -> FN VARIABLE trait . parametros LKEY cuerpoFuncion RKEY
-    (63) parametros -> . LPAREN RPAREN datoARetornar
-    (64) parametros -> . LPAREN parametro RPAREN datoARetornar
-    (65) parametros -> . LPAREN RPAREN
-    (66) parametros -> . LPAREN parametro RPAREN
+    (64) parametros -> . LPAREN RPAREN datoARetornar
+    (65) parametros -> . LPAREN parametro RPAREN datoARetornar
+    (66) parametros -> . LPAREN RPAREN
+    (67) parametros -> . LPAREN parametro RPAREN
 
     LPAREN          shift and go to state 68
 
-    parametros                     shift and go to state 98
+    parametros                     shift and go to state 92
 
 state 66
 
     (59) definirFuncion -> FN VARIABLE parametros . LKEY cuerpoFuncion RKEY
 
-    LKEY            shift and go to state 99
+    LKEY            shift and go to state 93
 
 
 state 67
 
     (60) trait -> LESS_THAN . GENERIC TWO_POINTS VARIABLE MORE_THAN
 
-    GENERIC         shift and go to state 100
+    GENERIC         shift and go to state 94
 
 
 state 68
 
-    (63) parametros -> LPAREN . RPAREN datoARetornar
-    (64) parametros -> LPAREN . parametro RPAREN datoARetornar
-    (65) parametros -> LPAREN . RPAREN
-    (66) parametros -> LPAREN . parametro RPAREN
-    (67) parametro -> . VARIABLE TWO_POINTS dato
-    (68) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
-    (69) parametro -> . dato COMA parametro
-    (70) parametro -> . dato
+    (64) parametros -> LPAREN . RPAREN datoARetornar
+    (65) parametros -> LPAREN . parametro RPAREN datoARetornar
+    (66) parametros -> LPAREN . RPAREN
+    (67) parametros -> LPAREN . parametro RPAREN
+    (68) parametro -> . VARIABLE TWO_POINTS dato
+    (69) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
+    (70) parametro -> . dato COMA parametro
+    (71) parametro -> . dato
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -1242,34 +1315,34 @@ state 68
     (34) dato -> . VEC
     (35) dato -> . GENERIC
 
-    RPAREN          shift and go to state 101
-    VARIABLE        shift and go to state 103
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    RPAREN          shift and go to state 95
+    VARIABLE        shift and go to state 97
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    parametro                      shift and go to state 102
-    dato                           shift and go to state 104
+    parametro                      shift and go to state 96
+    dato                           shift and go to state 98
 
 state 69
 
-    (85) hashMap -> HASHMAP TWO_POINTS TWO_POINTS . NEW LPAREN RPAREN
+    (81) hashMap -> HASHMAP TWO_POINTS TWO_POINTS . NEW LPAREN RPAREN
 
-    NEW             shift and go to state 105
+    NEW             shift and go to state 99
 
 
 state 70
 
-    (75) vector -> VEC NOT LBRACKET . datos RBRACKET
-    (76) datos -> . dato
-    (77) datos -> . dato COMA datos
+    (76) vector -> VEC NOT LBRACKET . datos RBRACKET
+    (79) datos -> . dato
+    (80) datos -> . dato COMA datos
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -1281,50 +1354,58 @@ state 70
     (34) dato -> . VEC
     (35) dato -> . GENERIC
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    datos                          shift and go to state 106
-    dato                           shift and go to state 107
+    datos                          shift and go to state 100
+    dato                           shift and go to state 101
 
 state 71
 
-    (86) for -> FOR VARIABLE IN . rango LKEY cuerpoFuncion RKEY
-    (87) rango -> . DECIMAL POINT POINT DECIMAL
-    (88) rango -> . DECIMAL POINT POINT ASSIGN DECIMAL
+    (77) vector -> VEC TWO_POINTS TWO_POINTS . NEW LPAREN RPAREN
+    (78) vector -> VEC TWO_POINTS TWO_POINTS . NEW LPAREN datos RPAREN
 
-    DECIMAL         shift and go to state 109
+    NEW             shift and go to state 102
 
-    rango                          shift and go to state 108
 
 state 72
 
-    (92) loop -> LOOP LKEY cuerpoFuncion . RKEY
+    (82) for -> FOR VARIABLE IN . rango LKEY cuerpoFuncion RKEY
+    (83) rango -> . DECIMAL POINT POINT DECIMAL
+    (84) rango -> . DECIMAL POINT POINT ASSIGN DECIMAL
 
-    RKEY            shift and go to state 110
+    DECIMAL         shift and go to state 104
 
+    rango                          shift and go to state 103
 
 state 73
 
-    (71) cuerpoFuncion -> cuerpo .
+    (88) loop -> LOOP LKEY cuerpoFuncion . RKEY
 
-    RKEY            reduce using rule 71 (cuerpoFuncion -> cuerpo .)
-    COMA            reduce using rule 71 (cuerpoFuncion -> cuerpo .)
+    RKEY            shift and go to state 105
 
 
 state 74
 
-    (89) eMatch -> MATCH VARIABLE LKEY . content RKEY
-    (90) content -> . dato MOREEQUAL_THAN cuerpoFuncion
-    (91) content -> . dato MOREEQUAL_THAN cuerpoFuncion COMA content
+    (72) cuerpoFuncion -> cuerpo .
+
+    RKEY            reduce using rule 72 (cuerpoFuncion -> cuerpo .)
+    COMA            reduce using rule 72 (cuerpoFuncion -> cuerpo .)
+
+
+state 75
+
+    (85) eMatch -> MATCH VARIABLE LKEY . content RKEY
+    (86) content -> . dato MOREEQUAL_THAN cuerpoFuncion
+    (87) content -> . dato MOREEQUAL_THAN cuerpoFuncion COMA content
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -1336,88 +1417,45 @@ state 74
     (34) dato -> . VEC
     (35) dato -> . GENERIC
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    content                        shift and go to state 111
-    dato                           shift and go to state 112
-
-state 75
-
-    (78) condicional -> IF VARIABLE comparacion . VARIABLE LKEY cuerpo RKEY
-
-    VARIABLE        shift and go to state 113
-
+    content                        shift and go to state 106
+    dato                           shift and go to state 107
 
 state 76
 
-    (79) comparacion -> EQUALS .
-
-    VARIABLE        reduce using rule 79 (comparacion -> EQUALS .)
-
-
-state 77
-
-    (80) comparacion -> NOT_EQUALS .
-
-    VARIABLE        reduce using rule 80 (comparacion -> NOT_EQUALS .)
-
-
-state 78
-
-    (81) comparacion -> LESS_THAN .
-
-    VARIABLE        reduce using rule 81 (comparacion -> LESS_THAN .)
-
-
-state 79
-
-    (82) comparacion -> LESSEQUAL_THAN .
-
-    VARIABLE        reduce using rule 82 (comparacion -> LESSEQUAL_THAN .)
-
-
-state 80
-
-    (83) comparacion -> MORE_THAN .
-
-    VARIABLE        reduce using rule 83 (comparacion -> MORE_THAN .)
-
-
-state 81
-
-    (84) comparacion -> MOREEQUAL_THAN .
-
-    VARIABLE        reduce using rule 84 (comparacion -> MOREEQUAL_THAN .)
-
-
-state 82
-
     (22) tipoDato -> TWO_POINTS dato .
-    (23) tipoDato -> TWO_POINTS dato . tipoDato
-    (22) tipoDato -> . TWO_POINTS dato
-    (23) tipoDato -> . TWO_POINTS dato tipoDato
-    (24) tipoDato -> . LESS_THAN dato MORE_THAN
-    (25) tipoDato -> . TWO_POINTS apuntador
+    (24) tipoDato -> dato . LESS_THAN dato MORE_THAN
 
     ASSIGN          reduce using rule 22 (tipoDato -> TWO_POINTS dato .)
     $end            reduce using rule 22 (tipoDato -> TWO_POINTS dato .)
     RKEY            reduce using rule 22 (tipoDato -> TWO_POINTS dato .)
     COMA            reduce using rule 22 (tipoDato -> TWO_POINTS dato .)
-    TWO_POINTS      shift and go to state 38
-    LESS_THAN       shift and go to state 39
+    LKEY            reduce using rule 22 (tipoDato -> TWO_POINTS dato .)
+    LESS_THAN       shift and go to state 80
 
-    tipoDato                       shift and go to state 114
 
-state 83
+state 77
+
+    (23) tipoDato -> TWO_POINTS tipoDato .
+
+    ASSIGN          reduce using rule 23 (tipoDato -> TWO_POINTS tipoDato .)
+    $end            reduce using rule 23 (tipoDato -> TWO_POINTS tipoDato .)
+    RKEY            reduce using rule 23 (tipoDato -> TWO_POINTS tipoDato .)
+    COMA            reduce using rule 23 (tipoDato -> TWO_POINTS tipoDato .)
+    LKEY            reduce using rule 23 (tipoDato -> TWO_POINTS tipoDato .)
+
+
+state 78
 
     (25) tipoDato -> TWO_POINTS apuntador .
 
@@ -1425,58 +1463,71 @@ state 83
     $end            reduce using rule 25 (tipoDato -> TWO_POINTS apuntador .)
     RKEY            reduce using rule 25 (tipoDato -> TWO_POINTS apuntador .)
     COMA            reduce using rule 25 (tipoDato -> TWO_POINTS apuntador .)
+    LKEY            reduce using rule 25 (tipoDato -> TWO_POINTS apuntador .)
 
 
-state 84
+state 79
 
-    (34) dato -> VEC .
-
-    TWO_POINTS      reduce using rule 34 (dato -> VEC .)
-    LESS_THAN       reduce using rule 34 (dato -> VEC .)
-    ASSIGN          reduce using rule 34 (dato -> VEC .)
-    $end            reduce using rule 34 (dato -> VEC .)
-    RKEY            reduce using rule 34 (dato -> VEC .)
-    COMA            reduce using rule 34 (dato -> VEC .)
-    MORE_THAN       reduce using rule 34 (dato -> VEC .)
-    RPAREN          reduce using rule 34 (dato -> VEC .)
-    RBRACKET        reduce using rule 34 (dato -> VEC .)
-    MOREEQUAL_THAN  reduce using rule 34 (dato -> VEC .)
-    LKEY            reduce using rule 34 (dato -> VEC .)
-
-
-state 85
-
-    (93) apuntador -> FN . parametros
-    (63) parametros -> . LPAREN RPAREN datoARetornar
-    (64) parametros -> . LPAREN parametro RPAREN datoARetornar
-    (65) parametros -> . LPAREN RPAREN
-    (66) parametros -> . LPAREN parametro RPAREN
+    (89) apuntador -> FN . parametros
+    (64) parametros -> . LPAREN RPAREN datoARetornar
+    (65) parametros -> . LPAREN parametro RPAREN datoARetornar
+    (66) parametros -> . LPAREN RPAREN
+    (67) parametros -> . LPAREN parametro RPAREN
 
     LPAREN          shift and go to state 68
 
-    parametros                     shift and go to state 115
+    parametros                     shift and go to state 108
 
-state 86
+state 80
 
-    (24) tipoDato -> LESS_THAN dato . MORE_THAN
+    (24) tipoDato -> dato LESS_THAN . dato MORE_THAN
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
 
-    MORE_THAN       shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
+    dato                           shift and go to state 109
 
-state 87
+state 81
 
     (19) creacion -> LET MUT VARIABLE .
 
     COMMA_DOT       reduce using rule 19 (creacion -> LET MUT VARIABLE .)
     TWO_POINTS      reduce using rule 19 (creacion -> LET MUT VARIABLE .)
-    LESS_THAN       reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    STRING          reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    CHAR            reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    DECIMAL         reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    HEXADECIMAL     reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    OCTAL           reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    BINARIO         reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    BOOL            reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    FLOAT           reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    VEC             reduce using rule 19 (creacion -> LET MUT VARIABLE .)
+    GENERIC         reduce using rule 19 (creacion -> LET MUT VARIABLE .)
     ASSIGN          reduce using rule 19 (creacion -> LET MUT VARIABLE .)
     $end            reduce using rule 19 (creacion -> LET MUT VARIABLE .)
     RKEY            reduce using rule 19 (creacion -> LET MUT VARIABLE .)
     COMA            reduce using rule 19 (creacion -> LET MUT VARIABLE .)
 
 
-state 88
+state 82
 
     (11) asignacion -> definicion ASSIGN valorAsignado COMMA_DOT .
 
@@ -1485,7 +1536,7 @@ state 88
     COMA            reduce using rule 11 (asignacion -> definicion ASSIGN valorAsignado COMMA_DOT .)
 
 
-state 89
+state 83
 
     (43) llamadaAfuncion -> VARIABLE argumentos .
     (44) llamadaAfuncion -> VARIABLE argumentos . POINT llamadaAfuncion
@@ -1493,10 +1544,10 @@ state 89
     COMMA_DOT       reduce using rule 43 (llamadaAfuncion -> VARIABLE argumentos .)
     COMA            reduce using rule 43 (llamadaAfuncion -> VARIABLE argumentos .)
     RPAREN          reduce using rule 43 (llamadaAfuncion -> VARIABLE argumentos .)
-    POINT           shift and go to state 117
+    POINT           shift and go to state 110
 
 
-state 90
+state 84
 
     (42) llamadaAfuncionPorAlias -> VARIABLE POINT . llamadaAfuncion
     (43) llamadaAfuncion -> . VARIABLE argumentos
@@ -1505,20 +1556,20 @@ state 90
     (46) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
 
-    VARIABLE        shift and go to state 118
+    VARIABLE        shift and go to state 111
 
-    llamadaAfuncion                shift and go to state 119
+    llamadaAfuncion                shift and go to state 112
 
-state 91
+state 85
 
     (45) llamadaAfuncion -> VARIABLE TWO_POINTS . TWO_POINTS argumentos
     (46) llamadaAfuncion -> VARIABLE TWO_POINTS . TWO_POINTS
     (47) llamadaAfuncion -> VARIABLE TWO_POINTS . TWO_POINTS llamadaAfuncion
 
-    TWO_POINTS      shift and go to state 120
+    TWO_POINTS      shift and go to state 113
 
 
-state 92
+state 86
 
     (48) argumentos -> LPAREN . argumento RPAREN
     (49) argumentos -> LPAREN . RPAREN
@@ -1547,25 +1598,25 @@ state 92
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
 
-    RPAREN          shift and go to state 122
-    VARIABLE        shift and go to state 123
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    RPAREN          shift and go to state 115
+    VARIABLE        shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    argumento                      shift and go to state 121
-    dato                           shift and go to state 124
-    llamadaAfuncion                shift and go to state 125
-    llamadaAfuncionPorAlias        shift and go to state 126
+    argumento                      shift and go to state 114
+    dato                           shift and go to state 117
+    llamadaAfuncion                shift and go to state 118
+    llamadaAfuncionPorAlias        shift and go to state 119
 
-state 93
+state 87
 
     (15) varEnVar -> VARIABLE POINT . VARIABLE
     (42) llamadaAfuncionPorAlias -> VARIABLE POINT . llamadaAfuncion
@@ -1575,11 +1626,11 @@ state 93
     (46) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
 
-    VARIABLE        shift and go to state 127
+    VARIABLE        shift and go to state 120
 
-    llamadaAfuncion                shift and go to state 119
+    llamadaAfuncion                shift and go to state 112
 
-state 94
+state 88
 
     (12) asignacion -> VARIABLE ASSIGN valorAsignado COMMA_DOT .
 
@@ -1588,7 +1639,7 @@ state 94
     COMA            reduce using rule 12 (asignacion -> VARIABLE ASSIGN valorAsignado COMMA_DOT .)
 
 
-state 95
+state 89
 
     (13) asignacion -> VARIABLE ASSIGN varEnVar COMMA_DOT .
 
@@ -1597,32 +1648,32 @@ state 95
     COMA            reduce using rule 13 (asignacion -> VARIABLE ASSIGN varEnVar COMMA_DOT .)
 
 
-state 96
+state 90
 
-    (73) atributos -> VARIABLE . TWO_POINTS dato
-    (74) atributos -> VARIABLE . TWO_POINTS dato COMA atributos
+    (74) atributos -> VARIABLE . TWO_POINTS dato
+    (75) atributos -> VARIABLE . TWO_POINTS dato COMA atributos
 
-    TWO_POINTS      shift and go to state 128
-
-
-state 97
-
-    (72) struct -> STRUCT VARIABLE LKEY atributos . RKEY
-
-    RKEY            shift and go to state 129
+    TWO_POINTS      shift and go to state 121
 
 
-state 98
+state 91
+
+    (73) struct -> STRUCT VARIABLE LKEY atributos . RKEY
+
+    RKEY            shift and go to state 122
+
+
+state 92
 
     (58) definirFuncion -> FN VARIABLE trait parametros . LKEY cuerpoFuncion RKEY
 
-    LKEY            shift and go to state 130
+    LKEY            shift and go to state 123
 
 
-state 99
+state 93
 
     (59) definirFuncion -> FN VARIABLE parametros LKEY . cuerpoFuncion RKEY
-    (71) cuerpoFuncion -> . cuerpo
+    (72) cuerpoFuncion -> . cuerpo
     (1) cuerpo -> . asignacion
     (2) cuerpo -> . struct
     (3) cuerpo -> . varEnVar
@@ -1630,23 +1681,24 @@ state 99
     (5) cuerpo -> . hashMap
     (6) cuerpo -> . vector
     (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
     (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
     (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
     (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
     (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
     (15) varEnVar -> . VARIABLE POINT VARIABLE
     (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
     (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
     (16) definicion -> . creacion
     (17) definicion -> . creacion COMMA_DOT
     (18) definicion -> . creacion tipoDato
@@ -1654,20 +1706,19 @@ state 99
     (20) creacion -> . LET VARIABLE
     (21) creacion -> . CONST VARIABLE
 
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
-    cuerpoFuncion                  shift and go to state 131
-    cuerpo                         shift and go to state 73
+    cuerpoFuncion                  shift and go to state 124
+    cuerpo                         shift and go to state 74
     asignacion                     shift and go to state 2
     struct                         shift and go to state 3
     varEnVar                       shift and go to state 4
@@ -1677,158 +1728,148 @@ state 99
     for                            shift and go to state 8
     loop                           shift and go to state 9
     eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
-state 100
+state 94
 
     (60) trait -> LESS_THAN GENERIC . TWO_POINTS VARIABLE MORE_THAN
 
-    TWO_POINTS      shift and go to state 132
+    TWO_POINTS      shift and go to state 125
+
+
+state 95
+
+    (64) parametros -> LPAREN RPAREN . datoARetornar
+    (66) parametros -> LPAREN RPAREN .
+    (61) datoARetornar -> . MINUS MORE_THAN dato
+    (62) datoARetornar -> . MINUS MORE_THAN NOT
+    (63) datoARetornar -> . MINUS MORE_THAN tipoDato
+
+    LKEY            reduce using rule 66 (parametros -> LPAREN RPAREN .)
+    ASSIGN          reduce using rule 66 (parametros -> LPAREN RPAREN .)
+    $end            reduce using rule 66 (parametros -> LPAREN RPAREN .)
+    RKEY            reduce using rule 66 (parametros -> LPAREN RPAREN .)
+    COMA            reduce using rule 66 (parametros -> LPAREN RPAREN .)
+    MINUS           shift and go to state 127
+
+    datoARetornar                  shift and go to state 126
+
+state 96
+
+    (65) parametros -> LPAREN parametro . RPAREN datoARetornar
+    (67) parametros -> LPAREN parametro . RPAREN
+
+    RPAREN          shift and go to state 128
+
+
+state 97
+
+    (68) parametro -> VARIABLE . TWO_POINTS dato
+    (69) parametro -> VARIABLE . TWO_POINTS dato COMA parametro
+
+    TWO_POINTS      shift and go to state 129
+
+
+state 98
+
+    (70) parametro -> dato . COMA parametro
+    (71) parametro -> dato .
+
+    COMA            shift and go to state 130
+    RPAREN          reduce using rule 71 (parametro -> dato .)
+
+
+state 99
+
+    (81) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW . LPAREN RPAREN
+
+    LPAREN          shift and go to state 131
+
+
+state 100
+
+    (76) vector -> VEC NOT LBRACKET datos . RBRACKET
+
+    RBRACKET        shift and go to state 132
 
 
 state 101
 
-    (63) parametros -> LPAREN RPAREN . datoARetornar
-    (65) parametros -> LPAREN RPAREN .
-    (61) datoARetornar -> . MINUS MORE_THAN dato
-    (62) datoARetornar -> . MINUS MORE_THAN NOT
+    (79) datos -> dato .
+    (80) datos -> dato . COMA datos
 
-    LKEY            reduce using rule 65 (parametros -> LPAREN RPAREN .)
-    ASSIGN          reduce using rule 65 (parametros -> LPAREN RPAREN .)
-    $end            reduce using rule 65 (parametros -> LPAREN RPAREN .)
-    RKEY            reduce using rule 65 (parametros -> LPAREN RPAREN .)
-    COMA            reduce using rule 65 (parametros -> LPAREN RPAREN .)
-    MINUS           shift and go to state 134
+    RBRACKET        reduce using rule 79 (datos -> dato .)
+    RPAREN          reduce using rule 79 (datos -> dato .)
+    COMA            shift and go to state 133
 
-    datoARetornar                  shift and go to state 133
 
 state 102
 
-    (64) parametros -> LPAREN parametro . RPAREN datoARetornar
-    (66) parametros -> LPAREN parametro . RPAREN
+    (77) vector -> VEC TWO_POINTS TWO_POINTS NEW . LPAREN RPAREN
+    (78) vector -> VEC TWO_POINTS TWO_POINTS NEW . LPAREN datos RPAREN
 
-    RPAREN          shift and go to state 135
+    LPAREN          shift and go to state 134
 
 
 state 103
 
-    (67) parametro -> VARIABLE . TWO_POINTS dato
-    (68) parametro -> VARIABLE . TWO_POINTS dato COMA parametro
+    (82) for -> FOR VARIABLE IN rango . LKEY cuerpoFuncion RKEY
 
-    TWO_POINTS      shift and go to state 136
+    LKEY            shift and go to state 135
 
 
 state 104
 
-    (69) parametro -> dato . COMA parametro
-    (70) parametro -> dato .
+    (83) rango -> DECIMAL . POINT POINT DECIMAL
+    (84) rango -> DECIMAL . POINT POINT ASSIGN DECIMAL
 
-    COMA            shift and go to state 137
-    RPAREN          reduce using rule 70 (parametro -> dato .)
+    POINT           shift and go to state 136
 
 
 state 105
 
-    (85) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW . LPAREN RPAREN
+    (88) loop -> LOOP LKEY cuerpoFuncion RKEY .
 
-    LPAREN          shift and go to state 138
+    $end            reduce using rule 88 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
+    RKEY            reduce using rule 88 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
+    COMA            reduce using rule 88 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
 
 
 state 106
 
-    (75) vector -> VEC NOT LBRACKET datos . RBRACKET
+    (85) eMatch -> MATCH VARIABLE LKEY content . RKEY
 
-    RBRACKET        shift and go to state 139
+    RKEY            shift and go to state 137
 
 
 state 107
 
-    (76) datos -> dato .
-    (77) datos -> dato . COMA datos
+    (86) content -> dato . MOREEQUAL_THAN cuerpoFuncion
+    (87) content -> dato . MOREEQUAL_THAN cuerpoFuncion COMA content
 
-    RBRACKET        reduce using rule 76 (datos -> dato .)
-    COMA            shift and go to state 140
+    MOREEQUAL_THAN  shift and go to state 138
 
 
 state 108
 
-    (86) for -> FOR VARIABLE IN rango . LKEY cuerpoFuncion RKEY
+    (89) apuntador -> FN parametros .
 
-    LKEY            shift and go to state 141
+    ASSIGN          reduce using rule 89 (apuntador -> FN parametros .)
+    $end            reduce using rule 89 (apuntador -> FN parametros .)
+    RKEY            reduce using rule 89 (apuntador -> FN parametros .)
+    COMA            reduce using rule 89 (apuntador -> FN parametros .)
+    LKEY            reduce using rule 89 (apuntador -> FN parametros .)
 
 
 state 109
 
-    (87) rango -> DECIMAL . POINT POINT DECIMAL
-    (88) rango -> DECIMAL . POINT POINT ASSIGN DECIMAL
+    (24) tipoDato -> dato LESS_THAN dato . MORE_THAN
 
-    POINT           shift and go to state 142
+    MORE_THAN       shift and go to state 139
 
 
 state 110
-
-    (92) loop -> LOOP LKEY cuerpoFuncion RKEY .
-
-    $end            reduce using rule 92 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
-    RKEY            reduce using rule 92 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
-    COMA            reduce using rule 92 (loop -> LOOP LKEY cuerpoFuncion RKEY .)
-
-
-state 111
-
-    (89) eMatch -> MATCH VARIABLE LKEY content . RKEY
-
-    RKEY            shift and go to state 143
-
-
-state 112
-
-    (90) content -> dato . MOREEQUAL_THAN cuerpoFuncion
-    (91) content -> dato . MOREEQUAL_THAN cuerpoFuncion COMA content
-
-    MOREEQUAL_THAN  shift and go to state 144
-
-
-state 113
-
-    (78) condicional -> IF VARIABLE comparacion VARIABLE . LKEY cuerpo RKEY
-
-    LKEY            shift and go to state 145
-
-
-state 114
-
-    (23) tipoDato -> TWO_POINTS dato tipoDato .
-
-    ASSIGN          reduce using rule 23 (tipoDato -> TWO_POINTS dato tipoDato .)
-    $end            reduce using rule 23 (tipoDato -> TWO_POINTS dato tipoDato .)
-    RKEY            reduce using rule 23 (tipoDato -> TWO_POINTS dato tipoDato .)
-    COMA            reduce using rule 23 (tipoDato -> TWO_POINTS dato tipoDato .)
-
-
-state 115
-
-    (93) apuntador -> FN parametros .
-
-    ASSIGN          reduce using rule 93 (apuntador -> FN parametros .)
-    $end            reduce using rule 93 (apuntador -> FN parametros .)
-    RKEY            reduce using rule 93 (apuntador -> FN parametros .)
-    COMA            reduce using rule 93 (apuntador -> FN parametros .)
-
-
-state 116
-
-    (24) tipoDato -> LESS_THAN dato MORE_THAN .
-
-    ASSIGN          reduce using rule 24 (tipoDato -> LESS_THAN dato MORE_THAN .)
-    $end            reduce using rule 24 (tipoDato -> LESS_THAN dato MORE_THAN .)
-    RKEY            reduce using rule 24 (tipoDato -> LESS_THAN dato MORE_THAN .)
-    COMA            reduce using rule 24 (tipoDato -> LESS_THAN dato MORE_THAN .)
-
-
-state 117
 
     (44) llamadaAfuncion -> VARIABLE argumentos POINT . llamadaAfuncion
     (43) llamadaAfuncion -> . VARIABLE argumentos
@@ -1837,11 +1878,11 @@ state 117
     (46) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
 
-    VARIABLE        shift and go to state 118
+    VARIABLE        shift and go to state 111
 
-    llamadaAfuncion                shift and go to state 146
+    llamadaAfuncion                shift and go to state 140
 
-state 118
+state 111
 
     (43) llamadaAfuncion -> VARIABLE . argumentos
     (44) llamadaAfuncion -> VARIABLE . argumentos POINT llamadaAfuncion
@@ -1851,12 +1892,12 @@ state 118
     (48) argumentos -> . LPAREN argumento RPAREN
     (49) argumentos -> . LPAREN RPAREN
 
-    TWO_POINTS      shift and go to state 91
-    LPAREN          shift and go to state 92
+    TWO_POINTS      shift and go to state 85
+    LPAREN          shift and go to state 86
 
-    argumentos                     shift and go to state 89
+    argumentos                     shift and go to state 83
 
-state 119
+state 112
 
     (42) llamadaAfuncionPorAlias -> VARIABLE POINT llamadaAfuncion .
 
@@ -1865,7 +1906,7 @@ state 119
     RPAREN          reduce using rule 42 (llamadaAfuncionPorAlias -> VARIABLE POINT llamadaAfuncion .)
 
 
-state 120
+state 113
 
     (45) llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS . argumentos
     (46) llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS .
@@ -1881,20 +1922,20 @@ state 120
     COMMA_DOT       reduce using rule 46 (llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS .)
     COMA            reduce using rule 46 (llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS .)
     RPAREN          reduce using rule 46 (llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS .)
-    LPAREN          shift and go to state 92
-    VARIABLE        shift and go to state 118
+    LPAREN          shift and go to state 86
+    VARIABLE        shift and go to state 111
 
-    argumentos                     shift and go to state 147
-    llamadaAfuncion                shift and go to state 148
+    argumentos                     shift and go to state 141
+    llamadaAfuncion                shift and go to state 142
 
-state 121
+state 114
 
     (48) argumentos -> LPAREN argumento . RPAREN
 
-    RPAREN          shift and go to state 149
+    RPAREN          shift and go to state 143
 
 
-state 122
+state 115
 
     (49) argumentos -> LPAREN RPAREN .
 
@@ -1904,7 +1945,7 @@ state 122
     RPAREN          reduce using rule 49 (argumentos -> LPAREN RPAREN .)
 
 
-state 123
+state 116
 
     (50) argumento -> VARIABLE .
     (52) argumento -> VARIABLE . COMA argumento
@@ -1918,41 +1959,41 @@ state 123
     (49) argumentos -> . LPAREN RPAREN
 
     RPAREN          reduce using rule 50 (argumento -> VARIABLE .)
-    COMA            shift and go to state 150
-    TWO_POINTS      shift and go to state 91
-    POINT           shift and go to state 90
-    LPAREN          shift and go to state 92
+    COMA            shift and go to state 144
+    TWO_POINTS      shift and go to state 85
+    POINT           shift and go to state 84
+    LPAREN          shift and go to state 86
 
-    argumentos                     shift and go to state 89
+    argumentos                     shift and go to state 83
 
-state 124
+state 117
 
     (51) argumento -> dato .
     (53) argumento -> dato . COMA argumento
 
     RPAREN          reduce using rule 51 (argumento -> dato .)
-    COMA            shift and go to state 151
+    COMA            shift and go to state 145
 
 
-state 125
+state 118
 
     (54) argumento -> llamadaAfuncion .
     (56) argumento -> llamadaAfuncion . COMA argumento
 
     RPAREN          reduce using rule 54 (argumento -> llamadaAfuncion .)
-    COMA            shift and go to state 152
+    COMA            shift and go to state 146
 
 
-state 126
+state 119
 
     (55) argumento -> llamadaAfuncionPorAlias .
     (57) argumento -> llamadaAfuncionPorAlias . COMA argumento
 
     RPAREN          reduce using rule 55 (argumento -> llamadaAfuncionPorAlias .)
-    COMA            shift and go to state 153
+    COMA            shift and go to state 147
 
 
-state 127
+state 120
 
     (15) varEnVar -> VARIABLE POINT VARIABLE .
     (43) llamadaAfuncion -> VARIABLE . argumentos
@@ -1964,15 +2005,15 @@ state 127
     (49) argumentos -> . LPAREN RPAREN
 
     COMMA_DOT       reduce using rule 15 (varEnVar -> VARIABLE POINT VARIABLE .)
-    TWO_POINTS      shift and go to state 91
-    LPAREN          shift and go to state 92
+    TWO_POINTS      shift and go to state 85
+    LPAREN          shift and go to state 86
 
-    argumentos                     shift and go to state 89
+    argumentos                     shift and go to state 83
 
-state 128
+state 121
 
-    (73) atributos -> VARIABLE TWO_POINTS . dato
-    (74) atributos -> VARIABLE TWO_POINTS . dato COMA atributos
+    (74) atributos -> VARIABLE TWO_POINTS . dato
+    (75) atributos -> VARIABLE TWO_POINTS . dato COMA atributos
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -1984,32 +2025,32 @@ state 128
     (34) dato -> . VEC
     (35) dato -> . GENERIC
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    dato                           shift and go to state 154
+    dato                           shift and go to state 148
 
-state 129
+state 122
 
-    (72) struct -> STRUCT VARIABLE LKEY atributos RKEY .
+    (73) struct -> STRUCT VARIABLE LKEY atributos RKEY .
 
-    $end            reduce using rule 72 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
-    RKEY            reduce using rule 72 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
-    COMA            reduce using rule 72 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
+    $end            reduce using rule 73 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
+    RKEY            reduce using rule 73 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
+    COMA            reduce using rule 73 (struct -> STRUCT VARIABLE LKEY atributos RKEY .)
 
 
-state 130
+state 123
 
     (58) definirFuncion -> FN VARIABLE trait parametros LKEY . cuerpoFuncion RKEY
-    (71) cuerpoFuncion -> . cuerpo
+    (72) cuerpoFuncion -> . cuerpo
     (1) cuerpo -> . asignacion
     (2) cuerpo -> . struct
     (3) cuerpo -> . varEnVar
@@ -2017,23 +2058,24 @@ state 130
     (5) cuerpo -> . hashMap
     (6) cuerpo -> . vector
     (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
     (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
     (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
     (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
     (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
     (15) varEnVar -> . VARIABLE POINT VARIABLE
     (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
     (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
     (16) definicion -> . creacion
     (17) definicion -> . creacion COMMA_DOT
     (18) definicion -> . creacion tipoDato
@@ -2041,20 +2083,19 @@ state 130
     (20) creacion -> . LET VARIABLE
     (21) creacion -> . CONST VARIABLE
 
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
-    cuerpoFuncion                  shift and go to state 155
-    cuerpo                         shift and go to state 73
+    cuerpoFuncion                  shift and go to state 149
+    cuerpo                         shift and go to state 74
     asignacion                     shift and go to state 2
     struct                         shift and go to state 3
     varEnVar                       shift and go to state 4
@@ -2064,370 +2105,352 @@ state 130
     for                            shift and go to state 8
     loop                           shift and go to state 9
     eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
-state 131
+state 124
 
     (59) definirFuncion -> FN VARIABLE parametros LKEY cuerpoFuncion . RKEY
 
-    RKEY            shift and go to state 156
+    RKEY            shift and go to state 150
+
+
+state 125
+
+    (60) trait -> LESS_THAN GENERIC TWO_POINTS . VARIABLE MORE_THAN
+
+    VARIABLE        shift and go to state 151
+
+
+state 126
+
+    (64) parametros -> LPAREN RPAREN datoARetornar .
+
+    LKEY            reduce using rule 64 (parametros -> LPAREN RPAREN datoARetornar .)
+    ASSIGN          reduce using rule 64 (parametros -> LPAREN RPAREN datoARetornar .)
+    $end            reduce using rule 64 (parametros -> LPAREN RPAREN datoARetornar .)
+    RKEY            reduce using rule 64 (parametros -> LPAREN RPAREN datoARetornar .)
+    COMA            reduce using rule 64 (parametros -> LPAREN RPAREN datoARetornar .)
+
+
+state 127
+
+    (61) datoARetornar -> MINUS . MORE_THAN dato
+    (62) datoARetornar -> MINUS . MORE_THAN NOT
+    (63) datoARetornar -> MINUS . MORE_THAN tipoDato
+
+    MORE_THAN       shift and go to state 152
+
+
+state 128
+
+    (65) parametros -> LPAREN parametro RPAREN . datoARetornar
+    (67) parametros -> LPAREN parametro RPAREN .
+    (61) datoARetornar -> . MINUS MORE_THAN dato
+    (62) datoARetornar -> . MINUS MORE_THAN NOT
+    (63) datoARetornar -> . MINUS MORE_THAN tipoDato
+
+    LKEY            reduce using rule 67 (parametros -> LPAREN parametro RPAREN .)
+    ASSIGN          reduce using rule 67 (parametros -> LPAREN parametro RPAREN .)
+    $end            reduce using rule 67 (parametros -> LPAREN parametro RPAREN .)
+    RKEY            reduce using rule 67 (parametros -> LPAREN parametro RPAREN .)
+    COMA            reduce using rule 67 (parametros -> LPAREN parametro RPAREN .)
+    MINUS           shift and go to state 127
+
+    datoARetornar                  shift and go to state 153
+
+state 129
+
+    (68) parametro -> VARIABLE TWO_POINTS . dato
+    (69) parametro -> VARIABLE TWO_POINTS . dato COMA parametro
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
+
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
+
+    dato                           shift and go to state 154
+
+state 130
+
+    (70) parametro -> dato COMA . parametro
+    (68) parametro -> . VARIABLE TWO_POINTS dato
+    (69) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
+    (70) parametro -> . dato COMA parametro
+    (71) parametro -> . dato
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
+
+    VARIABLE        shift and go to state 97
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
+
+    dato                           shift and go to state 98
+    parametro                      shift and go to state 155
+
+state 131
+
+    (81) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN . RPAREN
+
+    RPAREN          shift and go to state 156
 
 
 state 132
 
-    (60) trait -> LESS_THAN GENERIC TWO_POINTS . VARIABLE MORE_THAN
+    (76) vector -> VEC NOT LBRACKET datos RBRACKET .
 
-    VARIABLE        shift and go to state 157
+    $end            reduce using rule 76 (vector -> VEC NOT LBRACKET datos RBRACKET .)
+    RKEY            reduce using rule 76 (vector -> VEC NOT LBRACKET datos RBRACKET .)
+    COMA            reduce using rule 76 (vector -> VEC NOT LBRACKET datos RBRACKET .)
+    COMMA_DOT       reduce using rule 76 (vector -> VEC NOT LBRACKET datos RBRACKET .)
 
 
 state 133
 
-    (63) parametros -> LPAREN RPAREN datoARetornar .
+    (80) datos -> dato COMA . datos
+    (79) datos -> . dato
+    (80) datos -> . dato COMA datos
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
 
-    LKEY            reduce using rule 63 (parametros -> LPAREN RPAREN datoARetornar .)
-    ASSIGN          reduce using rule 63 (parametros -> LPAREN RPAREN datoARetornar .)
-    $end            reduce using rule 63 (parametros -> LPAREN RPAREN datoARetornar .)
-    RKEY            reduce using rule 63 (parametros -> LPAREN RPAREN datoARetornar .)
-    COMA            reduce using rule 63 (parametros -> LPAREN RPAREN datoARetornar .)
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
+    dato                           shift and go to state 101
+    datos                          shift and go to state 157
 
 state 134
 
-    (61) datoARetornar -> MINUS . MORE_THAN dato
-    (62) datoARetornar -> MINUS . MORE_THAN NOT
+    (77) vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN . RPAREN
+    (78) vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN . datos RPAREN
+    (79) datos -> . dato
+    (80) datos -> . dato COMA datos
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
 
-    MORE_THAN       shift and go to state 158
+    RPAREN          shift and go to state 158
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
+    datos                          shift and go to state 159
+    dato                           shift and go to state 101
 
 state 135
 
-    (64) parametros -> LPAREN parametro RPAREN . datoARetornar
-    (66) parametros -> LPAREN parametro RPAREN .
-    (61) datoARetornar -> . MINUS MORE_THAN dato
-    (62) datoARetornar -> . MINUS MORE_THAN NOT
+    (82) for -> FOR VARIABLE IN rango LKEY . cuerpoFuncion RKEY
+    (72) cuerpoFuncion -> . cuerpo
+    (1) cuerpo -> . asignacion
+    (2) cuerpo -> . struct
+    (3) cuerpo -> . varEnVar
+    (4) cuerpo -> . definirFuncion
+    (5) cuerpo -> . hashMap
+    (6) cuerpo -> . vector
+    (7) cuerpo -> . for
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
+    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
+    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
+    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
+    (14) asignacion -> . definicion
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (15) varEnVar -> . VARIABLE POINT VARIABLE
+    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
+    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
+    (16) definicion -> . creacion
+    (17) definicion -> . creacion COMMA_DOT
+    (18) definicion -> . creacion tipoDato
+    (19) creacion -> . LET MUT VARIABLE
+    (20) creacion -> . LET VARIABLE
+    (21) creacion -> . CONST VARIABLE
 
-    LKEY            reduce using rule 66 (parametros -> LPAREN parametro RPAREN .)
-    ASSIGN          reduce using rule 66 (parametros -> LPAREN parametro RPAREN .)
-    $end            reduce using rule 66 (parametros -> LPAREN parametro RPAREN .)
-    RKEY            reduce using rule 66 (parametros -> LPAREN parametro RPAREN .)
-    COMA            reduce using rule 66 (parametros -> LPAREN parametro RPAREN .)
-    MINUS           shift and go to state 134
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
-    datoARetornar                  shift and go to state 159
+    cuerpoFuncion                  shift and go to state 160
+    cuerpo                         shift and go to state 74
+    asignacion                     shift and go to state 2
+    struct                         shift and go to state 3
+    varEnVar                       shift and go to state 4
+    definirFuncion                 shift and go to state 5
+    hashMap                        shift and go to state 6
+    vector                         shift and go to state 7
+    for                            shift and go to state 8
+    loop                           shift and go to state 9
+    eMatch                         shift and go to state 10
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
 state 136
 
-    (67) parametro -> VARIABLE TWO_POINTS . dato
-    (68) parametro -> VARIABLE TWO_POINTS . dato COMA parametro
-    (26) dato -> . STRING
-    (27) dato -> . CHAR
-    (28) dato -> . DECIMAL
-    (29) dato -> . HEXADECIMAL
-    (30) dato -> . OCTAL
-    (31) dato -> . BINARIO
-    (32) dato -> . BOOL
-    (33) dato -> . FLOAT
-    (34) dato -> . VEC
-    (35) dato -> . GENERIC
+    (83) rango -> DECIMAL POINT . POINT DECIMAL
+    (84) rango -> DECIMAL POINT . POINT ASSIGN DECIMAL
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    POINT           shift and go to state 161
 
-    dato                           shift and go to state 160
 
 state 137
 
-    (69) parametro -> dato COMA . parametro
-    (67) parametro -> . VARIABLE TWO_POINTS dato
-    (68) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
-    (69) parametro -> . dato COMA parametro
-    (70) parametro -> . dato
-    (26) dato -> . STRING
-    (27) dato -> . CHAR
-    (28) dato -> . DECIMAL
-    (29) dato -> . HEXADECIMAL
-    (30) dato -> . OCTAL
-    (31) dato -> . BINARIO
-    (32) dato -> . BOOL
-    (33) dato -> . FLOAT
-    (34) dato -> . VEC
-    (35) dato -> . GENERIC
+    (85) eMatch -> MATCH VARIABLE LKEY content RKEY .
 
-    VARIABLE        shift and go to state 103
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    $end            reduce using rule 85 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
+    RKEY            reduce using rule 85 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
+    COMA            reduce using rule 85 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
 
-    dato                           shift and go to state 104
-    parametro                      shift and go to state 161
 
 state 138
 
-    (85) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN . RPAREN
+    (86) content -> dato MOREEQUAL_THAN . cuerpoFuncion
+    (87) content -> dato MOREEQUAL_THAN . cuerpoFuncion COMA content
+    (72) cuerpoFuncion -> . cuerpo
+    (1) cuerpo -> . asignacion
+    (2) cuerpo -> . struct
+    (3) cuerpo -> . varEnVar
+    (4) cuerpo -> . definirFuncion
+    (5) cuerpo -> . hashMap
+    (6) cuerpo -> . vector
+    (7) cuerpo -> . for
+    (8) cuerpo -> . for cuerpo
+    (9) cuerpo -> . loop
+    (10) cuerpo -> . eMatch
+    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
+    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
+    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
+    (14) asignacion -> . definicion
+    (73) struct -> . STRUCT VARIABLE LKEY atributos RKEY
+    (15) varEnVar -> . VARIABLE POINT VARIABLE
+    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
+    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
+    (81) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (76) vector -> . VEC NOT LBRACKET datos RBRACKET
+    (77) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
+    (78) vector -> . VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN
+    (82) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
+    (88) loop -> . LOOP LKEY cuerpoFuncion RKEY
+    (85) eMatch -> . MATCH VARIABLE LKEY content RKEY
+    (16) definicion -> . creacion
+    (17) definicion -> . creacion COMMA_DOT
+    (18) definicion -> . creacion tipoDato
+    (19) creacion -> . LET MUT VARIABLE
+    (20) creacion -> . LET VARIABLE
+    (21) creacion -> . CONST VARIABLE
 
-    RPAREN          shift and go to state 162
+    VARIABLE        shift and go to state 12
+    STRUCT          shift and go to state 13
+    FN              shift and go to state 14
+    HASHMAP         shift and go to state 15
+    VEC             shift and go to state 16
+    FOR             shift and go to state 17
+    LOOP            shift and go to state 18
+    MATCH           shift and go to state 19
+    LET             shift and go to state 21
+    CONST           shift and go to state 22
 
+    cuerpoFuncion                  shift and go to state 162
+    cuerpo                         shift and go to state 74
+    asignacion                     shift and go to state 2
+    struct                         shift and go to state 3
+    varEnVar                       shift and go to state 4
+    definirFuncion                 shift and go to state 5
+    hashMap                        shift and go to state 6
+    vector                         shift and go to state 7
+    for                            shift and go to state 8
+    loop                           shift and go to state 9
+    eMatch                         shift and go to state 10
+    definicion                     shift and go to state 11
+    creacion                       shift and go to state 20
 
 state 139
 
-    (75) vector -> VEC NOT LBRACKET datos RBRACKET .
+    (24) tipoDato -> dato LESS_THAN dato MORE_THAN .
 
-    $end            reduce using rule 75 (vector -> VEC NOT LBRACKET datos RBRACKET .)
-    COMMA_DOT       reduce using rule 75 (vector -> VEC NOT LBRACKET datos RBRACKET .)
-    RKEY            reduce using rule 75 (vector -> VEC NOT LBRACKET datos RBRACKET .)
-    COMA            reduce using rule 75 (vector -> VEC NOT LBRACKET datos RBRACKET .)
+    ASSIGN          reduce using rule 24 (tipoDato -> dato LESS_THAN dato MORE_THAN .)
+    $end            reduce using rule 24 (tipoDato -> dato LESS_THAN dato MORE_THAN .)
+    RKEY            reduce using rule 24 (tipoDato -> dato LESS_THAN dato MORE_THAN .)
+    COMA            reduce using rule 24 (tipoDato -> dato LESS_THAN dato MORE_THAN .)
+    LKEY            reduce using rule 24 (tipoDato -> dato LESS_THAN dato MORE_THAN .)
 
 
 state 140
-
-    (77) datos -> dato COMA . datos
-    (76) datos -> . dato
-    (77) datos -> . dato COMA datos
-    (26) dato -> . STRING
-    (27) dato -> . CHAR
-    (28) dato -> . DECIMAL
-    (29) dato -> . HEXADECIMAL
-    (30) dato -> . OCTAL
-    (31) dato -> . BINARIO
-    (32) dato -> . BOOL
-    (33) dato -> . FLOAT
-    (34) dato -> . VEC
-    (35) dato -> . GENERIC
-
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
-
-    dato                           shift and go to state 107
-    datos                          shift and go to state 163
-
-state 141
-
-    (86) for -> FOR VARIABLE IN rango LKEY . cuerpoFuncion RKEY
-    (71) cuerpoFuncion -> . cuerpo
-    (1) cuerpo -> . asignacion
-    (2) cuerpo -> . struct
-    (3) cuerpo -> . varEnVar
-    (4) cuerpo -> . definirFuncion
-    (5) cuerpo -> . hashMap
-    (6) cuerpo -> . vector
-    (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
-    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
-    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
-    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
-    (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
-    (15) varEnVar -> . VARIABLE POINT VARIABLE
-    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
-    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
-    (16) definicion -> . creacion
-    (17) definicion -> . creacion COMMA_DOT
-    (18) definicion -> . creacion tipoDato
-    (19) creacion -> . LET MUT VARIABLE
-    (20) creacion -> . LET VARIABLE
-    (21) creacion -> . CONST VARIABLE
-
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
-
-    cuerpoFuncion                  shift and go to state 164
-    cuerpo                         shift and go to state 73
-    asignacion                     shift and go to state 2
-    struct                         shift and go to state 3
-    varEnVar                       shift and go to state 4
-    definirFuncion                 shift and go to state 5
-    hashMap                        shift and go to state 6
-    vector                         shift and go to state 7
-    for                            shift and go to state 8
-    loop                           shift and go to state 9
-    eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
-
-state 142
-
-    (87) rango -> DECIMAL POINT . POINT DECIMAL
-    (88) rango -> DECIMAL POINT . POINT ASSIGN DECIMAL
-
-    POINT           shift and go to state 165
-
-
-state 143
-
-    (89) eMatch -> MATCH VARIABLE LKEY content RKEY .
-
-    $end            reduce using rule 89 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
-    RKEY            reduce using rule 89 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
-    COMA            reduce using rule 89 (eMatch -> MATCH VARIABLE LKEY content RKEY .)
-
-
-state 144
-
-    (90) content -> dato MOREEQUAL_THAN . cuerpoFuncion
-    (91) content -> dato MOREEQUAL_THAN . cuerpoFuncion COMA content
-    (71) cuerpoFuncion -> . cuerpo
-    (1) cuerpo -> . asignacion
-    (2) cuerpo -> . struct
-    (3) cuerpo -> . varEnVar
-    (4) cuerpo -> . definirFuncion
-    (5) cuerpo -> . hashMap
-    (6) cuerpo -> . vector
-    (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
-    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
-    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
-    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
-    (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
-    (15) varEnVar -> . VARIABLE POINT VARIABLE
-    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
-    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
-    (16) definicion -> . creacion
-    (17) definicion -> . creacion COMMA_DOT
-    (18) definicion -> . creacion tipoDato
-    (19) creacion -> . LET MUT VARIABLE
-    (20) creacion -> . LET VARIABLE
-    (21) creacion -> . CONST VARIABLE
-
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
-
-    cuerpoFuncion                  shift and go to state 166
-    cuerpo                         shift and go to state 73
-    asignacion                     shift and go to state 2
-    struct                         shift and go to state 3
-    varEnVar                       shift and go to state 4
-    definirFuncion                 shift and go to state 5
-    hashMap                        shift and go to state 6
-    vector                         shift and go to state 7
-    for                            shift and go to state 8
-    loop                           shift and go to state 9
-    eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
-
-state 145
-
-    (78) condicional -> IF VARIABLE comparacion VARIABLE LKEY . cuerpo RKEY
-    (1) cuerpo -> . asignacion
-    (2) cuerpo -> . struct
-    (3) cuerpo -> . varEnVar
-    (4) cuerpo -> . definirFuncion
-    (5) cuerpo -> . hashMap
-    (6) cuerpo -> . vector
-    (7) cuerpo -> . for
-    (8) cuerpo -> . loop
-    (9) cuerpo -> . eMatch
-    (10) cuerpo -> . condicional
-    (11) asignacion -> . definicion ASSIGN valorAsignado COMMA_DOT
-    (12) asignacion -> . VARIABLE ASSIGN valorAsignado COMMA_DOT
-    (13) asignacion -> . VARIABLE ASSIGN varEnVar COMMA_DOT
-    (14) asignacion -> . definicion
-    (72) struct -> . STRUCT VARIABLE LKEY atributos RKEY
-    (15) varEnVar -> . VARIABLE POINT VARIABLE
-    (58) definirFuncion -> . FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY
-    (59) definirFuncion -> . FN VARIABLE parametros LKEY cuerpoFuncion RKEY
-    (85) hashMap -> . HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN
-    (75) vector -> . VEC NOT LBRACKET datos RBRACKET
-    (86) for -> . FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY
-    (92) loop -> . LOOP LKEY cuerpoFuncion RKEY
-    (89) eMatch -> . MATCH VARIABLE LKEY content RKEY
-    (78) condicional -> . IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY
-    (16) definicion -> . creacion
-    (17) definicion -> . creacion COMMA_DOT
-    (18) definicion -> . creacion tipoDato
-    (19) creacion -> . LET MUT VARIABLE
-    (20) creacion -> . LET VARIABLE
-    (21) creacion -> . CONST VARIABLE
-
-    VARIABLE        shift and go to state 13
-    STRUCT          shift and go to state 14
-    FN              shift and go to state 15
-    HASHMAP         shift and go to state 16
-    VEC             shift and go to state 17
-    FOR             shift and go to state 18
-    LOOP            shift and go to state 19
-    MATCH           shift and go to state 20
-    IF              shift and go to state 21
-    LET             shift and go to state 23
-    CONST           shift and go to state 24
-
-    cuerpo                         shift and go to state 167
-    asignacion                     shift and go to state 2
-    struct                         shift and go to state 3
-    varEnVar                       shift and go to state 4
-    definirFuncion                 shift and go to state 5
-    hashMap                        shift and go to state 6
-    vector                         shift and go to state 7
-    for                            shift and go to state 8
-    loop                           shift and go to state 9
-    eMatch                         shift and go to state 10
-    condicional                    shift and go to state 11
-    definicion                     shift and go to state 12
-    creacion                       shift and go to state 22
-
-state 146
 
     (44) llamadaAfuncion -> VARIABLE argumentos POINT llamadaAfuncion .
 
@@ -2436,7 +2459,7 @@ state 146
     RPAREN          reduce using rule 44 (llamadaAfuncion -> VARIABLE argumentos POINT llamadaAfuncion .)
 
 
-state 147
+state 141
 
     (45) llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS argumentos .
 
@@ -2445,7 +2468,7 @@ state 147
     RPAREN          reduce using rule 45 (llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS argumentos .)
 
 
-state 148
+state 142
 
     (47) llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion .
 
@@ -2454,7 +2477,7 @@ state 148
     RPAREN          reduce using rule 47 (llamadaAfuncion -> VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion .)
 
 
-state 149
+state 143
 
     (48) argumentos -> LPAREN argumento RPAREN .
 
@@ -2464,7 +2487,7 @@ state 149
     RPAREN          reduce using rule 48 (argumentos -> LPAREN argumento RPAREN .)
 
 
-state 150
+state 144
 
     (52) argumento -> VARIABLE COMA . argumento
     (50) argumento -> . VARIABLE
@@ -2492,24 +2515,24 @@ state 150
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
 
-    VARIABLE        shift and go to state 123
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    VARIABLE        shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    argumento                      shift and go to state 168
-    dato                           shift and go to state 124
-    llamadaAfuncion                shift and go to state 125
-    llamadaAfuncionPorAlias        shift and go to state 126
+    argumento                      shift and go to state 163
+    dato                           shift and go to state 117
+    llamadaAfuncion                shift and go to state 118
+    llamadaAfuncionPorAlias        shift and go to state 119
 
-state 151
+state 145
 
     (53) argumento -> dato COMA . argumento
     (50) argumento -> . VARIABLE
@@ -2537,24 +2560,24 @@ state 151
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
 
-    VARIABLE        shift and go to state 123
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    VARIABLE        shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    dato                           shift and go to state 124
-    argumento                      shift and go to state 169
-    llamadaAfuncion                shift and go to state 125
-    llamadaAfuncionPorAlias        shift and go to state 126
+    dato                           shift and go to state 117
+    argumento                      shift and go to state 164
+    llamadaAfuncion                shift and go to state 118
+    llamadaAfuncionPorAlias        shift and go to state 119
 
-state 152
+state 146
 
     (56) argumento -> llamadaAfuncion COMA . argumento
     (50) argumento -> . VARIABLE
@@ -2582,24 +2605,24 @@ state 152
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
 
-    VARIABLE        shift and go to state 123
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    VARIABLE        shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    llamadaAfuncion                shift and go to state 125
-    argumento                      shift and go to state 170
-    dato                           shift and go to state 124
-    llamadaAfuncionPorAlias        shift and go to state 126
+    llamadaAfuncion                shift and go to state 118
+    argumento                      shift and go to state 165
+    dato                           shift and go to state 117
+    llamadaAfuncionPorAlias        shift and go to state 119
 
-state 153
+state 147
 
     (57) argumento -> llamadaAfuncionPorAlias COMA . argumento
     (50) argumento -> . VARIABLE
@@ -2627,40 +2650,40 @@ state 153
     (47) llamadaAfuncion -> . VARIABLE TWO_POINTS TWO_POINTS llamadaAfuncion
     (42) llamadaAfuncionPorAlias -> . VARIABLE POINT llamadaAfuncion
 
-    VARIABLE        shift and go to state 123
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    VARIABLE        shift and go to state 116
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    llamadaAfuncionPorAlias        shift and go to state 126
-    argumento                      shift and go to state 171
-    dato                           shift and go to state 124
-    llamadaAfuncion                shift and go to state 125
+    llamadaAfuncionPorAlias        shift and go to state 119
+    argumento                      shift and go to state 166
+    dato                           shift and go to state 117
+    llamadaAfuncion                shift and go to state 118
 
-state 154
+state 148
 
-    (73) atributos -> VARIABLE TWO_POINTS dato .
-    (74) atributos -> VARIABLE TWO_POINTS dato . COMA atributos
+    (74) atributos -> VARIABLE TWO_POINTS dato .
+    (75) atributos -> VARIABLE TWO_POINTS dato . COMA atributos
 
-    RKEY            reduce using rule 73 (atributos -> VARIABLE TWO_POINTS dato .)
-    COMA            shift and go to state 172
+    RKEY            reduce using rule 74 (atributos -> VARIABLE TWO_POINTS dato .)
+    COMA            shift and go to state 167
 
 
-state 155
+state 149
 
     (58) definirFuncion -> FN VARIABLE trait parametros LKEY cuerpoFuncion . RKEY
 
-    RKEY            shift and go to state 173
+    RKEY            shift and go to state 168
 
 
-state 156
+state 150
 
     (59) definirFuncion -> FN VARIABLE parametros LKEY cuerpoFuncion RKEY .
 
@@ -2669,17 +2692,18 @@ state 156
     COMA            reduce using rule 59 (definirFuncion -> FN VARIABLE parametros LKEY cuerpoFuncion RKEY .)
 
 
-state 157
+state 151
 
     (60) trait -> LESS_THAN GENERIC TWO_POINTS VARIABLE . MORE_THAN
 
-    MORE_THAN       shift and go to state 174
+    MORE_THAN       shift and go to state 169
 
 
-state 158
+state 152
 
     (61) datoARetornar -> MINUS MORE_THAN . dato
     (62) datoARetornar -> MINUS MORE_THAN . NOT
+    (63) datoARetornar -> MINUS MORE_THAN . tipoDato
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -2690,136 +2714,153 @@ state 158
     (33) dato -> . FLOAT
     (34) dato -> . VEC
     (35) dato -> . GENERIC
+    (22) tipoDato -> . TWO_POINTS dato
+    (23) tipoDato -> . TWO_POINTS tipoDato
+    (24) tipoDato -> . dato LESS_THAN dato MORE_THAN
+    (25) tipoDato -> . TWO_POINTS apuntador
 
-    NOT             shift and go to state 176
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    NOT             shift and go to state 171
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
+    TWO_POINTS      shift and go to state 37
 
-    dato                           shift and go to state 175
+    dato                           shift and go to state 170
+    tipoDato                       shift and go to state 172
+
+state 153
+
+    (65) parametros -> LPAREN parametro RPAREN datoARetornar .
+
+    LKEY            reduce using rule 65 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+    ASSIGN          reduce using rule 65 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+    $end            reduce using rule 65 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+    RKEY            reduce using rule 65 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+    COMA            reduce using rule 65 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+
+
+state 154
+
+    (68) parametro -> VARIABLE TWO_POINTS dato .
+    (69) parametro -> VARIABLE TWO_POINTS dato . COMA parametro
+
+    RPAREN          reduce using rule 68 (parametro -> VARIABLE TWO_POINTS dato .)
+    COMA            shift and go to state 173
+
+
+state 155
+
+    (70) parametro -> dato COMA parametro .
+
+    RPAREN          reduce using rule 70 (parametro -> dato COMA parametro .)
+
+
+state 156
+
+    (81) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .
+
+    $end            reduce using rule 81 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    RKEY            reduce using rule 81 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    COMA            reduce using rule 81 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    COMMA_DOT       reduce using rule 81 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+
+
+state 157
+
+    (80) datos -> dato COMA datos .
+
+    RBRACKET        reduce using rule 80 (datos -> dato COMA datos .)
+    RPAREN          reduce using rule 80 (datos -> dato COMA datos .)
+
+
+state 158
+
+    (77) vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .
+
+    $end            reduce using rule 77 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    RKEY            reduce using rule 77 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    COMA            reduce using rule 77 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    COMMA_DOT       reduce using rule 77 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+
 
 state 159
 
-    (64) parametros -> LPAREN parametro RPAREN datoARetornar .
+    (78) vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos . RPAREN
 
-    LKEY            reduce using rule 64 (parametros -> LPAREN parametro RPAREN datoARetornar .)
-    ASSIGN          reduce using rule 64 (parametros -> LPAREN parametro RPAREN datoARetornar .)
-    $end            reduce using rule 64 (parametros -> LPAREN parametro RPAREN datoARetornar .)
-    RKEY            reduce using rule 64 (parametros -> LPAREN parametro RPAREN datoARetornar .)
-    COMA            reduce using rule 64 (parametros -> LPAREN parametro RPAREN datoARetornar .)
+    RPAREN          shift and go to state 174
 
 
 state 160
 
-    (67) parametro -> VARIABLE TWO_POINTS dato .
-    (68) parametro -> VARIABLE TWO_POINTS dato . COMA parametro
+    (82) for -> FOR VARIABLE IN rango LKEY cuerpoFuncion . RKEY
 
-    RPAREN          reduce using rule 67 (parametro -> VARIABLE TWO_POINTS dato .)
-    COMA            shift and go to state 177
+    RKEY            shift and go to state 175
 
 
 state 161
 
-    (69) parametro -> dato COMA parametro .
+    (83) rango -> DECIMAL POINT POINT . DECIMAL
+    (84) rango -> DECIMAL POINT POINT . ASSIGN DECIMAL
 
-    RPAREN          reduce using rule 69 (parametro -> dato COMA parametro .)
+    DECIMAL         shift and go to state 176
+    ASSIGN          shift and go to state 177
 
 
 state 162
 
-    (85) hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .
+    (86) content -> dato MOREEQUAL_THAN cuerpoFuncion .
+    (87) content -> dato MOREEQUAL_THAN cuerpoFuncion . COMA content
 
-    $end            reduce using rule 85 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
-    COMMA_DOT       reduce using rule 85 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
-    RKEY            reduce using rule 85 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
-    COMA            reduce using rule 85 (hashMap -> HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN .)
+    RKEY            reduce using rule 86 (content -> dato MOREEQUAL_THAN cuerpoFuncion .)
+    COMA            shift and go to state 178
 
 
 state 163
-
-    (77) datos -> dato COMA datos .
-
-    RBRACKET        reduce using rule 77 (datos -> dato COMA datos .)
-
-
-state 164
-
-    (86) for -> FOR VARIABLE IN rango LKEY cuerpoFuncion . RKEY
-
-    RKEY            shift and go to state 178
-
-
-state 165
-
-    (87) rango -> DECIMAL POINT POINT . DECIMAL
-    (88) rango -> DECIMAL POINT POINT . ASSIGN DECIMAL
-
-    DECIMAL         shift and go to state 179
-    ASSIGN          shift and go to state 180
-
-
-state 166
-
-    (90) content -> dato MOREEQUAL_THAN cuerpoFuncion .
-    (91) content -> dato MOREEQUAL_THAN cuerpoFuncion . COMA content
-
-    RKEY            reduce using rule 90 (content -> dato MOREEQUAL_THAN cuerpoFuncion .)
-    COMA            shift and go to state 181
-
-
-state 167
-
-    (78) condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo . RKEY
-
-    RKEY            shift and go to state 182
-
-
-state 168
 
     (52) argumento -> VARIABLE COMA argumento .
 
     RPAREN          reduce using rule 52 (argumento -> VARIABLE COMA argumento .)
 
 
-state 169
+state 164
 
     (53) argumento -> dato COMA argumento .
 
     RPAREN          reduce using rule 53 (argumento -> dato COMA argumento .)
 
 
-state 170
+state 165
 
     (56) argumento -> llamadaAfuncion COMA argumento .
 
     RPAREN          reduce using rule 56 (argumento -> llamadaAfuncion COMA argumento .)
 
 
-state 171
+state 166
 
     (57) argumento -> llamadaAfuncionPorAlias COMA argumento .
 
     RPAREN          reduce using rule 57 (argumento -> llamadaAfuncionPorAlias COMA argumento .)
 
 
-state 172
+state 167
 
-    (74) atributos -> VARIABLE TWO_POINTS dato COMA . atributos
-    (73) atributos -> . VARIABLE TWO_POINTS dato
-    (74) atributos -> . VARIABLE TWO_POINTS dato COMA atributos
+    (75) atributos -> VARIABLE TWO_POINTS dato COMA . atributos
+    (74) atributos -> . VARIABLE TWO_POINTS dato
+    (75) atributos -> . VARIABLE TWO_POINTS dato COMA atributos
 
-    VARIABLE        shift and go to state 96
+    VARIABLE        shift and go to state 90
 
-    atributos                      shift and go to state 183
+    atributos                      shift and go to state 179
 
-state 173
+state 168
 
     (58) definirFuncion -> FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY .
 
@@ -2828,42 +2869,129 @@ state 173
     COMA            reduce using rule 58 (definirFuncion -> FN VARIABLE trait parametros LKEY cuerpoFuncion RKEY .)
 
 
-state 174
+state 169
 
     (60) trait -> LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN .
 
     LPAREN          reduce using rule 60 (trait -> LESS_THAN GENERIC TWO_POINTS VARIABLE MORE_THAN .)
 
 
-state 175
+state 170
 
     (61) datoARetornar -> MINUS MORE_THAN dato .
+    (24) tipoDato -> dato . LESS_THAN dato MORE_THAN
 
-    LKEY            reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
     ASSIGN          reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
     $end            reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
     RKEY            reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
     COMA            reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
+    LKEY            reduce using rule 61 (datoARetornar -> MINUS MORE_THAN dato .)
+    LESS_THAN       shift and go to state 80
 
 
-state 176
+state 171
 
     (62) datoARetornar -> MINUS MORE_THAN NOT .
 
-    LKEY            reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
     ASSIGN          reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
     $end            reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
     RKEY            reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
     COMA            reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
+    LKEY            reduce using rule 62 (datoARetornar -> MINUS MORE_THAN NOT .)
+
+
+state 172
+
+    (63) datoARetornar -> MINUS MORE_THAN tipoDato .
+
+    ASSIGN          reduce using rule 63 (datoARetornar -> MINUS MORE_THAN tipoDato .)
+    $end            reduce using rule 63 (datoARetornar -> MINUS MORE_THAN tipoDato .)
+    RKEY            reduce using rule 63 (datoARetornar -> MINUS MORE_THAN tipoDato .)
+    COMA            reduce using rule 63 (datoARetornar -> MINUS MORE_THAN tipoDato .)
+    LKEY            reduce using rule 63 (datoARetornar -> MINUS MORE_THAN tipoDato .)
+
+
+state 173
+
+    (69) parametro -> VARIABLE TWO_POINTS dato COMA . parametro
+    (68) parametro -> . VARIABLE TWO_POINTS dato
+    (69) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
+    (70) parametro -> . dato COMA parametro
+    (71) parametro -> . dato
+    (26) dato -> . STRING
+    (27) dato -> . CHAR
+    (28) dato -> . DECIMAL
+    (29) dato -> . HEXADECIMAL
+    (30) dato -> . OCTAL
+    (31) dato -> . BINARIO
+    (32) dato -> . BOOL
+    (33) dato -> . FLOAT
+    (34) dato -> . VEC
+    (35) dato -> . GENERIC
+
+    VARIABLE        shift and go to state 97
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
+
+    dato                           shift and go to state 98
+    parametro                      shift and go to state 180
+
+state 174
+
+    (78) vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN .
+
+    $end            reduce using rule 78 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN .)
+    RKEY            reduce using rule 78 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN .)
+    COMA            reduce using rule 78 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN .)
+    COMMA_DOT       reduce using rule 78 (vector -> VEC TWO_POINTS TWO_POINTS NEW LPAREN datos RPAREN .)
+
+
+state 175
+
+    (82) for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .
+
+    VARIABLE        reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    STRUCT          reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    FN              reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    HASHMAP         reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    VEC             reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    FOR             reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    LOOP            reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    MATCH           reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    LET             reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    CONST           reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    $end            reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    RKEY            reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+    COMA            reduce using rule 82 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
+
+
+state 176
+
+    (83) rango -> DECIMAL POINT POINT DECIMAL .
+
+    LKEY            reduce using rule 83 (rango -> DECIMAL POINT POINT DECIMAL .)
 
 
 state 177
 
-    (68) parametro -> VARIABLE TWO_POINTS dato COMA . parametro
-    (67) parametro -> . VARIABLE TWO_POINTS dato
-    (68) parametro -> . VARIABLE TWO_POINTS dato COMA parametro
-    (69) parametro -> . dato COMA parametro
-    (70) parametro -> . dato
+    (84) rango -> DECIMAL POINT POINT ASSIGN . DECIMAL
+
+    DECIMAL         shift and go to state 181
+
+
+state 178
+
+    (87) content -> dato MOREEQUAL_THAN cuerpoFuncion COMA . content
+    (86) content -> . dato MOREEQUAL_THAN cuerpoFuncion
+    (87) content -> . dato MOREEQUAL_THAN cuerpoFuncion COMA content
     (26) dato -> . STRING
     (27) dato -> . CHAR
     (28) dato -> . DECIMAL
@@ -2875,107 +3003,44 @@ state 177
     (34) dato -> . VEC
     (35) dato -> . GENERIC
 
-    VARIABLE        shift and go to state 103
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    STRING          shift and go to state 39
+    CHAR            shift and go to state 40
+    DECIMAL         shift and go to state 41
+    HEXADECIMAL     shift and go to state 42
+    OCTAL           shift and go to state 43
+    BINARIO         shift and go to state 44
+    BOOL            shift and go to state 45
+    FLOAT           shift and go to state 46
+    VEC             shift and go to state 47
+    GENERIC         shift and go to state 48
 
-    dato                           shift and go to state 104
-    parametro                      shift and go to state 184
-
-state 178
-
-    (86) for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .
-
-    $end            reduce using rule 86 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
-    RKEY            reduce using rule 86 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
-    COMA            reduce using rule 86 (for -> FOR VARIABLE IN rango LKEY cuerpoFuncion RKEY .)
-
+    dato                           shift and go to state 107
+    content                        shift and go to state 182
 
 state 179
 
-    (87) rango -> DECIMAL POINT POINT DECIMAL .
+    (75) atributos -> VARIABLE TWO_POINTS dato COMA atributos .
 
-    LKEY            reduce using rule 87 (rango -> DECIMAL POINT POINT DECIMAL .)
+    RKEY            reduce using rule 75 (atributos -> VARIABLE TWO_POINTS dato COMA atributos .)
 
 
 state 180
 
-    (88) rango -> DECIMAL POINT POINT ASSIGN . DECIMAL
+    (69) parametro -> VARIABLE TWO_POINTS dato COMA parametro .
 
-    DECIMAL         shift and go to state 185
+    RPAREN          reduce using rule 69 (parametro -> VARIABLE TWO_POINTS dato COMA parametro .)
 
 
 state 181
 
-    (91) content -> dato MOREEQUAL_THAN cuerpoFuncion COMA . content
-    (90) content -> . dato MOREEQUAL_THAN cuerpoFuncion
-    (91) content -> . dato MOREEQUAL_THAN cuerpoFuncion COMA content
-    (26) dato -> . STRING
-    (27) dato -> . CHAR
-    (28) dato -> . DECIMAL
-    (29) dato -> . HEXADECIMAL
-    (30) dato -> . OCTAL
-    (31) dato -> . BINARIO
-    (32) dato -> . BOOL
-    (33) dato -> . FLOAT
-    (34) dato -> . VEC
-    (35) dato -> . GENERIC
+    (84) rango -> DECIMAL POINT POINT ASSIGN DECIMAL .
 
-    STRING          shift and go to state 50
-    CHAR            shift and go to state 51
-    DECIMAL         shift and go to state 52
-    HEXADECIMAL     shift and go to state 53
-    OCTAL           shift and go to state 54
-    BINARIO         shift and go to state 55
-    BOOL            shift and go to state 56
-    FLOAT           shift and go to state 57
-    VEC             shift and go to state 84
-    GENERIC         shift and go to state 59
+    LKEY            reduce using rule 84 (rango -> DECIMAL POINT POINT ASSIGN DECIMAL .)
 
-    dato                           shift and go to state 112
-    content                        shift and go to state 186
 
 state 182
 
-    (78) condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY .
+    (87) content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content .
 
-    $end            reduce using rule 78 (condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY .)
-    RKEY            reduce using rule 78 (condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY .)
-    COMA            reduce using rule 78 (condicional -> IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY .)
-
-
-state 183
-
-    (74) atributos -> VARIABLE TWO_POINTS dato COMA atributos .
-
-    RKEY            reduce using rule 74 (atributos -> VARIABLE TWO_POINTS dato COMA atributos .)
-
-
-state 184
-
-    (68) parametro -> VARIABLE TWO_POINTS dato COMA parametro .
-
-    RPAREN          reduce using rule 68 (parametro -> VARIABLE TWO_POINTS dato COMA parametro .)
-
-
-state 185
-
-    (88) rango -> DECIMAL POINT POINT ASSIGN DECIMAL .
-
-    LKEY            reduce using rule 88 (rango -> DECIMAL POINT POINT ASSIGN DECIMAL .)
-
-
-state 186
-
-    (91) content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content .
-
-    RKEY            reduce using rule 91 (content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content .)
+    RKEY            reduce using rule 87 (content -> dato MOREEQUAL_THAN cuerpoFuncion COMA content .)
 
