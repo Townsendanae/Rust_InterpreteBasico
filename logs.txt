@@ -1572,3 +1572,21 @@ fn prime_factors(n: u64) -> Vec<u64> {
     let mut i = 2;
     let mut n = n;
     let mut factors = Vec::new(); } 2022-11-29 22:45:11.257856
+for number2 in 1..3 { let hola = 123; }
+fn prime_factors(n: u64) -> Vec<u64> {
+    let mut i = 2;
+    let mut n = n;
+    let mut factors = Vec::new(); } 2022-11-29 22:50:19.574197
+let (hola, webo) = 12;  2022-11-29 22:56:08.706700
+let (hola, webo) = 12;  2022-11-29 22:56:18.061462
+let (hola, webo) = 12;  2022-11-29 22:56:25.670083
+let (hola, webo) = (12, 12); 2022-11-29 22:59:30.426163
+let (hola, webo) = (12, 13); 2022-11-29 23:00:18.198057
+let (hola, rommel, webo) = (12, 13, 14); 2022-11-29 23:01:52.010709
+let (hola, rommel, webo) = 12, 13, 14; 2022-11-29 23:02:07.998011
+let (hola, webo) = (12, 13); 2022-11-29 23:03:16.441614
+let (hola, webo, rommel) = (12, 13, 14); 2022-11-29 23:03:25.459349
+type hola = i32; 2022-11-29 23:10:53.441915
+type hola = i32; 2022-11-29 23:11:40.856286
+hola as i32; 2022-11-29 23:12:05.658310
+hola as i32 2022-11-29 23:12:10.082669
