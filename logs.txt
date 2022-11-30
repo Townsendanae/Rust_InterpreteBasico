@@ -1384,3 +1384,13 @@ pub fn prime_factors(n: u64) -> Vec<u64> {
     }
     factors
 } 2022-11-29 21:48:32.198194
+if number < 0 { 2022-11-29 21:56:51.394956
+        print!("{} - numero es negativo", number; 2022-11-29 21:56:51.410293
+if numbre < 2 {} 2022-11-29 21:57:15.572523
+if a < b {} 2022-11-29 21:57:59.727578
+& C:/Users/Danaé/AppData/Local/Microsoft/WindowsApps/python3.9.exe "c:/Users/Danaé/OneDrive - Escuela Superior Politécnica del Litoral/6to Semestre/2. Lenguajes de Programación/Proyecto/Coding/AnalizadorSintactico.py" 2022-11-29 21:58:28.946245
+IF A < B {} 2022-11-29 21:58:37.026752
+if a < b {} 2022-11-29 21:58:44.826415
+if a < b {} 2022-11-29 21:59:09.488560
+if a < b {print!("a");} 2022-11-29 21:59:35.706764
+if a < b {print!("a");} 2022-11-29 22:00:22.239126

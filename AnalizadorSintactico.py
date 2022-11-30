@@ -73,6 +73,7 @@ def p_cuerpo(p):
     | for
     | loop
     | eMatch
+    | condicional
     '''    
 
 def p_asignacion(p):
@@ -193,6 +194,17 @@ def p_datos(p):
     '''datos : dato
     | dato COMA datos'''
 
+def p_condicional(p):
+    '''condicional : IF VARIABLE comparacion VARIABLE LKEY cuerpo RKEY'''
+
+def p_comparacion(p):
+    '''comparacion : EQUALS 
+    | NOT_EQUALS
+    | LESS_THAN
+    | LESSEQUAL_THAN
+    | MORE_THAN
+    | MOREEQUAL_THAN''' 
+
 #hashmap: Rommel
 def p_hashMap(p):
     'hashMap : HASHMAP TWO_POINTS TWO_POINTS NEW LPAREN RPAREN'
@@ -247,16 +259,16 @@ def validaRegla(s):
   
   
 
-# while True:
-#     try:
-#         s = input('calc > ')
-#         lstErrores = []
-#     except EOFError:
-#         break
-#     if not s:
-#         continue
-#     validaRegla(s)
-#     print(lstErrores)
+while True:
+    try:
+        s = input('calc > ')
+        lstErrores = []
+    except EOFError:
+        break
+    if not s:
+        continue
+    validaRegla(s)
+    print(lstErrores)
 
     
 

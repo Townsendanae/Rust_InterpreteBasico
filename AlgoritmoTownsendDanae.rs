@@ -2,7 +2,7 @@ fn main() {
     let number = 5;
 
     if number < 0 {
-        print!("{} - numero es negativo", number;
+        print!("{} - numero es negativo", number);
     } else if number > 0 {
         print!("{} - numero es positivo", number);
     } else {
